@@ -1,27 +1,20 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <typography/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import Typography from './components/Demo/Typography'
 export default {
   name: 'app',
-  components: {
-    HelloWorld
-  }
+  components: { Typography }
 }
 </script>
 
 <style lang="stylus">
 #app
-  font-family 'Avenir', Helvetica, Arial, sans-serif
-  -webkit-font-smoothing antialiased
-  -moz-osx-font-smoothing grayscale
+  font-family $font
   text-align center
-  color #2c3e50
   margin-top 60px
 </style>
