@@ -5,9 +5,11 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "build-storybook": "storybook:build",
     "lint": "vue-cli-service lint",
     "storybook:build": "vue-cli-service storybook:build -c config/storybook",
-    "storybook:serve": "vue-cli-service storybook:serve -p 6006 -c config/storybook"
+    "storybook:serve": "vue-cli-service storybook:serve -p 6006 -c config/storybook -s ./public",
+    "storybook:deploy": "storybook-to-ghpages"
   },
   "dependencies": {
     "core-js": "^3.3.2",
@@ -18,6 +20,7 @@
     "@storybook/addon-knobs": "^4.1.0 || ^5.0.0",
     "@storybook/addon-links": "^4.1.0 || ^5.0.0",
     "@storybook/addon-notes": "^4.1.0 || ^5.0.0",
+    "@storybook/storybook-deployer": "^2.8.1",
     "@vue/cli-plugin-babel": "^4.0.0",
     "@vue/cli-plugin-eslint": "^4.0.0",
     "@vue/cli-service": "^4.0.0",
