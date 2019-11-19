@@ -10,6 +10,11 @@ yarn install
 yarn run storybook:serve
 ```
 
+### Compiles and publishes storybook to simplenexus.dev/SNUI
+```
+yarn run storybook:deploy
+```
+
 ### Compiles and minifies for production
 ```
 yarn build
