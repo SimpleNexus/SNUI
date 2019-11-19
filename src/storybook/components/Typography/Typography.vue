@@ -1,4 +1,5 @@
 <template>
+<!--  THIS IS A STORYBOOK ONLY COMPONENT -->
   <section class="sn-font-standard" >
     <table>
       <tr class="row">

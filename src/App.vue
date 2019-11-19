@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Typography from './components/Typography/Typography'
+import Typography from './storybook/components/Typography/Typography'
 export default {
   name: 'app',
   components: { Typography }
