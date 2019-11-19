@@ -1,11 +1,11 @@
 <template>
-  <div id="app">
+  <div id="app" class="snui">
     <typography/>
   </div>
 </template>
 
 <script>
-import Typography from './components/Demo/Typography'
+import Typography from './components/Typography/Typography'
 export default {
   name: 'app',
   components: { Typography }
