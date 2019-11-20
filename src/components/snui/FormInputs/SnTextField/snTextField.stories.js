@@ -14,9 +14,13 @@ storiesOf('SnTextField', module)
   }))
   .add('With Placeholder', () => ({
     components: { SnTextField },
-    template: '<sn-text-field placeholder="My Paceholder" />'
+    template: '<sn-text-field placeholder="My Placeholder" />'
   }))
   .add('With Label and Placeholder', () => ({
     components: { SnTextField },
-    template: '<sn-text-field label="My Label" placeholder="My Paceholder" />'
+    template: '<sn-text-field label="My Label" placeholder="My Placeholder" />'
+  }))
+  .add('Disabled', () => ({
+    components: { SnTextField },
+    template: '<sn-text-field label="My Label" placeholder="My Placeholder" disabled />'
   }))
