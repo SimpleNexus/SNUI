@@ -6,5 +6,5 @@ import SpecExport from './SpecExport'
 storiesOf('SpecExport', module)
   .add('Spec Export', () => ({
     components: { SpecExport },
-    template: '<SpecExport />'
+    template: '<SpecExport/>'
   }))
