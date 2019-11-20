@@ -1,13 +1,17 @@
 <template>
-  <div class="sn-form-field">
+  <div :class="{'sn-form-field': true, 'sn-form-field--is-active': inputActive, 'sn-form-field--is-filled': !!inputValue}">
     <div class="sn-text-field-wrapper">
       <label class="sn-font-standard sn-callout sn-text-field-label" :for="inputId">
         {{label}}
       </label>
-      <input :id="inputId"
+      <input v-model="inputValue"
+             :id="inputId"
              type="text"
              class="sn-font-standard sn-body sn-text-field-input"
+             :style="`width: ${width}px`"
              :placeholder="placeholder"
+             @focus="handleInputFocus"
+             @blur="handleInputBlur"
       />
     </div>
   </div>
@@ -26,10 +30,17 @@ export default {
       type: String,
       required: false,
       default: ''
+    },
+    width: {
+      type: Number,
+      required: false,
+      default: 320
     }
   },
   data () {
     return {
+      inputActive: false,
+      inputValue: null,
       inputId: this.getInputId()
     }
   },
@@ -37,31 +48,14 @@ export default {
     getInputId () {
       return this.inputId ? this.inputId : `sn-text-field-${Date.now()}-${Math.round(Math.random().toPrecision(5) * 10000)}`
     },
-
-    setActive (el, active) {
-      const formField = el.parentNode.parentNode
-      if (active) {
-        formField.classList.add('sn-form-field--is-active')
-      } else {
-        formField.classList.remove('sn-form-field--is-active')
-        el.value === ''
-          ? formField.classList.remove('sn-form-field--is-filled')
-          : formField.classList.add('sn-form-field--is-filled')
-      }
+    handleInputFocus () {
+      this.inputActive = true
+    },
+    handleInputBlur () {
+      this.inputActive = false
     }
   },
   mounted () {
-    [].forEach.call(
-      document.querySelectorAll('.sn-text-field-input'),
-      (el) => {
-        el.onblur = () => {
-          this.setActive(el, false)
-        }
-        el.onfocus = () => {
-          this.setActive(el, true)
-        }
-      }
-    )
   }
 }
 
@@ -74,15 +68,16 @@ label-active()
   font-size $font-size-caption-2
   line-height $line-height-caption-2
   transform translateY(-18px)
+  text-transform uppercase
 
 .sn-form-field
-  display block
+  display inline-block
 
+  // Move the label up and
   &--is-active
     .sn-text-field-wrapper
       &::after
         border-bottom 1px solid $primary
-        transform scaleX(150)
 
     .sn-text-field-label
       label-active()
@@ -92,7 +87,6 @@ label-active()
       label-active()
 
 .sn-text-field-label
-  text-transform uppercase
   color $sn-grey
   display block
   font-size $font-size-footnote
@@ -118,8 +112,6 @@ label-active()
     margin 0 auto
     position absolute
     right 0
-    transform scaleX(0)
-    transition all $animation-duration
     width 1%
 
 .sn-text-field-input,
