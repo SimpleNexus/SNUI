@@ -30,10 +30,13 @@ export default {
   },
   data () {
     return {
-      inputId: `sn-text-field-${Date.now()}-${Math.round(Math.random().toPrecision(5) * 10000)}`
+      inputId: this.getInputId()
     }
   },
   methods: {
+    getInputId () {
+      return this.inputId ? this.inputId : `sn-text-field-${Date.now()}-${Math.round(Math.random().toPrecision(5) * 10000)}`
+    },
 
     setActive (el, active) {
       const formField = el.parentNode.parentNode
