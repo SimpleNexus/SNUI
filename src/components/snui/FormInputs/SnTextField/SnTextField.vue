@@ -1,5 +1,5 @@
 <template>
-  <div :class="{'sn-form-field': true, 'sn-form-field--is-active': inputActive, 'sn-form-field--is-filled': !!inputValue}">
+  <div :class="getFormFieldClasses">
     <div class="sn-text-field-wrapper">
       <label class="sn-font-standard sn-callout sn-text-field-label" :for="inputId">
         {{label}}
@@ -55,7 +55,10 @@ export default {
       this.inputActive = false
     }
   },
-  mounted () {
+  computed: {
+    getFormFieldClasses () {
+      return { 'sn-form-field': true, 'sn-form-field--is-active': this.inputActive, 'sn-form-field--is-filled': !!this.inputValue }
+    }
   }
 }
 
