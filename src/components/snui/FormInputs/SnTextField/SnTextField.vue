@@ -57,7 +57,10 @@ export default {
   },
   computed: {
     getFormFieldClasses () {
-      return { 'sn-form-field': true, 'sn-form-field--is-active': this.inputActive, 'sn-form-field--is-filled': !!this.inputValue }
+      return { 'sn-form-field': true,
+        'sn-form-field--is-active': this.inputActive,
+        'sn-form-field--is-filled': (!!this.inputValue || !!this.placeholder)
+      }
     }
   }
 }
