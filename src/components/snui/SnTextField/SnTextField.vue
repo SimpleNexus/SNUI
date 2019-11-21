@@ -103,7 +103,8 @@ $animation-duration = 0.3s
     position absolute
     top 0
     transition all $animation-duration
-    width: 100%
+    width 100%
+    cursor text
 
   .sn-text-field-wrapper
     overflow hidden
