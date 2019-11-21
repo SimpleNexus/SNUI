@@ -24,3 +24,7 @@ storiesOf('SnTextField', module)
     components: { SnTextField },
     template: '<sn-text-field label="My Label" placeholder="My Placeholder" disabled />'
   }))
+  .add('With Validation', () => ({
+    components: { SnTextField },
+    template: `<sn-text-field label="Must be at least 5 characters" required :rules="[(val) => val.length >= 5 || 'Not long enough']" />`
+  }))

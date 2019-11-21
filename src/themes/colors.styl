@@ -33,6 +33,15 @@ $caution = $sn-orange
 $success = $sn-green
 $accent = $sn-brand
 
+// Helpers for adding opacity
+lighten1(c)
+  rgba(c, .75)
+
+lighten2(c)
+  rgba(c, .50)
+
+lighten3(c)
+  rgba(c, .25)
 
 /**
   Text Classes
@@ -40,21 +49,57 @@ $accent = $sn-brand
 
 .sn-text-primary
   color $primary
+  &--lighten-1
+      color lighten1($primary)
+  &--lighten-2
+      color lighten2($primary)
+  &--lighten-3
+      color lighten3($primary)
 
 .sn-text-secondary
   color $secondary
+  &--lighten-1
+    color lighten1($secondary)
+  &--lighten-2
+    color lighten2($secondary)
+  &--lighten-3
+    color lighten3($secondary)
 
 .sn-text-warning
   color $warning
+  &--lighten-1
+    color lighten1($warning)
+  &--lighten-2
+    color lighten2($warning)
+  &--lighten-3
+    color lighten3($warning)
 
 .sn-text-caution
   color $caution
+  &--lighten-1
+    color lighten1($caution)
+  &--lighten-2
+    color lighten2($caution)
+  &--lighten-3
+    color lighten3($caution)
 
 .sn-text-success
   color $success
+  &--lighten-1
+    color lighten1($success)
+  &--lighten-2
+    color lighten2($success)
+  &--lighten-3
+    color lighten3($success)
 
 .sn-text-accent
   color $accent
+  &--lighten-1
+    color lighten1($accent)
+  &--lighten-2
+    color lighten2($accent)
+  &--lighten-3
+    color lighten3($accent)
 
 /*
  Element Classes
@@ -62,18 +107,54 @@ $accent = $sn-brand
 
 .sn-background-primary
   background-color $primary
+  &--lighten-1
+    color lighten1($primary)
+  &--lighten-2
+    color lighten2($primary)
+  &--lighten-3
+    color lighten3($primary)
 
 .sn-background-secondary
   background-color $secondary
+  &--lighten-1
+    color lighten1($secondary)
+  &--lighten-2
+    color lighten2($secondary)
+  &--lighten-3
+    color lighten3($secondary)
 
 .sn-background-warning
   background-color $warning
+  &--lighten-1
+    color lighten1($warning)
+  &--lighten-2
+    color lighten2($warning)
+  &--lighten-3
+    color lighten3($warning)
 
 .sn-background-caution
   background-color $caution
+  &--lighten-1
+    color lighten1($caution)
+  &--lighten-2
+    color lighten2($caution)
+  &--lighten-3
+    color lighten3($caution)
 
 .sn-background-success
   background-color $success
+  &--lighten-1
+    color lighten1($success)
+  &--lighten-2
+    color lighten2($success)
+  &--lighten-3
+    color lighten3($success)
 
 .sn-background-accent
   background-color $accent
+  &--lighten-1
+    color lighten1($accent)
+  &--lighten-2
+    color lighten2($accent)
+  &--lighten-3
+    color lighten3($accent)
