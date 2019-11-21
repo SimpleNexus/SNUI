@@ -12,12 +12,15 @@
              :style="`width: ${width}px`"
              :placeholder="placeholder"
              :disabled="disabled"
+             :required="required"
              @focus="handleInputFocus"
              @blur="handleInputBlur"
       />
+      <transition name="error-message">
       <span v-if="!validInput" class="sn-font-standard sn-footnote sn-text-field-message sn-text-warning">
         {{validationErrorList[0]}}
       </span>
+      </transition>
     </div>
   </div>
 </template>
@@ -64,7 +67,7 @@ export default {
   },
   data () {
     return {
-      isFocused: false,
+      hasBeenActive: false,
       inputActive: false,
       inputValue: '',
       inputId: this.getInputId(),
@@ -111,6 +114,13 @@ export default {
       this.validInput = this.validationErrorList.length === 0
     }
   },
+  watch: {
+    inputActive (val) {
+      if (val) {
+        this.hasBeenActive = true
+      }
+    }
+  },
   computed: {
     getFormFieldClasses () {
       return { 'sn-form-field': true,
@@ -119,7 +129,7 @@ export default {
       }
     },
     shouldValidate () {
-      return this.validateOnBlur
+      return this.hasBeenActive && this.validateOnBlur
     }
   }
 }
@@ -139,6 +149,8 @@ $animation-duration = 0.3s
 
   // Move the label up and
   &--is-active
+    .sn-text-field-input
+      border-bottom 2px solid $sn-black
     .sn-text-field-label
       label-active()
 
@@ -174,14 +186,24 @@ $animation-duration = 0.3s
     padding 4px 0
     outline 0
     width 100%
+    &:required
+      box-shadow none
     &::placeholder
       color lighten2($primary)
-
     &:disabled
-      color $sn-grey
+      color lighten3($sn-grey)
       border-bottom 1px solid lighten2($sn-grey)
-
     &--invalid
+      box-shadow none
+      outline none
+      border none
       border-bottom 1px solid $warning
+
+.error-message
+  &-enter-active, &-leave-active
+    transition 0.3s cubic-bezier(0.25, 0.8, 0.5, 1)
+  &-enter, &-leave-to
+    opacity 0
+    transform translateY(-15px)
 
 </style>
