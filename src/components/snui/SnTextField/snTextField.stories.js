@@ -28,3 +28,7 @@ storiesOf('SnTextField', module)
     components: { SnTextField },
     template: `<sn-text-field label="Must be at least 5 characters" required :rules="[(val) => val.length >= 5 || 'Not long enough']" />`
   }))
+  .add('With Icon', () => ({
+    components: { SnTextField },
+    template: `<sn-text-field label="With Icon" icon="search" />`
+  }))

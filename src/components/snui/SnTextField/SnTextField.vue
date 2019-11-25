@@ -1,15 +1,20 @@
 <template>
   <div :class="getFormFieldClasses">
     <div class="sn-text-field-wrapper">
-      <label class="sn-font-standard sn-callout sn-text-field-label sn-text-primary--lighten-3" :for="inputId">
+      <label class="sn-font-standard sn-callout sn-text-field-label sn-text-primary--lighten-3"
+             :class="{'sn-text-field-label--with-icon': !!icon}"
+             :for="inputId"
+      >
         {{label}}
       </label>
+      <sn-icon v-if="!!icon" :name="icon" class="prepend-icon" />
       <input v-model="inputValue"
              :id="inputId"
              :name="inputId"
              type="text"
              class="sn-font-standard sn-body sn-text-field-input sn-text-primary"
-             :class="{'sn-text-field-input--invalid': !validInput}"
+             :class="{'sn-text-field-input--invalid': !validInput,
+                      'sn-text-field-input--with-icon': !!icon }"
              :style="`width: ${width}px`"
              :placeholder="placeholder"
              :disabled="disabled"
@@ -28,13 +33,20 @@
 
 <script>
 import uuid from 'uuid/v5'
+import SnIcon from '../SnIcon/SnIcon'
 export default {
   name: 'SnTextField',
+  components: { SnIcon },
   props: {
     disabled: {
       type: Boolean,
       required: false,
       default: false
+    },
+    icon: {
+      type: String,
+      required: false,
+      default: ''
     },
     label: {
       type: String,
@@ -147,6 +159,7 @@ $animation-duration = 0.3s
     line-height $line-height-caption-2
     transform translateY(-18px)
     text-transform uppercase
+    padding 28px 0 0 !important
     display inline-block
 
   // Move the label up and
@@ -171,6 +184,8 @@ $animation-duration = 0.3s
     transition all $animation-duration
     width 100%
     cursor text
+    &--with-icon
+      padding 28px 20px
 
   .sn-text-field-wrapper
     overflow hidden
@@ -200,6 +215,8 @@ $animation-duration = 0.3s
       outline none
       border none
       border-bottom 1px solid $warning
+    &--with-icon
+      padding-left 20px
 
 .error-message
   &-enter-active, &-leave-active
@@ -208,4 +225,7 @@ $animation-duration = 0.3s
     opacity 0
     transform translateY(-15px)
 
+.prepend-icon
+  position absolute
+  top 28px
 </style>
