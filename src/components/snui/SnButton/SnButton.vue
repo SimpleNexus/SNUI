@@ -8,6 +8,11 @@
 export default {
   name: 'SnButton',
   props: {
+    accent: {
+      type: Boolean,
+      default: false,
+      required: false
+    },
     appendIcon: {
       type: String,
       default: '',
@@ -40,12 +45,12 @@ export default {
     },
     primary: {
       type: Boolean,
-      default: true,
+      default: false,
       required: false
     },
     secondary: {
       type: Boolean,
-      default: true,
+      default: false,
       required: false
     },
     standard: {
@@ -67,13 +72,18 @@ export default {
         '--secondary': this.secondary,
         '--warning': this.warning,
         '--caution': this.caution,
-        '--outline': this.outline
+        '--accent': this.accent
       }
-      const classes = ['sn-font-standard', 'sn-subhead', 'sn-btn']
+      const classes = ['sn-font-standard', 'sn-subhead', 'sn-font-weight-semi-bold', styleClass]
+      const baseClassLength = classes.length
       for (const [cssClass, value] of Object.entries(modifiers)) {
         if (value) {
           classes.push(styleClass + cssClass)
         }
+      }
+      // if no modifier classes were provided, use primary
+      if (classes.length === baseClassLength) {
+        classes.push(`${styleClass}--primary`)
       }
       return classes
     }
@@ -87,13 +97,42 @@ export default {
 
   .sn-btn
     outline none
-    padding 6.5px 26.5px
     min-width 122px
-    min-height 32px
+    height 32px
+    border none
+    cursor pointer
+    color $sn-white
     &--primary
       background-color $primary
-      color $sn-white
-      border none
-      cursor pointer
+    &--secondary
+      background-color $secondary
+    &--caution
+      background-color $caution
+    &--warning
+      background-color $warning
+    &--accent
+      background-color $accent
 
+  .sn-btn-outline
+    outline none
+    min-width 122px
+    height 32px
+    cursor pointer
+    border 1px solid
+    background-color inherit
+    &--primary
+      border-color $primary
+      color $primary
+    &--secondary
+      border-color $secondary
+      color $secondary
+    &--caution
+      border-color $caution
+      color $caution
+    &--warning
+      border-color $warning
+      color $warning
+    &--accent
+      border-color $accent
+      color $accent
 </style>
