@@ -11,7 +11,7 @@
         <td class="col">
           {{level.cssClass}}
         </td>
-        <td :class="[level.cssClass, font, fontWeightClass]" class="col">
+        <td :class="[level.cssClass, fontWeightClass, font]" class="col">
           {{level.text}}
         </td>
         <td class="col">
@@ -132,7 +132,7 @@ export default {
   },
   computed: {
     font () {
-      return this.condensed ? 'sn-font-condensed' : 'sn-font-standard'
+      return this.condensed ? 'sn-font-condensed' : ''
     },
     fontWeightClass () {
       return `sn-font-weight-${this.fontWeight}`

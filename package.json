@@ -7,12 +7,13 @@
     "build": "vue-cli-service build",
     "build-storybook": "yarn run storybook:build",
     "lint": "vue-cli-service lint",
-    "storybook:build": "vue-cli-service storybook:build -c config/storybook",
+    "storybook:build": "vue-cli-service storybook:build -c config/storybook -s ./public",
     "storybook:serve": "vue-cli-service storybook:serve -p 6006 -c config/storybook -s ./public",
     "storybook:deploy": "storybook-to-ghpages"
   },
   "dependencies": {
     "core-js": "^3.3.2",
+    "uuid": "^3.3.3",
     "vue": "^2.6.10"
   },
   "devDependencies": {
