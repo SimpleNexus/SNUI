@@ -6,6 +6,7 @@
       </label>
       <input v-model="inputValue"
              :id="inputId"
+             :name="inputId"
              type="text"
              class="sn-font-standard sn-body sn-text-field-input sn-text-primary"
              :class="{'sn-text-field-input--invalid': !validInput}"
@@ -26,6 +27,7 @@
 </template>
 
 <script>
+import uuid from 'uuid/v5'
 export default {
   name: 'SnTextField',
   props: {
@@ -78,7 +80,7 @@ export default {
   },
   methods: {
     getInputId () {
-      return this.inputId ? this.inputId : `sn-text-field-${Date.now()}-${Math.round(Math.random().toPrecision(5) * 10000)}`
+      return this.inputId ? this.inputId : `sn-text-field-${uuid}`
     },
     handleInputFocus () {
       this.inputActive = true
