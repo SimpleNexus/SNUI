@@ -1,6 +1,7 @@
 import { storiesOf } from '@storybook/vue'
 
 import SnButton from './SnButton'
+import SnIcon from '../SnIcon/SnIcon'
 
 storiesOf('SnButton', module)
   .add('Standard Button', () => ({
@@ -26,14 +27,18 @@ storiesOf('SnButton', module)
 `
   }))
   .add('Button with icon', () => ({
-    components: { SnButton },
+    components: { SnButton, SnIcon },
     template: `<div>
       <sn-button prepend-icon="search">Prepend</sn-button>
-      <sn-button append-icon="search">Append</sn-button>
+      <sn-button append-icon="search" warning>Append</sn-button>
       <br />
       <br />
       <sn-button outline prepend-icon="search">Prepend</sn-button>
-      <sn-button outline append-icon="search">Append</sn-button>
+      <sn-button outline warning append-icon="search">Append</sn-button>
+      <br />
+      <br />
+      <sn-button icon><sn-icon name="search"/></sn-button>
+      <sn-button outline icon><sn-icon name="search"/></sn-button>
     </div>
     `
   }))

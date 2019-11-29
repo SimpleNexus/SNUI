@@ -1,5 +1,5 @@
 <template>
-    <button :class="buttonClasses">
+    <button :class="buttonClasses" @click="$emit('click')">
       <sn-icon v-if="!!prependIcon" :name="prependIcon" class="sn-btn-icon sn-btn-icon--prepend"/>
       <slot/>
       <sn-icon v-if="!!appendIcon" :name="appendIcon" class="sn-btn-icon sn-btn-icon--append"/>
@@ -33,6 +33,11 @@ export default {
       required: false
     },
     disabled: {
+      type: Boolean,
+      default: false,
+      required: false
+    },
+    icon: {
       type: Boolean,
       default: false,
       required: false
@@ -89,6 +94,9 @@ export default {
       if (classes.length === baseClassLength) {
         classes.push(`${styleClass}--primary`)
       }
+      if (this.icon) {
+        classes.push(`${styleClass}--icon`)
+      }
       return classes
     }
   }
@@ -124,6 +132,9 @@ export default {
       background-color $warning
     &--accent
       background-color $accent
+    &--icon
+      min-width 32px
+      width 32px
 
   .sn-btn-outline
     border 1px solid
@@ -143,6 +154,9 @@ export default {
     &--accent
       border-color $accent
       color $accent
+    &--icon
+      min-width 32px
+      width 32px
 
   .sn-btn-icon
     width 18px
