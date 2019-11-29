@@ -39,6 +39,11 @@ export default {
       default: false,
       required: false
     },
+    fab: {
+      type: Boolean,
+      default: false,
+      required: false
+    },
     icon: {
       type: Boolean,
       default: false,
@@ -75,7 +80,7 @@ export default {
       const styleClass = this.outline ? 'sn-btn-outline' : 'sn-btn'
       return ['sn-btn-base', styleClass]
         .concat(this.getColorClasses(styleClass))
-        .concat(this.getDisplayClasses(styleClass))
+        .concat(this.getDisplayClasses())
     }
   },
   methods: {
@@ -110,7 +115,8 @@ export default {
       const displayModifiers = {
         '--icon': this.icon,
         '--display': this.display,
-        '--disabled': this.disabled
+        '--disabled': this.disabled,
+        '--fab': this.fab
       }
 
       return Object.entries(displayModifiers)
@@ -161,6 +167,11 @@ export default {
     &--disabled
       opacity 20%
       cursor default
+    &--fab
+      border-radius 50%
+      min-width 64px
+      width 64px
+      height 64px
 
   .sn-btn-outline
     border 1px solid
@@ -185,7 +196,7 @@ export default {
     width 18px
     height 18px
     vertical-align middle
-    line-height 14px
+    line-height 16px
     &--append
       margin-left 4px
     &--prepend

@@ -44,6 +44,15 @@ storiesOf('SnButton', module)
     </div>
     `
   }))
+  .add('FAB', () => ({
+    components: { SnButton, SnIcon },
+    template: `<div>
+      <sn-button fab><sn-icon large name="bell"/></sn-button>
+      <sn-button outline fab><sn-icon large name="bell"/></sn-button>
+      <sn-button fab disabled><sn-icon large name="bell" /></sn-button>
+    </div>
+    `
+  }))
   .add('Display Buttons', () => ({
     components: { SnButton, SnIcon },
     template: `<div>
