@@ -25,3 +25,15 @@ storiesOf('SnButton', module)
                </div>
 `
   }))
+  .add('Button with icon', () => ({
+    components: { SnButton },
+    template: `<div>
+      <sn-button prepend-icon="search">Prepend</sn-button>
+      <sn-button append-icon="search">Append</sn-button>
+      <br />
+      <br />
+      <sn-button outline prepend-icon="search">Prepend</sn-button>
+      <sn-button outline append-icon="search">Append</sn-button>
+    </div>
+    `
+  }))

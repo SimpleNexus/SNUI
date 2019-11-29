@@ -1,12 +1,16 @@
 <template>
     <button :class="buttonClasses">
-      <slot></slot>
+      <sn-icon v-if="!!prependIcon" :name="prependIcon" class="sn-btn-icon sn-btn-icon--prepend"/>
+      <slot/>
+      <sn-icon v-if="!!appendIcon" :name="appendIcon" class="sn-btn-icon sn-btn-icon--append"/>
     </button>
 </template>
 
 <script>
+import SnIcon from '../SnIcon/SnIcon'
 export default {
   name: 'SnButton',
+  components: { SnIcon },
   props: {
     accent: {
       type: Boolean,
@@ -74,7 +78,7 @@ export default {
         '--caution': this.caution,
         '--accent': this.accent
       }
-      const classes = ['sn-font-standard', 'sn-subhead', 'sn-font-weight-semi-bold', styleClass]
+      const classes = ['sn-font-standard', 'sn-btn-base', styleClass]
       const baseClassLength = classes.length
       for (const [cssClass, value] of Object.entries(modifiers)) {
         if (value) {
@@ -92,15 +96,23 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-  button
+  .sn-btn-base
     text-transform uppercase
-
-  .sn-btn
     outline none
     min-width 122px
     height 32px
-    border none
     cursor pointer
+    font-weight $font-weight-medium
+    font-size 15px
+    line-height 20px
+    vertical-align middle
+    &:focus
+      outline none
+    &::-moz-focus-inner
+      border 0
+
+  .sn-btn
+    border none
     color $sn-white
     &--primary
       background-color $primary
@@ -114,10 +126,6 @@ export default {
       background-color $accent
 
   .sn-btn-outline
-    outline none
-    min-width 122px
-    height 32px
-    cursor pointer
     border 1px solid
     background-color inherit
     &--primary
@@ -135,4 +143,13 @@ export default {
     &--accent
       border-color $accent
       color $accent
+
+  .sn-btn-icon
+    width 18px
+    height 18px
+    vertical-align middle
+    &--append
+      margin-left 4px
+    &--prepend
+      margin-right 4px
 </style>

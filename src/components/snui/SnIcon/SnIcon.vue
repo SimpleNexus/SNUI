@@ -1,5 +1,5 @@
 <template>
-<i :class="`sn-icon-${name}`"></i>
+<i :class="`sn-icon sn-icon-${name}`"/>
 </template>
 
 <script>
@@ -14,6 +14,7 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style scoped lang="stylus">
+.sn-icon
+  display inline-block
 </style>
