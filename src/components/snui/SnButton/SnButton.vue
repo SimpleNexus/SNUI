@@ -1,5 +1,7 @@
 <template>
-    <button :class="buttonClasses" @click="$emit('click')">
+    <button :class="buttonClasses"
+            :disabled="disabled"
+            @click="$emit('click')">
       <sn-icon v-if="!!prependIcon" :name="prependIcon" class="sn-btn-icon sn-btn-icon--prepend"/>
       <slot/>
       <sn-icon v-if="!!appendIcon" :name="appendIcon" class="sn-btn-icon sn-btn-icon--append"/>
@@ -62,11 +64,6 @@ export default {
       default: false,
       required: false
     },
-    standard: {
-      type: Boolean,
-      default: true,
-      required: false
-    },
     warning: {
       type: Boolean,
       required: false,
@@ -76,28 +73,48 @@ export default {
   computed: {
     buttonClasses () {
       const styleClass = this.outline ? 'sn-btn-outline' : 'sn-btn'
-      const modifiers = {
+      return ['sn-btn-base', styleClass]
+        .concat(this.getColorClasses(styleClass))
+        .concat(this.getDisplayClasses(styleClass))
+    }
+  },
+  methods: {
+    /**
+     * Uses the component props to determine
+     * which color styles to return.
+     * @param btnStyle The base button style, outline or standard
+     *  in the form 'sn-btn' or 'sn-btn-outline'
+     * @returns {Array<string>}
+     */
+    getColorClasses (btnStyle) {
+      const colorModifiers = {
         '--primary': this.primary,
         '--secondary': this.secondary,
         '--warning': this.warning,
         '--caution': this.caution,
         '--accent': this.accent
       }
-      const classes = ['sn-font-standard', 'sn-btn-base', styleClass]
-      const baseClassLength = classes.length
-      for (const [cssClass, value] of Object.entries(modifiers)) {
-        if (value) {
-          classes.push(styleClass + cssClass)
-        }
+      console.log(colorModifiers)
+      const colorClasses = Object.entries(colorModifiers)
+        .reduce((prev, [cssClass, value]) => value ? [...prev, btnStyle + cssClass] : prev, [])
+
+      // Perform a check so that we return primary if not specified
+      return colorClasses.length ? colorClasses : [`${btnStyle}--primary`]
+    },
+    /**
+     * Uses the component props to determine
+     * which display styles to return
+     * @returns {Array<string>}
+     */
+    getDisplayClasses () {
+      const displayModifiers = {
+        '--icon': this.icon,
+        '--display': this.display,
+        '--disabled': this.disabled
       }
-      // if no modifier classes were provided, use primary
-      if (classes.length === baseClassLength) {
-        classes.push(`${styleClass}--primary`)
-      }
-      if (this.icon) {
-        classes.push(`${styleClass}--icon`)
-      }
-      return classes
+
+      return Object.entries(displayModifiers)
+        .reduce((prev, [cssClass, value]) => value ? [...prev, 'sn-btn' + cssClass] : prev, [])
     }
   }
 }
@@ -110,6 +127,7 @@ export default {
     min-width 122px
     height 32px
     cursor pointer
+    font-family $font-family
     font-weight $font-weight-medium
     font-size 15px
     line-height 20px
@@ -135,6 +153,14 @@ export default {
     &--icon
       min-width 32px
       width 32px
+    &--display
+      font-size 20px
+      font-family $font-family-condensed
+      line-height 20px
+      height 52px
+    &--disabled
+      opacity 20%
+      cursor default
 
   .sn-btn-outline
     border 1px solid
@@ -154,14 +180,12 @@ export default {
     &--accent
       border-color $accent
       color $accent
-    &--icon
-      min-width 32px
-      width 32px
 
   .sn-btn-icon
     width 18px
     height 18px
     vertical-align middle
+    line-height 14px
     &--append
       margin-left 4px
     &--prepend
