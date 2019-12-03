@@ -31,9 +31,6 @@ export default {
       return ['sn-icon', `sn-icon-${this.name}`].concat(this.getSizeClasses())
     }
   },
-  mounted () {
-    console.log(this.iconClasses)
-  },
   methods: {
     getSizeClasses () {
       const sizeModifiers = {
