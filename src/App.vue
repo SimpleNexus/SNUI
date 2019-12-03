@@ -1,14 +1,12 @@
 <template>
   <div id="app" class="snui">
-    <typography/>
+    Hello World
   </div>
 </template>
 
 <script>
-import Typography from './components/Typography/Typography'
 export default {
-  name: 'app',
-  components: { Typography }
+  name: 'app'
 }
 </script>
 
