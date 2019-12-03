@@ -1,7 +1,9 @@
 <template>
     <button :class="buttonClasses"
             :disabled="disabled"
-            @click="$emit('click')">
+            @click="$emit('click')"
+            id=""
+    >
       <sn-icon v-if="!!prependIcon" :name="prependIcon" class="sn-btn-icon sn-btn-icon--prepend"/>
       <slot/>
       <sn-icon v-if="!!appendIcon" :name="appendIcon" class="sn-btn-icon sn-btn-icon--append"/>
@@ -14,61 +16,97 @@ export default {
   name: 'SnButton',
   components: { SnIcon },
   props: {
+    /**
+     * Styles the button with accent colors
+     **/
     accent: {
       type: Boolean,
       default: false,
       required: false
     },
+    /**
+     * The name of an icon to append to the button text
+     **/
     appendIcon: {
       type: String,
       default: '',
       required: false
     },
+    /**
+     * Styles the button with caution colors
+     **/
     caution: {
       type: Boolean,
       default: false,
       required: false
     },
+    /**
+     * Styles the button as a display button (large)
+     **/
     display: {
       type: Boolean,
       default: false,
       required: false
     },
+    /**
+     * Disables the button
+     */
     disabled: {
       type: Boolean,
       default: false,
       required: false
     },
-    fab: {
+    /**
+     * Styles the button as a circle (circle button)
+     */
+    circle: {
       type: Boolean,
       default: false,
       required: false
     },
+    /**
+     * Styles the button as icon only
+     ***/
     icon: {
       type: Boolean,
       default: false,
       required: false
     },
+    /**
+     * Styles the button with an outline instead of fill
+     */
     outline: {
       type: Boolean,
       default: false,
       required: false
     },
+    /**
+     * The name of the icon to prepend to the button text
+     */
     prependIcon: {
       type: String,
       default: '',
       required: false
     },
+    /**
+     * Styles the button with primary colors
+     */
     primary: {
       type: Boolean,
       default: false,
       required: false
     },
+    /**
+     * Styles the button with secondary colors
+     */
     secondary: {
       type: Boolean,
       default: false,
       required: false
     },
+    /**
+     * Styles the button with warning colors
+     */
     warning: {
       type: Boolean,
       required: false,
@@ -116,7 +154,7 @@ export default {
         '--icon': this.icon,
         '--display': this.display,
         '--disabled': this.disabled,
-        '--fab': this.fab
+        '--circle': this.circle
       }
 
       return Object.entries(displayModifiers)
@@ -167,7 +205,7 @@ export default {
     &--disabled
       opacity 20%
       cursor default
-    &--fab
+    &--circle
       border-radius 50%
       min-width 64px
       width 64px
