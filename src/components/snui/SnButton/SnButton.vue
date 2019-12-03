@@ -137,7 +137,6 @@ export default {
         '--caution': this.caution,
         '--accent': this.accent
       }
-      console.log(colorModifiers)
       const colorClasses = Object.entries(colorModifiers)
         .reduce((prev, [cssClass, value]) => value ? [...prev, btnStyle + cssClass] : prev, [])
 
@@ -203,8 +202,8 @@ export default {
       line-height 20px
       height 52px
     &--disabled
-      opacity 20%
       cursor default
+      opacity $disabled-opacity
     &--circle
       border-radius 50%
       min-width 64px
