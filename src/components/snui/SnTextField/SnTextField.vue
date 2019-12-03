@@ -32,47 +32,76 @@
 </template>
 
 <script>
-import uuid from 'uuid/v5'
+import uuid from 'uuid/v4'
 import SnIcon from '../SnIcon/SnIcon'
 export default {
   name: 'SnTextField',
   components: { SnIcon },
   props: {
+    /**
+     * Disables the input when true
+     */
     disabled: {
       type: Boolean,
       required: false,
       default: false
     },
+    /**
+     * Prepend the input field with an icon from the sn-icon collection.
+     * Please note, do not include the sn-icon prefix in the icon name
+     */
     icon: {
       type: String,
       required: false,
       default: ''
     },
+    /**
+     * A text label to be paired with the input.
+     */
     label: {
       type: String,
       required: false,
       default: ''
     },
+    /**
+     * Placeholder text to be used in the input
+     */
     placeholder: {
       type: String,
       required: false,
       default: ''
     },
+    /**
+     * Specifies whether this input is required. If true, will validate
+     * on blur unless validateOnBlur is false. Note: This checks the input
+     * field value in JavaScript, but also sets the required flag on the html input field
+     */
     required: {
       type: Boolean,
       required: false,
       default: false
     },
+    /**
+     * The rules prop accepts an array of callback functions. While validating rules, the current v-model value will be passed to the callback.
+     * This callback should return either true or a String, the error message.
+     */
     rules: {
       type: Array,
       required: false,
       default: () => []
     },
+    /**
+     * Set the width of the input field
+     */
     width: {
       type: Number,
       required: false,
       default: 320
     },
+    /**
+     * Indicates whether the component should perform validation against
+     * the rules and required props on element blur
+     */
     validateOnBlur: {
       type: Boolean,
       required: false,
@@ -92,7 +121,7 @@ export default {
   },
   methods: {
     getInputId () {
-      return this.inputId ? this.inputId : `sn-text-field-${uuid}`
+      return this.inputId ? this.inputId : `sn-text-field-${uuid()}`
     },
     handleInputFocus () {
       this.inputActive = true
@@ -154,6 +183,7 @@ export default {
 $animation-duration = 0.3s
 
 .sn-form-field
+  display inline-block
   label-active()
     font-size $font-size-caption-2 !important
     line-height $line-height-caption-2
@@ -182,7 +212,6 @@ $animation-duration = 0.3s
     position absolute
     top 0
     transition all $animation-duration
-    width 100%
     cursor text
     &--with-icon
       padding 28px 20px
@@ -190,7 +219,6 @@ $animation-duration = 0.3s
   .sn-text-field-wrapper
     overflow hidden
     position relative
-    width 100%
 
   .sn-text-field-input
     appearance none
