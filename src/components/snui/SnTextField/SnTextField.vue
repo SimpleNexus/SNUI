@@ -106,13 +106,21 @@ export default {
       type: Boolean,
       required: false,
       default: true
+    },
+    /**
+     * Value that will be bound to input component
+     */
+    value: {
+      type: String,
+      required: false,
+      default: ''
     }
   },
   data () {
     return {
       hasBeenActive: false,
       inputActive: false,
-      inputValue: '',
+      inputValue: this.value,
       inputId: this.getInputId(),
       validInput: true,
       validationErrorList: [],
@@ -162,6 +170,9 @@ export default {
       if (val) {
         this.hasBeenActive = true
       }
+    },
+    inputValue (val) {
+      this.$emit('input', val)
     }
   },
   computed: {
@@ -219,6 +230,7 @@ $animation-duration = 0.3s
   .sn-text-field-wrapper
     overflow hidden
     position relative
+    text-align left
 
   .sn-text-field-input
     appearance none

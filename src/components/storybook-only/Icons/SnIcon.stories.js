@@ -1,6 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from '@storybook/vue'
-import SnIcon from './SnIcon'
+import SnIcon from '../../snui/SnIcon/SnIcon'
+import IconList from './IconList'
 
 storiesOf('SnIcon', module)
   .add('Basic Icons', () => ({
@@ -17,3 +18,7 @@ storiesOf('SnIcon', module)
       summary: `A simple component to render sn-icons of different sizes.`
     }
   })
+  .add('Icon List', () => ({
+    components: { IconList },
+    template: `<IconList />`
+  }))
