@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/vue'
 
 import SpecExport from './SpecExport'
 
-storiesOf('SpecExport', module)
+storiesOf('Theme/Design System', module)
   .add('Spec Export', () => ({
     components: { SpecExport },
     template: '<SpecExport/>'

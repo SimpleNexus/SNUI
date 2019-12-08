@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/vue'
 
 import Typography from './Typography'
 
-storiesOf('Typography', module)
+storiesOf('Theme/Typography', module)
   .add('Standard Typography', () => ({
     components: { Typography },
     template: '<Typography />'

@@ -183,7 +183,9 @@ storiesOf('SnButton', module)
                    :caution="caution"
                    :warning="warning"
                    :disabled="disabled"
-                   :outline="outline">
+                   :outline="outline"
+                   @click="action"
+        >
           Prepend
         </sn-button>
         <sn-button append-icon="search"
@@ -193,7 +195,9 @@ storiesOf('SnButton', module)
                    :caution="caution"
                    :warning="warning"
                    :disabled="disabled"
-                   :outline="outline">
+                   :outline="outline"
+                   @click="action"
+        >
           Append
         </sn-button>
       </div>
@@ -233,7 +237,9 @@ storiesOf('SnButton', module)
         :caution="caution"
         :warning="warning"
         :disabled="disabled"
-        :outline="outline">
+        :outline="outline"
+        @click="action"
+      >
         <sn-icon name="search"/>
       </sn-button>
     `,
@@ -272,7 +278,9 @@ storiesOf('SnButton', module)
         :caution="caution"
         :warning="warning"
         :disabled="disabled"
-        :outline="outline">
+        :outline="outline"
+        @click="action"
+      >
         <sn-icon large name="bell"/>
       </sn-button>
       <sn-button
@@ -283,7 +291,9 @@ storiesOf('SnButton', module)
         :caution="caution"
         :warning="warning"
         :disabled="disabled"
-        :outline="outline">
+        :outline="outline"
+        @click="action"
+      >
         Text
       </sn-button>
       </div>
@@ -330,6 +340,7 @@ storiesOf('SnButton', module)
           :warning="warning"
           :disabled="disabled"
           :outline="outline"
+          @click="action"
         >
           Button
         </sn-button>

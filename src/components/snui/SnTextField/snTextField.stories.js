@@ -1,35 +1,70 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from '@storybook/vue'
+import { action } from '@storybook/addon-actions'
+import { boolean, text } from '@storybook/addon-knobs'
 
 import SnTextField from './SnTextField'
 
 storiesOf('SnTextField', module)
   .add('Basic Text Field', () => ({
     components: { SnTextField },
+    props: {
+      label: {
+        default: text('Label', 'Label')
+      },
+      placeholder: {
+        default: text('Placeholder', '')
+      },
+      disabled: {
+        default: boolean('Disabled', false)
+      }
+    },
+    data () {
+      return {
+        value: ''
+      }
+    },
     template: `
       <div>
-        <sn-text-field />
-        <sn-text-field placeholder="With Placeholder"/>
-        <sn-text-field label="With Label"/>
-        <sn-text-field label="With Label" placeholder="With Placeholder"/>
-        <sn-text-field label="Disabled" placeholder="My Placeholder" disabled/>
-      </div>
-    `
+        <sn-text-field
+          v-model="value"
+          :disabled="disabled"
+          :label="label"
+          :placeholder="placeholder"
+        />
+        <p class="sn-caption-1">Bound Value: {{value}}</p>
+      </div>`,
+    watch: {
+      value (input) {
+        action('Input')
+      }
+    }
   }), {
     info: {
-      summary: `A basic text field. Examples with reactive label, placeholder, and disabled state`
+      summary: `## Description
+                A basic text field with 2-way data binding via v-model.`
     }
   })
   .add('With Validation', () => ({
     components: { SnTextField },
+    data () { return { value: '' } },
     template: `
-      <sn-text-field label="Must be at least 5 characters" required
-                     :rules="[(val) => val.length >= 5 || 'Not long enough']"/>`
+      <sn-text-field
+        v-model="value"
+        label="Must be at least 5 characters" required
+        :rules="[(val) => val.length >= 5 || 'Not long enough']"
+      />`
   }), {
     info: {
-      summary: `SnTextField can take an array of validation rules as a prop.
+      summary: `## Description
+                SnTextField can take an array of validation rules as a prop.
                 If the validateOnBlur prop is true (default), the text field will
-                validate its value against the provided rules. `
+                validate its value against the provided rules.
+
+                Each rule must be a function that returns either a boolean or a string
+                when given a string as an argument. If the validation function returns false,
+                the input will use the string as an error message.
+                `
     }
   })
   .add('With Icon', () => ({

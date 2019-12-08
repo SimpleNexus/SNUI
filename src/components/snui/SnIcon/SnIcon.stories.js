@@ -1,7 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { storiesOf } from '@storybook/vue'
 import SnIcon from '../../snui/SnIcon/SnIcon'
-import IconList from './IconList'
 
 storiesOf('SnIcon', module)
   .add('Basic Icons', () => ({
@@ -15,10 +14,9 @@ storiesOf('SnIcon', module)
     `
   }), {
     info: {
-      summary: `A simple component to render sn-icons of different sizes.`
+      summary: `## Description
+                SnIcon makes it easy to render the SimpleNexus icon font. Simply pass an icon name and a
+                size to the component props`,
+      components: { SnIcon }
     }
   })
-  .add('Icon List', () => ({
-    components: { IconList },
-    template: `<IconList />`
-  }))

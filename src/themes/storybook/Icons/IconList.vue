@@ -23,8 +23,8 @@
 </template>
 
 <script>
-import SnIcon from '../../snui/SnIcon/SnIcon'
-import SnTextField from '../../snui/SnTextField/SnTextField'
+import SnIcon from '../../../components/snui/SnIcon/SnIcon'
+import SnTextField from '../../../components/snui/SnTextField/SnTextField'
 export default {
   name: 'IconList',
   components: { SnTextField, SnIcon },
