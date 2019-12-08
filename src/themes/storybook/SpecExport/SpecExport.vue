@@ -1,5 +1,5 @@
 <template>
-<iframe src="export/index.html" width="100%" height="1000px"></iframe>
+<iframe src="export/index.html" width="1000px" height="1000px"></iframe>
 </template>
 
 <script>
