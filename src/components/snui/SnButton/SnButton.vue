@@ -1,8 +1,7 @@
 <template>
     <button :class="buttonClasses"
             :disabled="disabled"
-            @click="$emit('click')"
-            id=""
+            @click="handleClick"
     >
       <sn-icon v-if="!!prependIcon" :name="prependIcon" class="sn-btn-icon sn-btn-icon--prepend"/>
       <slot/>
@@ -158,6 +157,9 @@ export default {
 
       return Object.entries(displayModifiers)
         .reduce((prev, [cssClass, value]) => value ? [...prev, 'sn-btn' + cssClass] : prev, [])
+    },
+    handleClick () {
+      return this.disabled ? null : this.$emit('click')
     }
   }
 }
