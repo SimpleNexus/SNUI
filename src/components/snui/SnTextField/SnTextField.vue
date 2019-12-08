@@ -172,6 +172,12 @@ export default {
       }
     },
     inputValue (val) {
+      /**
+       * Input event
+       *
+       * @event input
+       * @property {string} the current value of the input field
+       */
       this.$emit('input', val)
     }
   },

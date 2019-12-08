@@ -159,6 +159,11 @@ export default {
         .reduce((prev, [cssClass, value]) => value ? [...prev, 'sn-btn' + cssClass] : prev, [])
     },
     handleClick () {
+      /**
+       * Click Event
+       *
+       * @event click
+       */
       return this.disabled ? null : this.$emit('click')
     }
   }
