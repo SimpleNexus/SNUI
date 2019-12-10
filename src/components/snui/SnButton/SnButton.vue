@@ -188,18 +188,23 @@ export default {
       border 0
 
   .sn-btn
-    border none
+    border 1px solid $sn-black
     color $sn-white
     &--primary
       background-color $primary
+      border-color $primary
     &--secondary
       background-color $secondary
+      border-color $secondary
     &--caution
       background-color $caution
+      border-color $caution
     &--warning
       background-color $warning
+      border-color $warning
     &--accent
       background-color $accent
+      border-color $accent
     &--icon
       min-width 32px
       width 32px
@@ -235,6 +240,9 @@ export default {
     &--accent
       border-color $accent
       color $accent
+    .sn-btn--circle
+      width 65px
+      height 65px
 
   .sn-btn-icon
     width 18px

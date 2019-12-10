@@ -3,6 +3,7 @@ import { storiesOf } from '@storybook/vue'
 import { boolean } from '@storybook/addon-knobs'
 import SnOption from './SnOption'
 import SnIcon from '../SnIcon/SnIcon'
+import SnOptionGroup from '../SnOptionGroup/SnOptionGroup'
 
 storiesOf('SnOption', module)
   .add('Basic Option', () => ({
@@ -18,10 +19,13 @@ storiesOf('SnOption', module)
       }
     },
     template: `
-      <sn-option v-model="value" label="label">
-        <sn-icon v-if="icon" name="bell" large />
-        <span v-else>Text</span>
-      </sn-option>`
+      <div>
+        <sn-option v-model="value" label="label" input-value="test">
+          <sn-icon v-if="icon" name="bell" large />
+          <span v-else>Text</span>
+        </sn-option>
+      </div>
+      `
   }), {
     info: {
       summary: `## Description
@@ -32,3 +36,26 @@ storiesOf('SnOption', module)
       components: { SnOption }
     }
   })
+  .add('Option Group', () => ({
+    components: { SnOptionGroup },
+    data () {
+      return {
+        options: [{
+          label: 'MyOption',
+          disabled: false,
+          selected: true,
+          value: 'myOption',
+          icon: 'bell'
+        },
+        {
+          label: 'My Second Option',
+          disabled: false,
+          selected: false,
+          value: 'myOption2',
+          text: 'Text 2'
+        }]
+      }
+    },
+    template: `
+      <sn-option-group :options="options" name="test"/>`
+  }))
