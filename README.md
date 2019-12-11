@@ -1,6 +1,20 @@
-# snui
+# SNUI
 
-## Project setup
+## Description
+The SimpleNexus Component Library for Vue.js. 
+
+See our Storybook for component details and examples
+[SNUI Storybook](https://simplenexus.dev/SNUI)
+
+See our GitHub for source
+https://github.com/SimpleNexus/SNUI
+
+To get started, run 
+`yarn add @simplenexus/snui` to your Vue application
+
+## Development
+
+### Project setup
 ```
 yarn install
 ```
@@ -22,3 +36,6 @@ yarn lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+[SNUI Storybook]: https://simplenexus.dev/SNUI
