@@ -1,5 +1,5 @@
 <template>
-  <div style="align-content: center">
+  <div style="min-height: 900px" class="snui">
     <sn-text-field label="Search Icons" icon="search" v-model="search"/>
     <table class="sn-font-standard">
       <thead>

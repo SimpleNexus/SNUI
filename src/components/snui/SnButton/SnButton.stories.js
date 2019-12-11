@@ -36,7 +36,7 @@ storiesOf('SnButton', module)
   .add('All Buttons', () => ({
     components: { SnButton, SnIcon },
     template: `
-      <main>
+      <main class="snui">
         <section>
           <h2 class="sn-large-title">Standard Buttons</h2>
           <sn-button>Primary</sn-button>
