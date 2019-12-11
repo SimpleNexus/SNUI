@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="snui">
-    Hello World
+    <sn-button>Hello</sn-button>
   </div>
 </template>
 
