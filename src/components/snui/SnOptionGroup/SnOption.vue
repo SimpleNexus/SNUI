@@ -68,6 +68,11 @@ export default {
   methods: {
     selectOption () {
       const emitValue = this.value === this.optionValue ? '' : this.optionValue
+      /**
+       * Input Event when radio button changes value
+       * @event input
+       * @property {string | boolean | number} The current value of the option radio
+       */
       this.$emit('input', emitValue)
     }
   }

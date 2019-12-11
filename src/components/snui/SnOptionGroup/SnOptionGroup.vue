@@ -20,7 +20,7 @@
 <script>
 import uuid from 'uuid/v4'
 import SnIcon from '../SnIcon/SnIcon'
-import SnOption from '../SnOption/SnOption'
+import SnOption from './SnOption'
 
 export default {
   name: 'SnOptionGroup',
@@ -42,6 +42,17 @@ export default {
         text: 'string'
       }],
       required: true
+    },
+    value: {
+      type: [String, Number, Boolean],
+      required: false,
+      default: ''
+    }
+  },
+  mounted () {
+    const selectedOption = this.options.find(option => option.selected)
+    if (selectedOption) {
+      this.optionsSelectedValue = selectedOption.value
     }
   },
   data () {
@@ -57,6 +68,17 @@ export default {
     },
     selectOption (option) {
       this.optionsSelectedValue = this.optionsSelectedValue === option.value ? null : option.value
+    }
+  },
+  watch: {
+    optionsSelectedValue (value) {
+      /**
+       * Input event when value of radio group changes
+       *
+       * @event input
+       * @property { string | boolean | number } value
+       */
+      this.$emit('input', value)
     }
   }
 }

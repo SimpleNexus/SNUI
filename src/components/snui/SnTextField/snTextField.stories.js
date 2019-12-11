@@ -25,19 +25,17 @@ storiesOf('SnTextField', module)
       }
     },
     template: `
-      <div>
         <sn-text-field
           v-model="value"
           :disabled="disabled"
           :label="label"
           :placeholder="placeholder"
         />
-        <p class="sn-caption-1">Bound Value: {{value}}</p>
-      </div>`,
+    `,
+    methods: {
+      logInput: action('input changed') },
     watch: {
-      value (input) {
-        action('Input')
-      }
+      value (input) { this.logInput(input) }
     }
   }), {
     info: {
@@ -53,7 +51,15 @@ storiesOf('SnTextField', module)
         v-model="value"
         label="Must be at least 5 characters" required
         :rules="[(val) => val.length >= 5 || 'Not long enough']"
-      />`
+        @validated="logValidation"
+      />`,
+    methods: {
+      logInput: action('input changed'),
+      logValidation: action('validation')
+    },
+    watch: {
+      value (input) { this.logInput(input) }
+    }
   }), {
     info: {
       summary: `## Description

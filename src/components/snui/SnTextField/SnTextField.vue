@@ -163,6 +163,14 @@ export default {
       })
       this.validationErrorList = errorsList
       this.validInput = this.validationErrorList.length === 0
+      /**
+       * Fires when input is validated against provided rules.
+       * Returns the validation state of the input
+       *
+       * @event validated
+       * @property { boolean }
+       **/
+      this.$emit('validated', this.validInput)
     }
   },
   watch: {
@@ -173,12 +181,14 @@ export default {
     },
     inputValue (val) {
       /**
-       * Input event
+       * Input event when something is entered into the field
        *
        * @event input
        * @property {string} the current value of the input field
        */
       this.$emit('input', val)
+    },
+    validInput (val) {
     }
   },
   computed: {
