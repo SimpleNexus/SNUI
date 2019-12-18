@@ -86,6 +86,7 @@ export default {
   align-items center
   text-align center
   .sn-option-label
+    font-family $font-family
     margin-top 8px
     text-transform uppercase
     text-align center

@@ -1,5 +1,5 @@
 <template>
-<i :class="iconClasses"/>
+<i :class="iconClasses" :style="computedFontSize"/>
 </template>
 
 <script>
@@ -39,9 +39,20 @@ export default {
       type: Boolean,
       required: false,
       default: false
+    },
+    /**
+     * The size in pixels of the icon
+     */
+    size: {
+      type: Number,
+      required: false,
+      default: 0
     }
   },
   computed: {
+    computedFontSize () {
+      return this.size ? { 'font-size': this.size + 'px' } : null
+    },
     iconClasses () {
       return ['sn-icon', `sn-icon-${this.name}`].concat(this.getSizeClasses())
     }
