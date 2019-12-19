@@ -1,7 +1,7 @@
 <template>
 <div class="sn-avatar-wrapper">
   <div :class="avatarClasses"  :style="avatarSize">
-    <img v-if="useImage" :src="validatedImage" :alt="imageAlt" class="sn-avatar-content sn-avatar--img" @error="loadDefaultImage" />
+    <img v-if="useImage" :src="validatedImage" :alt="imageAltText" class="sn-avatar-content sn-avatar--img" @error="loadDefaultImage" />
     <i v-else-if="icon"  class="sn-avatar-content sn-avatar--icon" :class="avatarIconClasses"/>
     <span v-else-if="name" class="sn-avatar-content sn-avatar--text">{{initials}}</span>
   </div>
@@ -12,60 +12,104 @@
 export default {
   name: 'SnAvatar',
   props: {
+    /**
+     * Name of the icon to use in the avatar
+     */
     icon: {
       type: String,
       default: '',
       required: false
     },
+    /**
+     * Image source url for avatar
+     * If the image fails to load, the avatar will fallback to using initials if present,
+     * otherwise it will render a bundled default avatar image
+     */
     image: {
       type: String,
       default: '',
       required: false
     },
-    imageAlt: {
+    /**
+     * Alternate text for avatar img tag
+     */
+    imageAltText: {
       type: String,
       default: 'Avatar Image',
       required: false
     },
+    /**
+     * Render large sized avatar
+     */
     large: {
       type: Boolean,
       default: false,
       required: false
     },
+    /**
+     * Render medium sized avatar
+     */
     medium: {
       type: Boolean,
       default: false,
       required: false
     },
+    /**
+     * Render micro sized avatar
+     */
     micro: {
       type: Boolean,
       default: false,
       required: false
     },
+    /**
+     * Render mini sized avatar
+     */
     mini: {
       type: Boolean,
       default: false,
       required: false
     },
+    /**
+     * The name of the user. Will be broken up and rendered as initials
+     * unless an icon or valid image url is given. If image loading fails,
+     * will be used as a fallback to fill the avatar with initials
+     */
     name: {
       type: String,
       default: '',
       required: false
     },
+    /**
+     * Custom size in pixels of the avatar.
+     * Named size classes should be preferred to this prop
+     * Max 200
+     * Min 28
+     */
     size: {
       type: Number,
       default: 0,
       required: false
     },
+    /**
+     * Render small avatar
+     */
     small: {
       type: Boolean,
       default: false,
       required: false
     },
+    /**
+     * When true (default), render the name's full initials
+     * as opposed to a single initial when false
+     */
     useFullInitials: {
       type: Boolean,
       default: true
     },
+    /**
+     * Render an xl avatar
+     */
     xl: {
       type: Boolean,
       default: false,

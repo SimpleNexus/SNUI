@@ -1,6 +1,6 @@
 import { storiesOf } from '@storybook/vue'
 import SnAvatar from './SnAvatar'
-import { radios, text } from '@storybook/addon-knobs'
+import { radios, text, boolean } from '@storybook/addon-knobs'
 
 const avatarSizeLabel = 'Size'
 const avatarSizeOptions = {
@@ -12,6 +12,7 @@ const avatarSizeOptions = {
   Mini: 'mini',
   Micro: 'micro'
 }
+
 const avatarSizeDefault = 'standard'
 const computedAvatarSize = {
   xl () {
@@ -43,6 +44,9 @@ storiesOf('SnAvatar', module)
     props: {
       size: {
         default: radios(avatarSizeLabel, avatarSizeOptions, avatarSizeDefault)
+      },
+      useFullInitials: {
+        default: boolean('Use Full Initials', true)
       }
     },
     template: `
@@ -53,13 +57,16 @@ storiesOf('SnAvatar', module)
                    :small="small"
                    :mini="mini"
                    :micro="micro"
+                   :use-full-initials="useFullInitials"
         />`,
     computed: {
       ...computedAvatarSize
     }
   }), {
     info: {
-      summary: `Summary`
+      summary: `The avatar component can take a \`name\` prop which will be split into intitials.
+
+       The \`useFullInitials\` prop can be used to control whether to render a single or both initials.`
     }
   })
   .add('Avatar With Image', () => ({
@@ -93,7 +100,11 @@ storiesOf('SnAvatar', module)
     }
   }), {
     info: {
-      summary: `Summary`
+      summary: `
+      The avatar component can take an \`image\` source url prop to render an image inside the avatar.
+      If the image loading fails, the component will fall back to rendering initials from the \`name\` prop.
+      If image loading failed and the \`name\` prop was not given, the component will render a default avatar image.
+      `
     }
   })
   .add('Icon Avatar', () => ({
@@ -118,6 +129,7 @@ storiesOf('SnAvatar', module)
     }
   }), {
     info: {
-      summary: `Summary`
+      summary: `
+      The avatar component can an icon prop which will render an icon inside the component. The icon scales in size with the component.`
     }
   })
