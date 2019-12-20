@@ -15,11 +15,18 @@
   },
   "dependencies": {
     "core-js": "^3.4.7",
+    "css-vars-ponyfill": "^2.1.2",
     "uuid": "^3.3.3",
     "vue": "^2.6.10"
   },
   "main": "dist/SNUI.common.js",
-  "files": [  "dist/*",  "src/*",  "public/*",  "*.json",  "*.js"],
+  "files": [
+    "dist/*",
+    "src/*",
+    "public/*",
+    "*.json",
+    "*.js"
+  ],
   "devDependencies": {
     "@storybook/addon-actions": "^5.2.8",
     "@storybook/addon-centered": "^5.2.8",

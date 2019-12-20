@@ -261,9 +261,6 @@ storiesOf('SnButton', module)
       disabled: {
         default: boolean('Disabled', false)
       },
-      outline: {
-        default: boolean('Outline', false)
-      },
       buttonType: {
         default: radios(buttonTypeLabel, buttonTypeOptions, buttonTypeDefault)
       }
@@ -278,7 +275,6 @@ storiesOf('SnButton', module)
         :caution="caution"
         :warning="warning"
         :disabled="disabled"
-        :outline="outline"
         @click="action"
       >
         <sn-icon large name="bell"/>
@@ -291,7 +287,6 @@ storiesOf('SnButton', module)
         :caution="caution"
         :warning="warning"
         :disabled="disabled"
-        :outline="outline"
         @click="action"
       >
         Text
