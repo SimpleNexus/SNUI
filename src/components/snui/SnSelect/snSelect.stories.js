@@ -16,18 +16,12 @@ storiesOf('SnSelect', module)
     },
     data () {
       return {
-        defaultVal: {
-          text: 'Item 1',
-          value: 'item1'
-        },
-        items: [{
-          text: 'Item 1',
-          value: 'item1'
-        },
-        {
-          text: 'Item 2',
-          value: 'item2'
-        }
+        defaultVal: 'Initial Value',
+        items: [
+          'Item 1',
+          'Item 2',
+          'Item 3',
+          'Initial Value'
         ]
       }
     },
@@ -83,6 +77,7 @@ storiesOf('SnSelect', module)
     template: `
       <sn-select
         v-model="defaultVal"
+        avatar
         :items="items"
         :disabled="disabled"
         :return-object="returnObject"
@@ -129,6 +124,7 @@ storiesOf('SnSelect', module)
     template: `
       <sn-select
         v-model="defaultVal"
+        icon
         :items="items"
         :disabled="disabled"
         :return-object="returnObject"

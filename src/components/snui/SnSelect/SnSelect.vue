@@ -1,11 +1,12 @@
 <template>
   <div class="sn-select-wrapper">
-    <div :class="selectBoxClasses" @click="toggleOptions">
+    <div :class="selectBoxClasses" @click="toggleItems">
       <sn-avatar
         class="sn-select-selected-leader"
         v-if="selectedItemAvatar"
         :image="selectedItemAvatar"
         micro
+        :name="selectedItemText"
       />
       <i
         v-if="selectedItemIcon"
@@ -34,6 +35,7 @@
           v-if="getItemAvatar(item)"
           :image="getItemAvatar(item)"
           class="sn-select-item--leader"
+          :name="getItemText(item)"
           micro
         />
         <i v-if="getItemIcon(item)"
@@ -50,49 +52,110 @@
 
 <script>
 import SnAvatar from '../SnAvatar/SnAvatar'
+
 export default {
   name: 'SnSelect',
   components: { SnAvatar },
   props: {
+    /**
+     * Boolean flag to indicate that the
+     * item list should display avatars
+     **/
+    avatar: {
+      type: Boolean,
+      default: false,
+      required: false
+    },
+    /**
+     * Prop to control whether the select box
+     * will allow input
+     **/
     disabled: {
       type: Boolean,
       default: false,
       required: false
     },
+    /**
+     * Prop to indicate that the
+     * item list should display icons
+     **/
+    icon: {
+      type: Boolean,
+      default: false,
+      required: false
+    },
+    /**
+     * Used to specify which object key should be used
+     * as item display text
+     **/
     itemText: {
       type: String,
       default: 'text',
       required: false
     },
+    /**
+     * Used to specify which object key should be used
+     * as item value
+     **/
     itemValue: {
       type: String,
       default: 'value',
       required: false
     },
+    /**
+     * Used to specify which object key should be used
+     * as item icon
+     **/
     itemIcon: {
       type: String,
       default: 'icon',
       required: false
     },
+    /**
+     * Used to specify which object key should be used
+     * as item avatar source
+     **/
     itemAvatar: {
       type: String,
       default: 'avatar',
       required: false
     },
+    /**
+     * List of items to be shown in the items list.
+     * Can be a list of primitives or objects. If objects
+     * are provided, the item value, text, avatar, and icon
+     * keys should be provided as needed to ensure the item list data
+     * is mapped correctly
+     **/
     items: {
       type: Array,
       default: () => []
     },
+    /**
+     * By default, if the item list contains objects,
+     * the component will emit the value specified by the itemValue key.
+     * Enabling this prop will cause the component to emit the entire
+     * item object on select
+     **/
     returnObject: {
       type: Boolean,
       default: false,
       required: false
     },
+    /**
+     * Indicates that the select will be used to show sorting
+     * options. Prefaces the selected item with "SORT:"
+     **/
     sorting: {
       type: Boolean,
       default: false,
       required: false
     },
+    /**
+     * The data value to be modeled. The component will try and match
+     * this initial value to an item in the items list. If not found,
+     * the component will set the first item in the list as selected
+     **/
     value: {
       default: ''
     }
@@ -100,25 +163,45 @@ export default {
   data () {
     return {
       itemsVisible: false,
-      selectedItem: this.value
+      selectedItem: ''
     }
   },
   computed: {
+    /**
+       * Returns either an up or down icon depending on
+       * whether the item list is open
+       */
     chevronIcon () {
       return this.itemsVisible ? 'sn-icon-chevron-up-small' : 'sn-icon-chevron-down-small'
     },
+    /**
+       * Helper to get teh currently selected avatar
+       */
     selectedItemAvatar () {
       return this.getItemAvatar(this.selectedItem)
     },
+    /**
+       * Helper to get teh currently selected icon
+       */
     selectedItemIcon () {
       return this.getItemIcon(this.selectedItem)
     },
+    /**
+       * Helper to get teh currently selected text
+       */
     selectedItemText () {
       return this.getItemText(this.selectedItem)
     },
+    /**
+       * Helper to get teh currently selected value
+       */
     selectedItemValue () {
       return this.getItemValue(this.selectedItem)
     },
+    /**
+       * Returns the list of CSS classes to be attached
+       * to the select box
+       */
     selectBoxClasses () {
       const classes = ['sn-select']
       if (this.disabled) {
@@ -127,25 +210,67 @@ export default {
       return classes
     }
   },
+  mounted () {
+    this.validateProps()
+    this.selectedItem = this.items.find(item => this.getItemValue(item) === this.getItemValue(this.value)) || this.items[0]
+  },
   methods: {
-    toggleOptions () {
+    /**
+       * Controls whether the item list is shown.
+       * If disabled, it will always hide the list
+       */
+    toggleItems () {
       if (this.disabled) {
+        this.itemsVisible = false
         return
       }
       this.itemsVisible = !this.itemsVisible
     },
+    /**
+       * Extracts the text from a select item.
+       * If the item is an object it will return the item text
+       * key provided in props
+       * @param item
+       * @returns {*}
+       */
     getItemText (item) {
-      return typeof item === 'object' ? item[this.itemText] : item
+      return item && typeof item === 'object' ? item[this.itemText] : item
     },
+    /**
+       * Extracts the value from a select item.
+       * If the item is an object it will return the item value
+       * key provided in props
+       * @param item
+       * @returns {*}
+       */
     getItemValue (item) {
       return typeof item === 'object' ? item[this.itemValue] : item
     },
+    /**
+       * Extracts the avatar source from a select item
+       * If the item is not an object, it will return null.
+       * It will return the item avatar key provided in props
+       * @param item
+       * @returns {*}
+       */
     getItemAvatar (item) {
-      return typeof item === 'object' ? item[this.itemAvatar] : null
+      return this.avatar && typeof item === 'object' ? item[this.itemAvatar] : null
     },
+    /**
+       * Extracts the icon name from a select item
+       * If the item is not an object, it will return null.
+       * It will return the item icon key provided in props
+       * @param item
+       * @returns {*}
+       */
     getItemIcon (item) {
-      return typeof item === 'object' ? item[this.itemIcon] : null
+      return this.icon && typeof item === 'object' ? item[this.itemIcon] : null
     },
+    /**
+       * Returns a css class list for items in the select list
+       * @param item
+       * @returns {[string]}
+       */
     getItemClasses (item) {
       const classes = ['sn-select-item']
       if (this.selectedItemValue === this.getItemValue(item)) {
@@ -154,19 +279,36 @@ export default {
       if (this.getItemIcon(item) || this.getItemAvatar(item)) {
         classes.push('sn-select-item--with-leader')
       }
-      if (this.sorting) {
-        classes.push('sn-select-item--sorting')
-      }
       return classes
     },
+    /**
+       * Sets the selectedItem data value to the clicked item in the list.
+       * Emits this as an event and toggles the list closed
+       * @param item
+       */
     selectItem (item) {
       this.selectedItem = item
+      // We can either emit the value property or the entire item
       if (this.returnObject) {
         this.$emit('input', item)
       } else {
         this.$emit('input', this.getItemValue(item))
       }
-      this.toggleOptions()
+      this.toggleItems()
+    },
+    /**
+       * Run on mount to ensure that multiple display modifiers
+       * aren't going to confuse the component.
+       * Prints a warning to the console
+       */
+    validateProps () {
+      let singlePropCount = 0
+      if (this.avatar) { singlePropCount++ }
+      if (this.icon) { singlePropCount++ }
+      if (this.sorting) { singlePropCount++ }
+      if (singlePropCount > 1) {
+        console.error('Warning: SnSelect cannot multiple display modifiers, please pick one: avatar, icon, sorting')
+      }
     }
   }
 }
@@ -190,6 +332,7 @@ export default {
       border solid 1px $sn-black
       align-items center
       cursor pointer
+
       &--disabled
         cursor not-allowed
         opacity $disabled-opacity
@@ -224,14 +367,19 @@ export default {
         align-items center
         padding-left 16px
         height 36px
+
         &--icon
           font-size 20px
+
         &--with-leader
           padding-left 8px
+
         &--selected
           background-color #EEEEEE
+
         &:hover
           background-color #EEEEEE
+
         &--leader
           padding-right 4px
 
