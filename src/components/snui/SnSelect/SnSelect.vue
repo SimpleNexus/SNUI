@@ -1,14 +1,16 @@
 <template>
   <div class="sn-select-wrapper">
-    <div class="sn-select" @click="toggleOptions">
-      <div class="sn-select-selected-item">Dropdown</div>
+    <div :class="selectBoxClasses" @click="toggleOptions">
+      <div class="sn-select-selected-item">{{this.selectedItemText}}</div>
       <i class="sn-select-chevron" :class="chevronIcon"/>
     </div>
-    <div class="sn-select-options-wrapper" v-show="optionsVisible">
+    <div class="sn-select-options-wrapper" v-show="itemsVisible">
       <div
         v-for="item in items"
         class="sn-select-option"
+        :class="selectedItemValue === getItemValue(item) ? 'sn-select-option--selected' : ''"
         :key="`sn-select-option-${getItemText(item)}`"
+        @click="selectItem(item)"
       >
         {{getItemText(item)}}
       </div>
@@ -20,9 +22,9 @@
 export default {
   name: 'SnSelect',
   props: {
-    label: {
-      type: String,
-      default: '',
+    disabled: {
+      type: Boolean,
+      default: false,
       required: false
     },
     itemText: {
@@ -48,21 +50,46 @@ export default {
     items: {
       type: Array,
       default: () => []
+    },
+    returnObject: {
+      type: Boolean,
+      default: false,
+      required: false
+    },
+    value: {
+      default: ''
     }
   },
   data () {
     return {
-      optionsVisible: false
+      itemsVisible: false,
+      selectedItem: this.value
     }
   },
   computed: {
     chevronIcon () {
-      return this.optionsVisible ? 'sn-icon-chevron-up-small' : 'sn-icon-chevron-down-small'
+      return this.itemsVisible ? 'sn-icon-chevron-up-small' : 'sn-icon-chevron-down-small'
+    },
+    selectedItemText () {
+      return this.getItemText(this.selectedItem)
+    },
+    selectedItemValue () {
+      return this.getItemValue(this.selectedItem)
+    },
+    selectBoxClasses () {
+      const classes = ['sn-select']
+      if (this.disabled) {
+        classes.push('sn-select--disabled')
+      }
+      return classes
     }
   },
   methods: {
     toggleOptions () {
-      this.optionsVisible = !this.optionsVisible
+      if (this.disabled) {
+        return
+      }
+      this.itemsVisible = !this.itemsVisible
     },
     getItemText (item) {
       return typeof item === 'object' ? item[this.itemText] : item
@@ -75,6 +102,15 @@ export default {
     },
     getItemIcon (item) {
       return typeof item === 'object' ? item[this.itemIcon] : null
+    },
+    selectItem (item) {
+      this.selectedItem = item
+      if (this.returnObject) {
+        this.$emit('input', item)
+      } else {
+        this.$emit('input', this.getItemValue(item))
+      }
+      this.toggleOptions()
     }
   }
 }
@@ -95,6 +131,9 @@ export default {
       border solid 1px $sn-black
       align-items center
       cursor pointer
+      &--disabled
+        cursor not-allowed
+        opacity $disabled-opacity
 
       .sn-select-selected-item
         font-size 14px
@@ -117,10 +156,12 @@ export default {
 
       .sn-select-option
         display flex
+        cursor pointer
         align-items center
         padding-left 16px
         height 36px
-
+        &--selected
+          background-color #EEEEEE
         &:hover
           background-color #EEEEEE
 </style>

@@ -214,7 +214,7 @@ export default {
       line-height 20px
       height 52px
     &--disabled
-      cursor default
+      cursor not-allowed
       opacity $disabled-opacity
     &--circle
       border-radius 50%
