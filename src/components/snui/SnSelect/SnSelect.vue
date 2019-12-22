@@ -1,8 +1,8 @@
 <template>
   <div class="sn-select-wrapper">
-    <div :class="selectBoxClasses" @click="toggleItems">
+    <div :class="selectBoxClasses" @click="toggleItems" ref="selectBox">
       <sn-avatar
-        class="sn-select-selected-leader"
+        class="sn-select-selected--leader"
         v-if="selectedItemAvatar"
         :image="selectedItemAvatar"
         micro
@@ -10,10 +10,10 @@
       />
       <i
         v-if="selectedItemIcon"
-        class="sn-select-selected-leader"
+        class="sn-select-selected--leader"
         :class="`sn-icon-${selectedItemIcon}`"
       />
-      <div class="sn-select-selected-item">
+      <div class="sn-select-selected--item">
         <span
           v-if="sorting"
           class="sn-select-sort-text"
@@ -24,7 +24,13 @@
       </div>
       <i class="sn-select-chevron" :class="chevronIcon"/>
     </div>
-    <div class="sn-select-items-wrapper" v-show="itemsVisible">
+    <div
+      v-click-outside="{
+        exclude: ['selectBox'],
+        handler: 'toggleItems'
+      }"
+      v-show="itemsVisible"
+      class="sn-select-items-wrapper">
       <div
         v-for="item in items"
         :class="getItemClasses(item)"
@@ -58,104 +64,104 @@ export default {
   components: { SnAvatar },
   props: {
     /**
-     * Boolean flag to indicate that the
-     * item list should display avatars
-     **/
+       * Boolean flag to indicate that the
+       * item list should display avatars
+       **/
     avatar: {
       type: Boolean,
       default: false,
       required: false
     },
     /**
-     * Prop to control whether the select box
-     * will allow input
-     **/
+       * Prop to control whether the select box
+       * will allow input
+       **/
     disabled: {
       type: Boolean,
       default: false,
       required: false
     },
     /**
-     * Prop to indicate that the
-     * item list should display icons
-     **/
+       * Prop to indicate that the
+       * item list should display icons
+       **/
     icon: {
       type: Boolean,
       default: false,
       required: false
     },
     /**
-     * Used to specify which object key should be used
-     * as item display text
-     **/
+       * Used to specify which object key should be used
+       * as item display text
+       **/
     itemText: {
       type: String,
       default: 'text',
       required: false
     },
     /**
-     * Used to specify which object key should be used
-     * as item value
-     **/
+       * Used to specify which object key should be used
+       * as item value
+       **/
     itemValue: {
       type: String,
       default: 'value',
       required: false
     },
     /**
-     * Used to specify which object key should be used
-     * as item icon
-     **/
+       * Used to specify which object key should be used
+       * as item icon
+       **/
     itemIcon: {
       type: String,
       default: 'icon',
       required: false
     },
     /**
-     * Used to specify which object key should be used
-     * as item avatar source
-     **/
+       * Used to specify which object key should be used
+       * as item avatar source
+       **/
     itemAvatar: {
       type: String,
       default: 'avatar',
       required: false
     },
     /**
-     * List of items to be shown in the items list.
-     * Can be a list of primitives or objects. If objects
-     * are provided, the item value, text, avatar, and icon
-     * keys should be provided as needed to ensure the item list data
-     * is mapped correctly
-     **/
+       * List of items to be shown in the items list.
+       * Can be a list of primitives or objects. If objects
+       * are provided, the item value, text, avatar, and icon
+       * keys should be provided as needed to ensure the item list data
+       * is mapped correctly
+       **/
     items: {
       type: Array,
       default: () => []
     },
     /**
-     * By default, if the item list contains objects,
-     * the component will emit the value specified by the itemValue key.
-     * Enabling this prop will cause the component to emit the entire
-     * item object on select
-     **/
+       * By default, if the item list contains objects,
+       * the component will emit the value specified by the itemValue key.
+       * Enabling this prop will cause the component to emit the entire
+       * item object on select
+       **/
     returnObject: {
       type: Boolean,
       default: false,
       required: false
     },
     /**
-     * Indicates that the select will be used to show sorting
-     * options. Prefaces the selected item with "SORT:"
-     **/
+       * Indicates that the select will be used to show sorting
+       * options. Prefaces the selected item with "SORT:"
+       **/
     sorting: {
       type: Boolean,
       default: false,
       required: false
     },
     /**
-     * The data value to be modeled. The component will try and match
-     * this initial value to an item in the items list. If not found,
-     * the component will set the first item in the list as selected
-     **/
+       * The data value to be modeled. The component will try and match
+       * this initial value to an item in the items list. If not found,
+       * the component will set the first item in the list as selected
+       **/
     value: {
       default: ''
     }
@@ -322,9 +328,6 @@ export default {
     vertical-align center
     font-family $font-family
 
-    .sn-select-sort-text
-      font-weight $font-weight-regular
-
     .sn-select
       display flex
       width 208px
@@ -337,19 +340,23 @@ export default {
         cursor not-allowed
         opacity $disabled-opacity
 
-      .sn-select-selected-item
-        font-size 14px
-        font-weight $font-weight-medium
-        flex-grow 1
-        padding-left 16px
-
-      .sn-select-selected-leader
-        padding-left 8px
-        margin-right -8px
-        font-size 20px
-
       .sn-select-chevron
         margin-right 8px
+
+      .sn-select-sort-text
+        font-weight $font-weight-regular
+
+      .sn-select-selected
+        &--item
+          font-size 14px
+          font-weight $font-weight-medium
+          flex-grow 1
+          padding-left 16px
+
+        &--leader
+          padding-left 8px
+          margin-right -8px
+          font-size 20px
 
     .sn-select-items-wrapper
       display flex

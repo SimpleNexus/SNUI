@@ -2,6 +2,7 @@ import * as components from './components/snui'
 import cssVars from 'css-vars-ponyfill'
 import { setBrandColor } from './util/setBrandColor'
 import { hexToRgb } from './util/hexToRgb'
+import ClickOutside from './directives/clickOutside'
 
 export default {
   install (Vue, options) {
@@ -23,5 +24,7 @@ export default {
       hexToRgb,
       setBrandColor
     }
+
+    Vue.directive('click-outside', ClickOutside)
   }
 }

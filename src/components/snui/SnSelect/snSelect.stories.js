@@ -2,6 +2,10 @@ import { storiesOf } from '@storybook/vue'
 import SnSelect from './SnSelect'
 import { boolean } from '@storybook/addon-knobs'
 import { action } from '@storybook/addon-actions'
+import Vue from 'vue'
+import ClickOutside from '../../../directives/clickOutside'
+
+Vue.directive('click-outside', ClickOutside)
 
 storiesOf('SnSelect', module)
   .add('Basic Select', () => ({
