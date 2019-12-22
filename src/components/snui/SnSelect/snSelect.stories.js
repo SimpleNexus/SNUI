@@ -139,3 +139,47 @@ storiesOf('SnSelect', module)
       summary: ``
     }
   })
+  .add('With Sorting', () => ({
+    components: { SnSelect },
+    props: {
+      disabled: {
+        default: boolean('Disabled', false)
+      },
+      returnObject: {
+        default: boolean('Return Object (see Actions tab)', false)
+      }
+    },
+    data () {
+      return {
+        defaultVal: {
+          text: 'A - Z',
+          value: 'a-z'
+        },
+        items: [{
+          text: 'A - Z',
+          value: 'a-z'
+        },
+        {
+          text: 'Z - A',
+          value: 'z-a'
+        }
+        ]
+      }
+    },
+    methods: {
+      logInput: action('input changed')
+    },
+    template: `
+      <sn-select
+        v-model="defaultVal"
+        :items="items"
+        :disabled="disabled"
+        :return-object="returnObject"
+        @input="logInput"
+        sorting
+      />`
+  }), {
+    info: {
+      summary: ``
+    }
+  })

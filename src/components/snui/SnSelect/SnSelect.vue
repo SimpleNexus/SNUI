@@ -12,7 +12,15 @@
         class="sn-select-selected-leader"
         :class="`sn-icon-${selectedItemIcon}`"
       />
-      <div class="sn-select-selected-item">{{this.selectedItemText}}</div>
+      <div class="sn-select-selected-item">
+        <span
+          v-if="sorting"
+          class="sn-select-sort-text"
+        >
+          SORT:
+        </span>
+        {{this.selectedItemText}}
+      </div>
       <i class="sn-select-chevron" :class="chevronIcon"/>
     </div>
     <div class="sn-select-items-wrapper" v-show="itemsVisible">
@@ -172,6 +180,9 @@ export default {
     vertical-align center
     font-family $font-family
 
+    .sn-select-sort-text
+      font-weight $font-weight-regular
+
     .sn-select
       display flex
       width 208px
@@ -223,4 +234,5 @@ export default {
           background-color #EEEEEE
         &--leader
           padding-right 4px
+
 </style>
