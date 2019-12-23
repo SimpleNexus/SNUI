@@ -275,6 +275,7 @@ storiesOf('SnButton', module)
         :caution="caution"
         :warning="warning"
         :disabled="disabled"
+        :outline="true"
         @click="action"
       >
         <sn-icon large name="bell"/>
@@ -287,6 +288,7 @@ storiesOf('SnButton', module)
         :caution="caution"
         :warning="warning"
         :disabled="disabled"
+        :outline="true"
         @click="action"
       >
         Text

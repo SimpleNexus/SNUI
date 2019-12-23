@@ -114,7 +114,7 @@ export default {
   },
   computed: {
     buttonClasses () {
-      const styleClass = this.outline || this.circle ? 'sn-btn-outline' : 'sn-btn'
+      const styleClass = this.outline ? 'sn-btn-outline' : 'sn-btn'
       return ['sn-btn-base', styleClass]
         .concat(this.getColorClasses(styleClass))
         .concat(this.getDisplayClasses())
