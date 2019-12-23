@@ -42,7 +42,11 @@ storiesOf('SnSelect', module)
       />`
   }), {
     info: {
-      summary: ``
+      summary: `
+      A basic select box takes an array of items that are either primitives or objects. If objects are supplied,
+      it is advised to use the \`item-text\` and \`item-value\` props to tell the component which properties to
+      display and bind to the field.
+      `
     }
   })
   .add('With Avatar', () => ({
@@ -89,7 +93,10 @@ storiesOf('SnSelect', module)
       />`
   }), {
     info: {
-      summary: ``
+      summary: `When given the avatar prop, the select field will render an avatar with each option in the select list.
+                To specify which object property should be used as the avatar image source, supply an \`item-avatar\`
+                prop to the component. If the avatar image fails to load, the component will fall back to the \`item-text\`
+                prop value to render initials.`
     }
   })
   .add('With Icon', () => ({
@@ -136,7 +143,11 @@ storiesOf('SnSelect', module)
       />`
   }), {
     info: {
-      summary: ``
+      summary: `
+      When given the icon prop, the component will render an icon with each option in the select list.
+      To specify which object property should be used as the icon name, supply an \`item-icon\`
+      prop to the component. Please note that the icon name should exist in the sn-icon font.
+      `
     }
   })
   .add('With Sorting', () => ({
@@ -180,6 +191,9 @@ storiesOf('SnSelect', module)
       />`
   }), {
     info: {
-      summary: ``
+      summary: `
+      When given the \`sorting\` prop, the component will prepend the 'SORT:' flag to the selected item
+      to indicate that the items are meant for changing a sort order.
+      `
     }
   })

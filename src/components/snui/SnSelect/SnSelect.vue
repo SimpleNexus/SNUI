@@ -346,10 +346,10 @@ export default {
         cursor not-allowed
         opacity $disabled-opacity
 
-      .&--chevron
+      &--chevron
         margin-right 8px
 
-      .&--sort-text
+      &--sort-text
         font-weight $font-weight-regular
 
       .sn-select-selected
