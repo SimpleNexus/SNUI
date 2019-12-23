@@ -16,18 +16,18 @@
       <div class="sn-select-selected--item">
         <span
           v-if="sorting"
-          class="sn-select-sort-text"
+          class="sn-select--sort-text"
         >
           SORT:
         </span>
         {{this.selectedItemText}}
       </div>
-      <i class="sn-select-chevron" :class="chevronIcon"/>
+      <i class="sn-select--chevron" :class="chevronIcon"/>
     </div>
     <div
       v-click-outside="{
         exclude: ['selectBox'],
-        handler: 'toggleItems'
+        handler: 'closeItems'
       }"
       v-show="itemsVisible"
       class="sn-select-items-wrapper">
@@ -222,6 +222,12 @@ export default {
   },
   methods: {
     /**
+     * Specifically used for closing the item list
+     * */
+    closeItems () {
+      this.itemsVisible = false
+    },
+    /**
        * Controls whether the item list is shown.
        * If disabled, it will always hide the list
        */
@@ -340,10 +346,10 @@ export default {
         cursor not-allowed
         opacity $disabled-opacity
 
-      .sn-select-chevron
+      .&--chevron
         margin-right 8px
 
-      .sn-select-sort-text
+      .&--sort-text
         font-weight $font-weight-regular
 
       .sn-select-selected
