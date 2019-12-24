@@ -20,7 +20,9 @@ export default {
           const excludedEl = vnode.context.$refs[refName]
           // See if this excluded element
           // is the same element the user just clicked on
-          clickedOnExcludedEl = excludedEl.contains(e.target)
+          if (excludedEl) {
+            clickedOnExcludedEl = excludedEl.contains(e.target)
+          }
         }
       })
 
