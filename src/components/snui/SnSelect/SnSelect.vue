@@ -370,18 +370,21 @@ export default {
       background-color white
       position absolute
       border solid 1px $sn-black
-      width 208px
       z-index 10
       margin-top 40px
       padding 0
+      width 208px
+      max-height 180px
+      overflow-y auto
 
       .sn-select-item
         display flex
+        flex 1
         align-items center
         list-style-type none
         cursor pointer
         padding-left 16px
-        height 36px
+        min-height 36px
 
         &--icon
           font-size 20px
