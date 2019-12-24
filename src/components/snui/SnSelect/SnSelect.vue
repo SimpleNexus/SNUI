@@ -24,14 +24,14 @@
       </div>
       <i class="sn-select--chevron" :class="chevronIcon"/>
     </div>
-    <div
+    <ul
       v-click-outside="{
         exclude: ['selectBox'],
         handler: 'closeItems'
       }"
       v-show="itemsVisible"
       class="sn-select-items-wrapper">
-      <div
+      <li
         v-for="item in items"
         :class="getItemClasses(item)"
         :key="`sn-select-item-${getItemText(item)}`"
@@ -51,8 +51,8 @@
         <span>
         {{getItemText(item)}}
         </span>
-      </div>
-    </div>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -373,11 +373,13 @@ export default {
       width 208px
       z-index 10
       margin-top 40px
+      padding 0
 
       .sn-select-item
         display flex
-        cursor pointer
         align-items center
+        list-style-type none
+        cursor pointer
         padding-left 16px
         height 36px
 
