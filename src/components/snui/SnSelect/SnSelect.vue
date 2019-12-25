@@ -301,12 +301,9 @@ export default {
     selectItem (item) {
       this.selectedItem = item
       // We can either emit the value property or the entire item
-      if (this.returnObject) {
-        this.$emit('input', item)
-      } else {
-        this.$emit('input', this.getItemValue(item))
-      }
+      const emitVal = this.returnObject ? item : this.getItemValue(item)
       this.toggleItems()
+      this.$emit('input', emitVal)
     },
     /**
        * Run on mount to ensure that multiple display modifiers

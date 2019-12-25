@@ -79,6 +79,9 @@ lighten2(c)
 lighten3(c)
   s("rgba(var(%s), .25)", c)
 
+disable(c)
+  s("rgba(var(%s), %s)", c, $disabled-opacity)
+
 /**
   Text Classes
  */
