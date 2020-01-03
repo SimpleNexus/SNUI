@@ -15,13 +15,13 @@
       :to="useRouter && link ? link : undefined"
       :href="!useRouter && link ? link : undefined"
     >
-      {{text}}
-    </a>
-    <span
-      v-if="hasCount"
-      class="sn-tab-count">
+      {{ text }}
+      <span
+        v-if="hasCount"
+        class="sn-tab-count">
     ({{count}})
   </span>
+    </a>
   </li>
 </template>
 
@@ -88,14 +88,16 @@ export default {
 
     .sn-tab-text
       padding-bottom 4px
-      &:hover
+      &:after
+        display block
+        content ''
+        transition transform 250ms ease-in-out
+        transform scaleX(0)
         border-bottom solid 1px #D8D8D8
-      &--active
-        border-bottom solid 1px #D8D8D8
+      &--active:after
+        transform scaleX(1)
       &--disabled
         border none
-        &:hover
-          border none
 
     .sn-tab-count
       color $sn-grey

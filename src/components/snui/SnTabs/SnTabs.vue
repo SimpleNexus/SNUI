@@ -27,50 +27,84 @@ export default {
   name: 'SnTabs',
   components: { SnTab },
   props: {
+    /**
+     * Instructs the component to show the tab count
+     */
     count: {
       type: Boolean,
       default: false,
       required: false
     },
+    /**
+     * Displays the tabs as a column instead of a row
+     */
     column: {
       type: Boolean,
       default: false,
       required: false
     },
+    /**
+     * The list of tabs to display. Can be made
+     * of objects with text, count, and link values
+     * or just primitives
+     */
     tabs: {
       type: Array,
       default: () => [],
       required: true
     },
+    /**
+     * The object key for the text to display in each tab
+     */
     tabText: {
       type: String,
       default: 'text',
       required: false
     },
+    /**
+     * The object key for the link to be attached to each tab
+     */
     tabLink: {
       type: String,
       default: 'link',
       required: false
     },
+    /**
+     * The object key for the count to be displayed for each tab
+     */
     tabCount: {
       type: String,
       default: 'count',
       required: false
     },
+    /**
+     * The object key to indicate whether each tab is disabled
+     */
     tabDisabled: {
       type: String,
       default: 'disabled',
       required: false
     },
+    /**
+     * If true, input events will emit the entire tab object instead of the tab index
+     */
     returnObject: {
       type: Boolean,
       default: false,
       required: false
     },
+    /**
+     * The tab value to be modeled. By default returns the tab index.
+     * If the returnObject prop is true, will map to a tab object.
+     */
     value: {
-      type: [Number, String],
+      type: [Number, Object],
       default: 0
     },
+    /**
+     * Use Vue router `to` attributes in tab links.
+     * If false, uses hrml href attribute
+     */
     useRouter: {
       type: Boolean,
       default: true,
@@ -80,6 +114,13 @@ export default {
   data () {
     return {
       activeTabIndex: 0
+    }
+  },
+  mounted () {
+    if (typeof this.value === 'number') {
+      this.activeTabIndex = this.value
+    } else if (this.value && typeof this.value === 'object') {
+      this.activeTabIndex = this.tabs.findIndex(tab => this.getTabText(tab) === this.getTabText(this.value)) || 0
     }
   },
   methods: {
