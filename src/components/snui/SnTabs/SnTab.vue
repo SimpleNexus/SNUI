@@ -94,6 +94,7 @@ export default {
 
     .sn-tab-text-wrapper
       display inline-block
+
     .sn-tab-text
       padding-bottom 4px
 
