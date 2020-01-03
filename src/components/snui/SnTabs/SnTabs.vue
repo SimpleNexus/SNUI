@@ -1,9 +1,11 @@
 <template>
   <div class="sn-tabs-wrapper">
-    <ul :class="{
+    <ul
+      :class="{
       'sn-tabs': true,
       'sn-tabs--column': column
     }"
+      @scroll="captureScroll"
     >
       <sn-tab
         v-for="(tab, index) in tabs"
@@ -28,83 +30,83 @@ export default {
   components: { SnTab },
   props: {
     /**
-     * Instructs the component to show the tab count
-     */
+       * Instructs the component to show the tab count
+       */
     count: {
       type: Boolean,
       default: false,
       required: false
     },
     /**
-     * Displays the tabs as a column instead of a row
-     */
+       * Displays the tabs as a column instead of a row
+       */
     column: {
       type: Boolean,
       default: false,
       required: false
     },
     /**
-     * The list of tabs to display. Can be made
-     * of objects with text, count, and link values
-     * or just primitives
-     */
+       * The list of tabs to display. Can be made
+       * of objects with text, count, and link values
+       * or just primitives
+       */
     tabs: {
       type: Array,
       default: () => [],
       required: true
     },
     /**
-     * The object key for the text to display in each tab
-     */
+       * The object key for the text to display in each tab
+       */
     tabText: {
       type: String,
       default: 'text',
       required: false
     },
     /**
-     * The object key for the link to be attached to each tab
-     */
+       * The object key for the link to be attached to each tab
+       */
     tabLink: {
       type: String,
       default: 'link',
       required: false
     },
     /**
-     * The object key for the count to be displayed for each tab
-     */
+       * The object key for the count to be displayed for each tab
+       */
     tabCount: {
       type: String,
       default: 'count',
       required: false
     },
     /**
-     * The object key to indicate whether each tab is disabled
-     */
+       * The object key to indicate whether each tab is disabled
+       */
     tabDisabled: {
       type: String,
       default: 'disabled',
       required: false
     },
     /**
-     * If true, input events will emit the entire tab object instead of the tab index
-     */
+       * If true, input events will emit the entire tab object instead of the tab index
+       */
     returnObject: {
       type: Boolean,
       default: false,
       required: false
     },
     /**
-     * The tab value to be modeled. By default returns the tab index.
-     * If the returnObject prop is true, will map to a tab object.
-     */
+       * The tab value to be modeled. By default returns the tab index.
+       * If the returnObject prop is true, will map to a tab object.
+       */
     value: {
       type: [Number, Object],
       default: 0
     },
     /**
-     * Use Vue router `to` attributes in tab links.
-     * If false, uses hrml href attribute
-     */
+       * Use Vue router `to` attributes in tab links.
+       * If false, uses hrml href attribute
+       */
     useRouter: {
       type: Boolean,
       default: true,
@@ -124,6 +126,9 @@ export default {
     }
   },
   methods: {
+    captureScroll () {
+      console.log(arguments)
+    },
     getTabText (tab) {
       return tab && typeof tab === 'object' ? tab[this.tabText] : tab
     },

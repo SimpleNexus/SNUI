@@ -4,7 +4,7 @@
       'sn-tab': true,
       'sn-tab--disabled': disabled
     }"
-    @click="!disabled && $emit('click')"
+    @click="handleTabClick"
   >
     <div class="sn-tab-text-wrapper">
       <a
@@ -31,31 +31,50 @@
 export default {
   name: 'SnTab',
   props: {
+    /**
+     * Indicates whether the tab is currently selected
+     */
     active: {
       type: Boolean,
       default: false,
       required: false
     },
+    /**
+     * Inserted in parentheses after the tab text
+     */
     count: {
       type: [Number, String, undefined],
       default: undefined,
       required: false
     },
+    /**
+     * Disables the tab
+     */
     disabled: {
       type: Boolean,
       default: false,
       required: false
     },
+    /**
+     * A link or route the tab should navigate to
+     */
     link: {
       type: String,
       default: '',
       required: false
     },
+    /**
+     * The text to be displayed in the tab
+     */
     text: {
       type: String,
       default: '',
       required: true
     },
+    /**
+     * Toggles whether the component should use
+     * href or Vue router for the link prop
+     */
     useRouter: {
       type: Boolean,
       default: true,
@@ -65,6 +84,12 @@ export default {
   computed: {
     hasCount () {
       return typeof this.count !== 'undefined'
+    }
+  },
+  methods: {
+    handleTabClick () {
+      // We should only emit if the tab is not disabled
+      return !this.disabled && this.$emit('click')
     }
   }
 }
@@ -96,14 +121,13 @@ export default {
       display inline-block
 
     .sn-tab-text
-      padding-bottom 4px
-
       &:after
         display block
         content ''
         transition transform 250ms ease-in-out
         transform scaleX(0)
         border-bottom solid 1px #D8D8D8
+        padding-bottom 4px
 
       &--active:after
         transform scaleX(1)
