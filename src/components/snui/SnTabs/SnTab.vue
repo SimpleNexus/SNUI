@@ -6,22 +6,24 @@
     }"
     @click="!disabled && $emit('click')"
   >
-    <a
-      :class="{
+    <div class="sn-tab-text-wrapper">
+      <a
+        :class="{
         'sn-tab-text': true,
         'sn-tab-text--active': active,
         'sn-tab-text--disabled': disabled
       }"
-      :to="useRouter && link ? link : undefined"
-      :href="!useRouter && link ? link : undefined"
-    >
-      {{ text }}
-      <span
-        v-if="hasCount"
-        class="sn-tab-count">
+        :to="useRouter && link ? link : undefined"
+        :href="!useRouter && link ? link : undefined"
+      >
+        {{ text }}
+      </a>
+    </div>
+    <span
+      v-if="hasCount"
+      class="sn-tab-count">
     ({{count}})
   </span>
-    </a>
   </li>
 </template>
 
@@ -77,25 +79,34 @@ export default {
     font-size 14px
     line-height 20px
     margin 8px
+
     &:after
       text-decoration none
+
     &:hover
       cursor pointer
+
     &--disabled
       color disable($sn-black-var)
+
       &:hover
         cursor not-allowed
 
+    .sn-tab-text-wrapper
+      display inline-block
     .sn-tab-text
       padding-bottom 4px
+
       &:after
         display block
         content ''
         transition transform 250ms ease-in-out
         transform scaleX(0)
         border-bottom solid 1px #D8D8D8
+
       &--active:after
         transform scaleX(1)
+
       &--disabled
         border none
 
