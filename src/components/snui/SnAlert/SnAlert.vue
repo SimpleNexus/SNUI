@@ -114,7 +114,7 @@ export default {
   computed: {
     alertClasses () {
       const colorProps = ['primary', 'warning', 'success', 'caution']
-      return ['sn-alert-wrapper'].concat(this.generateCSSModifierClasses(colorProps, 'sn-alert-wrapper', 'primary'))
+      return ['sn-alert-wrapper'].concat(this.generateCSSModifierClasses(colorProps, 'sn-alert-wrapper', { defaultModifier: 'primary' }))
     }
   },
   methods: {

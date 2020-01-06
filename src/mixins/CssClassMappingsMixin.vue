@@ -13,8 +13,8 @@ export default {
      * @param {Array<string>} modifierList - A list of modifiers that exist as props or data members on the component instance
      * @param {string} prefix - The prefix that the modifiers will be applied to
      * @param {Object} options - Additional options
-     * @param {string} options.defaultModifier - The default modifier to be returned if none of the provided ones are applied
-     * @param {boolean} options.includePrefixInClassList - Include the prefix as it's own CSS class in the returned list
+     * @param {string} [options.defaultModifier=''] - The default modifier to be returned if none of the provided ones are applied
+     * @param {boolean} [options.includePrefixInClassList=true] - Include the prefix as it's own CSS class in the returned list
      * @return {Array<string>}
      */
     generateCSSModifierClasses (modifierList, prefix, options = { defaultModifier: '', includePrefixInClassList: true }) {
