@@ -3,7 +3,8 @@
     <ul
       :class="{
       'sn-tabs': true,
-      'sn-tabs--column': column
+      'sn-tabs--column': column,
+      'sn-tabs--right-align': rightAlign
     }"
     >
       <sn-tab
@@ -15,6 +16,7 @@
         :disabled="getTabDisabled(tab)"
         :link="getTabLink(tab)"
         :use-router="useRouter"
+        :right-align="rightAlign"
         @click="setTabAsActive(tab, index)"
       />
     </ul>
@@ -110,6 +112,11 @@ export default {
       type: Boolean,
       default: true,
       required: false
+    },
+    rightAlign: {
+      type: Boolean,
+      default: false,
+      required: false
     }
   },
   data () {
@@ -160,4 +167,7 @@ export default {
 
     &--row
       flex-direction row
+
+    &--right-align
+      text-align right
 </style>

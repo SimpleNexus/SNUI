@@ -18,6 +18,9 @@ storiesOf('SnTabs', module)
       },
       selectedTab: {
         default: number('Selected Tab', 0, { range: true, min: 0, max: 3, step: 1 })
+      },
+      rightAlign: {
+        default: boolean('Right Align', false)
       }
     },
     methods: {
@@ -55,6 +58,7 @@ storiesOf('SnTabs', module)
         :column="column"
         :tabs="tabs"
         :return-object="returnObject"
+        :right-align="rightAlign"
         @input="handleInput"
     />`
   }), {

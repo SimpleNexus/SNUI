@@ -32,49 +32,49 @@ export default {
   name: 'SnTab',
   props: {
     /**
-     * Indicates whether the tab is currently selected
-     */
+       * Indicates whether the tab is currently selected
+       */
     active: {
       type: Boolean,
       default: false,
       required: false
     },
     /**
-     * Inserted in parentheses after the tab text
-     */
+       * Inserted in parentheses after the tab text
+       */
     count: {
       type: [Number, String, undefined],
       default: undefined,
       required: false
     },
     /**
-     * Disables the tab
-     */
+       * Disables the tab
+       */
     disabled: {
       type: Boolean,
       default: false,
       required: false
     },
     /**
-     * A link or route the tab should navigate to
-     */
+       * A link or route the tab should navigate to
+       */
     link: {
       type: String,
       default: '',
       required: false
     },
     /**
-     * The text to be displayed in the tab
-     */
+       * The text to be displayed in the tab
+       */
     text: {
       type: String,
       default: '',
-      required: true
+      required: false
     },
     /**
-     * Toggles whether the component should use
-     * href or Vue router for the link prop
-     */
+       * Toggles whether the component should use
+       * href or Vue router for the link prop
+       */
     useRouter: {
       type: Boolean,
       default: true,
@@ -98,7 +98,6 @@ export default {
 <style scoped lang="stylus">
   .sn-tab
     text-decoration none
-    text-transform uppercase
     font-family $font-family
     font-weight $font-weight-regular
     font-size 14px
@@ -126,11 +125,14 @@ export default {
         content ''
         transition transform 250ms ease-in-out
         transform scaleX(0)
-        border-bottom solid 1px #D8D8D8
+        border-bottom solid 1px lighten3($sn-black-var)
         padding-bottom 4px
 
-      &--active:after
-        transform scaleX(1)
+      &--active
+        font-weight $font-weight-medium
+
+        &:after
+          transform scaleX(1)
 
       &--disabled
         border none
