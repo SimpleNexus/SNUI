@@ -89,7 +89,7 @@ export default {
   methods: {
     handleTabClick () {
       // We should only emit if the tab is not disabled
-      return !this.disabled && this.$emit('click')
+      return !this.disabled && this.$emit('click', arguments)
     }
   }
 }

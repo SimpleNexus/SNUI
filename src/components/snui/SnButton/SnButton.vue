@@ -164,7 +164,7 @@ export default {
        *
        * @event click
        */
-      return this.disabled ? null : this.$emit('click')
+      return this.disabled ? null : this.$emit('click', arguments)
     }
   }
 }

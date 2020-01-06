@@ -1,6 +1,7 @@
 import { storiesOf } from '@storybook/vue'
 import SnAlert from './SnAlert'
 import { boolean, radios } from '@storybook/addon-knobs'
+import { action } from '@storybook/addon-actions'
 
 const alertTypeLabel = 'Alert Type'
 const alertTypeOptions = {
@@ -39,13 +40,30 @@ storiesOf('SnAlert', module)
     computed: {
       ...computedAlertType
     },
+    data () {
+      return {
+        show: true
+      }
+    },
+    methods: {
+      actionClicked: action('Action Clicked'),
+      dismissed () {
+        action('Dismissed')(arguments)
+        setTimeout(() => {
+          this.show = true
+        }, 2000)
+      }
+    },
     template: `
       <sn-alert
+        v-model="show"
         :dismissible="dismissible"
         :primary="primary"
         :caution="caution"
         :warning="warning"
         :success="success"
+        @dismissed="dismissed"
+        @actionClicked="actionClicked"
       >
         <span>This is an alert</span>
         <span slot="action">undo</span>

@@ -6,7 +6,10 @@
   <div class="sn-alert">
     <sn-icon class='sn-alert--icon' size="20" :name="icon" />
     <slot />
-    <div class="sn-alert--action">
+    <div
+      class="sn-alert--action"
+      @click="actionClicked"
+    >
       <slot name="action" />
     </div>
     <div
@@ -54,11 +57,19 @@ export default {
       default: false
     },
     timeout: {
-      type: Number
+      type: [Number, undefined],
+      default: undefined
     },
     value: {
       type: Boolean,
       default: true
+    }
+  },
+  mounted () {
+    if (this.timeout !== undefined) {
+      setTimeout(() => {
+        this.dismiss()
+      }, this.timeout)
     }
   },
   data () {
@@ -80,8 +91,18 @@ export default {
     }
   },
   methods: {
+    actionClicked () {
+      this.$emit('actionClicked', arguments)
+    },
     dismiss () {
       this.show = false
+      this.$emit('input', false)
+      this.$emit('dismissed', arguments)
+    }
+  },
+  watch: {
+    value (val) {
+      this.show = val
     }
   }
 }
@@ -117,6 +138,7 @@ export default {
     &--dismiss
       margin-left 8px
       margin-right 8px
+      margin-top 4px
       &:hover
         cursor pointer
     &--action
