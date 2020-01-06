@@ -24,7 +24,8 @@ storiesOf('SnTabs', module)
       }
     },
     methods: {
-      handleInput: action('Tab Changed')
+      handleInput: action('Tab Changed'),
+      handleTabClick: action('Tab Clicked')
     },
     data () {
       return {
@@ -60,6 +61,7 @@ storiesOf('SnTabs', module)
         :return-object="returnObject"
         :right-align="rightAlign"
         @input="handleInput"
+        @tabClicked="handleTabClick"
     />`
   }), {
     info: {

@@ -152,6 +152,7 @@ export default {
       this.activeTabIndex = index
       const emitVal = this.returnObject ? tab : index
       this.$emit('input', emitVal)
+      this.$emit('tabClicked', tab)
     }
   }
 }
