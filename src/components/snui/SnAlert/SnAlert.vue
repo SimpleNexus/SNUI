@@ -1,29 +1,31 @@
 <template>
-<div
-  v-show="show"
-  :class="alertClasses"
->
-  <div class="sn-alert">
-    <sn-icon class='sn-alert--icon' size="20" :name="icon" />
-    <slot />
+  <transition name="fade">
     <div
-      class="sn-alert--action"
-      @click="actionClicked"
+      v-show="show"
+      :class="alertClasses"
     >
-      <slot name="action" />
+      <div class="sn-alert">
+        <sn-icon class='sn-alert--icon' size="20" :name="icon" />
+        <slot />
+        <div
+          class="sn-alert--action"
+          @click="actionClicked"
+        >
+          <slot name="action" />
+        </div>
+        <div
+          class="sn-alert--dismiss"
+          @click="dismiss"
+        >
+          <sn-icon
+            v-if="dismissible"
+            name="exit"
+            size="20"
+          />
+        </div>
+      </div>
     </div>
-    <div
-      class="sn-alert--dismiss"
-      @click="dismiss"
-    >
-      <sn-icon
-        v-if="dismissible"
-        name="exit"
-        size="20"
-      />
-    </div>
-  </div>
-</div>
+  </transition>
 </template>
 
 <script>
@@ -32,34 +34,64 @@ export default {
   name: 'SnAlert',
   components: { SnIcon },
   props: {
+    /**
+     * Indicates whether the user should be able to dismiss
+     * the alert. If true, includes a clickable dismiss icon
+     * to the right of action slot. When click, the icon will
+     * hide the component and emit a dismissed event.
+     */
     dismissible: {
       type: Boolean,
       default: true
     },
+    /**
+     * The name of the icon to be prepended to the alert. Default is
+     * the warning icon
+     */
     icon: {
       type: String,
       default: 'warning'
     },
+    /**
+     * Indicates the primary color should be used
+     */
     primary: {
       type: Boolean,
       default: false
     },
+    /**
+     * Indicates the success color should be used
+     */
     success: {
       type: Boolean,
       default: false
     },
+    /**
+     * Indicates the warning color should be used
+     */
     warning: {
       type: Boolean,
       default: false
     },
+    /**
+     * Indicates the caution color should be used
+     */
     caution: {
       type: Boolean,
       default: false
     },
+    /**
+     * When given, the alert will dismiss itself after
+     * the specified timeout. Value should be in milliseconds (1000ms = 1s)
+     */
     timeout: {
       type: [Number, undefined],
       default: undefined
     },
+    /**
+     * The value the component will be bound to. Updates when the component
+     * is dismissed or hidden via timeout
+     */
     value: {
       type: Boolean,
       default: true
@@ -92,6 +124,11 @@ export default {
   },
   methods: {
     actionClicked () {
+      /**
+       * Click Event on Action Slot
+       *
+       * @event click
+       */
       this.$emit('actionClicked', arguments)
     },
     dismiss () {
@@ -128,10 +165,10 @@ export default {
   .sn-alert
     display flex
     align-items center
-    height 48px
+    min-height 48px
     max-width 1104px
     min-width 500px
-    padding 4px
+    padding 8px 4px
     &--icon
       margin-left 16px
       margin-right 8px
@@ -147,4 +184,11 @@ export default {
       margin-right 8px
       &:hover
         cursor pointer
+
+.fade-enter-active, .fade-leave-active
+  transition opacity .3s
+
+.fade-enter, .fade-leave-to
+  opacity 0
+
 </style>
