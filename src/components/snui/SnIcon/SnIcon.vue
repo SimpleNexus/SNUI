@@ -44,7 +44,7 @@ export default {
      * The size in pixels of the icon
      */
     size: {
-      type: Number,
+      type: [Number, String],
       required: false,
       default: 0
     }
