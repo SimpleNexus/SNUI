@@ -1,6 +1,6 @@
 import { storiesOf } from '@storybook/vue'
 import SnTabs from './SnTabs'
-import { boolean } from '@storybook/addon-knobs'
+import { boolean, number } from '@storybook/addon-knobs'
 import { action } from '@storybook/addon-actions'
 
 storiesOf('SnTabs', module)
@@ -15,6 +15,9 @@ storiesOf('SnTabs', module)
       },
       returnObject: {
         default: boolean('Return Object (see Actions)', false)
+      },
+      selectedTab: {
+        default: number('Selected Tab', 0, { range: true, min: 0, max: 3, step: 1 })
       }
     },
     methods: {
@@ -22,6 +25,7 @@ storiesOf('SnTabs', module)
     },
     data () {
       return {
+        selectedTabIndex: this.selectedTab,
         tabs: [{
           text: 'W-2',
           count: 3,
@@ -31,6 +35,14 @@ storiesOf('SnTabs', module)
           count: 2,
           disabled: false
         }, {
+          text: 'Paystubs',
+          count: 0
+        },
+        {
+          text: 'Drivers License',
+          count: 0
+        },
+        {
           text: 'Disabled',
           disabled: true
         }]
@@ -38,6 +50,7 @@ storiesOf('SnTabs', module)
     },
     template: `
       <sn-tabs
+        v-model="selectedTabIndex"
         :count="count"
         :column="column"
         :tabs="tabs"
