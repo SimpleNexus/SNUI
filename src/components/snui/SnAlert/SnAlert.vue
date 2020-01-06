@@ -30,9 +30,11 @@
 
 <script>
 import SnIcon from '../SnIcon/SnIcon'
+import CssClassMappingsMixin from '../../../mixins/CssClassMappingsMixin'
 export default {
   name: 'SnAlert',
   components: { SnIcon },
+  mixins: [CssClassMappingsMixin],
   props: {
     /**
      * Indicates whether the user should be able to dismiss
@@ -111,15 +113,8 @@ export default {
   },
   computed: {
     alertClasses () {
-      const colorModifiers = {
-        '--primary': this.primary,
-        '--warning': this.warning,
-        '--success': this.success,
-        '--caution': this.caution
-      }
-      const colorClasses = Object.entries(colorModifiers)
-        .reduce((prev, [cssClass, value]) => value ? [...prev, 'sn-alert-wrapper' + cssClass] : prev, [])
-      return colorClasses.length ? ['sn-alert-wrapper', ...colorClasses] : ['sn-alert-wrapper', 'sn-alert-wrapper--primary']
+      const colorProps = ['primary', 'warning', 'success', 'caution']
+      return ['sn-alert-wrapper'].concat(this.generateCSSModifierClasses(colorProps, 'sn-alert-wrapper', 'primary'))
     }
   },
   methods: {

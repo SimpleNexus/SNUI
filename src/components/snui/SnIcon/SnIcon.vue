@@ -3,8 +3,11 @@
 </template>
 
 <script>
+import CssClassMappingsMixin from '../../../mixins/CssClassMappingsMixin'
+
 export default {
   name: 'SnIcon',
+  mixins: [CssClassMappingsMixin],
   props: {
     /**
      * The name of the icon to be rendered. Must be a valid
@@ -54,20 +57,9 @@ export default {
       return this.size ? { 'font-size': this.size + 'px' } : null
     },
     iconClasses () {
-      return ['sn-icon', `sn-icon-${this.name}`].concat(this.getSizeClasses())
-    }
-  },
-  methods: {
-    getSizeClasses () {
-      const sizeModifiers = {
-        '--small': this.small,
-        '--medium': this.medium,
-        '--large': this.large
-      }
-      const sizeClasses = Object.entries(sizeModifiers)
-        .reduce((prev, [cssClass, value]) => value ? [...prev, 'sn-icon' + cssClass] : prev, [])
-
-      return sizeClasses.length ? sizeClasses : ['sn-icon--small']
+      const sizeModifiers = ['small', 'medium', 'large']
+      return [`sn-icon-${this.name}`]
+        .concat(this.generateCSSModifierClasses(sizeModifiers, 'sn-icon', { defaultModifier: 'small' }))
     }
   }
 }

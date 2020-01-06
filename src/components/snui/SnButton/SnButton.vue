@@ -11,9 +11,11 @@
 
 <script>
 import SnIcon from '../SnIcon/SnIcon'
+import CssClassMappingsMixin from '../../../mixins/CssClassMappingsMixin'
 export default {
   name: 'SnButton',
   components: { SnIcon },
+  mixins: [CssClassMappingsMixin],
   props: {
     /**
      * Styles the button with accent colors
@@ -115,49 +117,14 @@ export default {
   computed: {
     buttonClasses () {
       const styleClass = this.outline ? 'sn-btn-outline' : 'sn-btn'
-      return ['sn-btn-base', styleClass]
-        .concat(this.getColorClasses(styleClass))
-        .concat(this.getDisplayClasses())
+      const colorModifiers = ['primary', 'secondary', 'warning', 'caution', 'accent']
+      const displayModifiers = ['icon', 'display', 'disabled', 'circle']
+      return ['sn-btn-base']
+        .concat(this.generateCSSModifierClasses(colorModifiers, styleClass, { defaultModifier: 'primary' }))
+        .concat(this.generateCSSModifierClasses(displayModifiers, 'sn-btn'))
     }
   },
   methods: {
-    /**
-     * Uses the component props to determine
-     * which color styles to return.
-     * @param btnStyle The base button style, outline or standard
-     *  in the form 'sn-btn' or 'sn-btn-outline'
-     * @returns {Array<string>}
-     */
-    getColorClasses (btnStyle) {
-      const colorModifiers = {
-        '--primary': this.primary,
-        '--secondary': this.secondary,
-        '--warning': this.warning,
-        '--caution': this.caution,
-        '--accent': this.accent
-      }
-      const colorClasses = Object.entries(colorModifiers)
-        .reduce((prev, [cssClass, value]) => value ? [...prev, btnStyle + cssClass] : prev, [])
-
-      // Perform a check so that we return primary if not specified
-      return colorClasses.length ? colorClasses : [`${btnStyle}--primary`]
-    },
-    /**
-     * Uses the component props to determine
-     * which display styles to return
-     * @returns {Array<string>}
-     */
-    getDisplayClasses () {
-      const displayModifiers = {
-        '--icon': this.icon,
-        '--display': this.display,
-        '--disabled': this.disabled,
-        '--circle': this.circle
-      }
-
-      return Object.entries(displayModifiers)
-        .reduce((prev, [cssClass, value]) => value ? [...prev, 'sn-btn' + cssClass] : prev, [])
-    },
     handleClick () {
       /**
        * Click Event

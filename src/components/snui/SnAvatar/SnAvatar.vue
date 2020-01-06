@@ -9,8 +9,11 @@
 </template>
 
 <script>
+import CssClassMappingsMixin from '../../../mixins/CssClassMappingsMixin'
+
 export default {
   name: 'SnAvatar',
+  mixins: [CssClassMappingsMixin],
   props: {
     /**
      * Name of the icon to use in the avatar
@@ -118,6 +121,7 @@ export default {
   },
   data () {
     return {
+      avatarModifiers: ['xl', 'large', 'medium', 'small', 'mini', 'micro'],
       validatedImage: this.image,
       useImage: !!this.image
     }
@@ -132,7 +136,6 @@ export default {
       }
     },
     avatarSize () {
-      console.log(this.size)
       return this.size ? {
         height: this.size + 'px',
         width: this.size + 'px',
@@ -140,26 +143,13 @@ export default {
       } : {}
     },
     avatarClasses () {
-      return ['sn-avatar'].concat(this.getSizeClasses())
+      return this.generateCSSModifierClasses(this.avatarModifiers, 'sn-avatar')
     },
     avatarIconClasses () {
-      return [`sn-icon-${this.icon}`].concat(this.getSizeClasses().map(size => size + '--icon'))
+      return [`sn-icon-${this.icon}`].concat(this.generateCSSModifierClasses(this.avatarModifiers, 'sn-avatar', { includePrefixInClassList: false }).map(size => size + '--icon'))
     }
   },
   methods: {
-    getSizeClasses () {
-      const sizeModifiers = {
-        '--xl': this.xl,
-        '--large': this.large,
-        '--medium': this.medium,
-        '--small': this.small,
-        '--mini': this.mini,
-        '--micro': this.micro
-      }
-
-      return Object.entries(sizeModifiers)
-        .reduce((prev, [cssClass, value]) => value ? [...prev, 'sn-avatar' + cssClass] : prev, [])
-    },
     loadDefaultImage () {
       if (this.initials.length) {
         this.useImage = false
