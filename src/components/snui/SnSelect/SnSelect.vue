@@ -242,8 +242,8 @@ export default {
        * Extracts the text from a select item.
        * If the item is an object it will return the item text
        * key provided in props
-       * @param item
-       * @returns {*}
+       * @param {Object|number|string} item
+       * @returns {number|string}
        */
     getItemText (item) {
       return item && typeof item === 'object' ? item[this.itemText] : item
@@ -252,8 +252,8 @@ export default {
        * Extracts the value from a select item.
        * If the item is an object it will return the item value
        * key provided in props
-       * @param item
-       * @returns {*}
+       * @param {Object|string|number|boolean} item
+       * @returns {string|number|boolean}
        */
     getItemValue (item) {
       return typeof item === 'object' ? item[this.itemValue] : item
@@ -262,8 +262,8 @@ export default {
        * Extracts the avatar source from a select item
        * If the item is not an object, it will return null.
        * It will return the item avatar key provided in props
-       * @param item
-       * @returns {*}
+       * @param {Object|number|string} item
+       * @returns {string | null}
        */
     getItemAvatar (item) {
       return this.avatar && typeof item === 'object' ? item[this.itemAvatar] : null
@@ -272,16 +272,16 @@ export default {
        * Extracts the icon name from a select item
        * If the item is not an object, it will return null.
        * It will return the item icon key provided in props
-       * @param item
-       * @returns {*}
+       * @param {Object|number|string} item
+       * @returns {string|null}
        */
     getItemIcon (item) {
       return this.icon && typeof item === 'object' ? item[this.itemIcon] : null
     },
     /**
        * Returns a css class list for items in the select list
-       * @param item
-       * @returns {[string]}
+       * @param {Object|number|string} item
+       * @returns {Array<string>}
        */
     getItemClasses (item) {
       const classes = ['sn-select-item']
@@ -296,7 +296,7 @@ export default {
     /**
        * Sets the selectedItem data value to the clicked item in the list.
        * Emits this as an event and toggles the list closed
-       * @param item
+       * @param {Object|number|string} item
        */
     selectItem (item) {
       this.selectedItem = item

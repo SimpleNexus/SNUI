@@ -5,7 +5,6 @@
       'sn-tabs': true,
       'sn-tabs--column': column
     }"
-      @scroll="captureScroll"
     >
       <sn-tab
         v-for="(tab, index) in tabs"
@@ -126,9 +125,6 @@ export default {
     }
   },
   methods: {
-    captureScroll () {
-      console.log(arguments)
-    },
     getTabText (tab) {
       return tab && typeof tab === 'object' ? tab[this.tabText] : tab
     },

@@ -150,6 +150,11 @@ export default {
     }
   },
   methods: {
+    /**
+     * Attempts to load the default image.
+     * If initials are available, it will render them,
+     * otherwise it falls back to the default avatar image
+     */
     loadDefaultImage () {
       if (this.initials.length) {
         this.useImage = false
