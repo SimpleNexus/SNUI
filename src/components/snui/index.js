@@ -6,5 +6,6 @@ import SnAvatar from './SnAvatar/SnAvatar'
 import SnSelect from './SnSelect/SnSelect'
 import SnTabs from './SnTabs/SnTabs'
 import SnAlert from './SnAlert/SnAlert'
+import SnToggle from './SnSwitch/SnSwitch'
 
-export { SnButton, SnIcon, SnOptionGroup, SnTextField, SnAvatar, SnSelect, SnTabs, SnAlert }
+export { SnButton, SnIcon, SnOptionGroup, SnTextField, SnAvatar, SnSelect, SnTabs, SnAlert, SnToggle }
