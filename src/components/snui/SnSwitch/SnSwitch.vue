@@ -147,8 +147,8 @@ export default {
         left: 19px
   &--disabled
     div
-      border solid 1px lighten3($sn-grey-var)
-      background-color lighten3($sn-grey-var)
+      border solid 1px disable($sn-grey-var)
+      background-color disable($sn-grey-var)
     input
       cursor not-allowed
 </style>
