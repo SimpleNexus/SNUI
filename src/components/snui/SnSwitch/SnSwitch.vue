@@ -89,7 +89,7 @@ export default {
   font-family $font-family
   display flex
   flex-direction column
-  max-width 250px
+  max-width 256px
 .sn-switch
   position relative
   display flex
@@ -99,10 +99,10 @@ export default {
     line-height 20px
     margin-left 8px
   &--description
-    font-weight $font-weight-light
     font-size 12px
     line-height 16px
     text-transform uppercase
+    color lighten1($sn-black-var)
     margin 0
     margin-left 48px
   &--input
