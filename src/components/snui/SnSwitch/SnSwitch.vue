@@ -34,34 +34,46 @@ export default {
   },
   props: {
     /**
-       * The string to be added as a switch description
-       */
+     * The string to be added as a switch description
+     ***/
     description: {
       type: String,
       default: ''
     },
     /**
-       * Disables the switch
-       */
+     * Disables the switch
+     **/
     disabled: {
       type: Boolean,
       default: false
     },
+    /**
+     * When true, emits the change event on mount.
+     **/
     emitOnMount: {
       type: Boolean,
       default: true
     },
+    /**
+     * The value that will be bound by v-model
+     **/
     inputValue: null,
     /**
-       * The string to be added as a label
-       */
+     * The string to be added as a label
+     **/
     label: {
       type: String,
       default: ''
     },
     /**
-       * The value bound to the checkbox
-       */
+     * This should mainly be used when binding an array
+     * to a list of switches. This is used to define the
+     * value of the internal html input element. When
+     * the component is bound to the array, it will add/remove
+     * this value on change. If given when bound to a primitive,
+     * the component will emit this value when checked and false when
+     * unchecked
+     **/
     value: null
   },
   mounted () {
@@ -70,9 +82,16 @@ export default {
     }
   },
   computed: {
+    /**
+     * Returns whether the component is bound to multiple values (e.g. an Array)
+     **/
     isMultiple () {
       return Array.isArray(this.inputValue)
     },
+    /**
+     * Returns whether the component is currently checked. Handles
+     * the case when the component is bound to an array
+     **/
     checked () {
       if (this.isMultiple) {
         return this.inputValue.includes(this.value)
@@ -80,6 +99,9 @@ export default {
         return !!this.inputValue
       }
     },
+    /**
+     * Computed css classes for the switch component
+     **/
     displayClasses () {
       return {
         'sn-switch': true,
@@ -89,16 +111,31 @@ export default {
     }
   },
   methods: {
+    /**
+     * Handles the change event on the checkbox input
+     * @param {Object} e
+     * @param {Object} e.target
+     * @param {Boolean} e.target.checked
+     */
     triggerChange (e) {
       if (this.isMultiple) {
         this.updateArrayInput(e)
       } else {
-        this.updateBooleanInput(e)
+        this.updatePrimitiveInput(e)
       }
     },
+    /**
+     * Handles emitting changes when component is bound to an array
+     * @param {Object} e
+     * @param {Object} e.target
+     * @param {Boolean} e.target.checked
+     */
     updateArrayInput (e) {
       const inputChecked = e.target.checked
+      // make a copy of the inputValue which contains the list
+      // of checked values
       const checkedValues = this.inputValue.slice()
+      // look for the value of this input in the list
       const foundIndex = checkedValues.indexOf(this.value)
 
       if (foundIndex >= 0 && !inputChecked) {
@@ -114,13 +151,22 @@ export default {
         return
       }
 
+      // Emit the newly updated list
       this.$emit('change', checkedValues)
     },
-    updateBooleanInput (e) {
+    /**
+     * Handles emitting change events for Boolean values
+     * @param {Object} e
+     * @param {Object} e.target
+     * @param {Boolean} e.target.checked
+     */
+    updatePrimitiveInput (e) {
       const inputChecked = e.target.checked
       if (inputChecked) {
+        // If a custom value was given, emit that value or fallback to true
         this.$emit('change', this.value || true)
       } else {
+        // Always emit false if the item is not checked
         this.$emit('change', false)
       }
     }
