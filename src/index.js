@@ -1,7 +1,6 @@
 import * as components from './components/snui'
 import cssVars from 'css-vars-ponyfill'
-import { setBrandColor } from './util/setBrandColor'
-import { hexToRgb } from './util/hexToRgb'
+import { hexToRgb, setBrandColor } from './util/colorUtils'
 import ClickOutside from './directives/clickOutside'
 
 export default {
