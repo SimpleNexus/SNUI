@@ -1,5 +1,5 @@
 <template>
-  <main class="snui">
+  <main class="snui sn-textwhite">
     <section
       v-for="color in colors"
       :key="color.name"
