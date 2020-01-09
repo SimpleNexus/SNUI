@@ -4,7 +4,8 @@
       <input class="sn-switch--input"
              type="checkbox"
              :disabled="disabled"
-             :checked="value"
+             :checked="checked"
+             :value="value"
              @change="triggerChange"
       >
       <div class="sn-switch--switcher"></div>
@@ -27,128 +28,182 @@ import CssClassMappingsMixin from '../../../mixins/CssClassMappingsMixin'
 export default {
   name: 'SnSwitch',
   mixins: [CssClassMappingsMixin],
+  model: {
+    prop: 'inputValue',
+    event: 'change'
+  },
   props: {
     /**
-     * The string to be added as a switch description
-     */
+       * The string to be added as a switch description
+       */
     description: {
       type: String,
       default: ''
     },
     /**
-     * Disables the switch
-     */
+       * Disables the switch
+       */
     disabled: {
       type: Boolean,
       default: false
     },
+    emitOnMount: {
+      type: Boolean,
+      default: true
+    },
+    inputValue: null,
     /**
-     * The string to be added as a label
-     */
+       * The string to be added as a label
+       */
     label: {
       type: String,
       default: ''
     },
     /**
-     * The true or false value of whether the switch is on
-     */
-    value: {
-      type: Boolean,
-      default: false
-    }
+       * The value bound to the checkbox
+       */
+    value: null
   },
-  data () {
-    return {
-      checkboxValue: this.value
+  mounted () {
+    if (this.emitOnMount) {
+      this.triggerChange({ target: { checked: this.checked } })
     }
   },
   computed: {
+    isMultiple () {
+      return Array.isArray(this.inputValue)
+    },
+    checked () {
+      if (this.isMultiple) {
+        return this.inputValue.includes(this.value)
+      } else {
+        return !!this.inputValue
+      }
+    },
     displayClasses () {
       return {
         'sn-switch': true,
-        'sn-switch--unchecked': !this.value,
+        'sn-switch--unchecked': !this.checked,
         'sn-switch--disabled': this.disabled
       }
     }
   },
   methods: {
     triggerChange (e) {
-      this.$emit('input', e.target.checked)
-    }
-  },
-  watch: {
-    value (val) {
-      this.checkboxValue = val
+      if (this.isMultiple) {
+        this.updateArrayInput(e)
+      } else {
+        this.updateBooleanInput(e)
+      }
+    },
+    updateArrayInput (e) {
+      const inputChecked = e.target.checked
+      const checkedValues = this.inputValue.slice()
+      const foundIndex = checkedValues.indexOf(this.value)
+
+      if (foundIndex >= 0 && !inputChecked) {
+        // We have found the index and the input is no longer checked,
+        // remove it
+        checkedValues.splice(foundIndex, 1)
+      } else if (foundIndex === -1 && inputChecked) {
+        // We have not found the index and the item is checked
+        // add it
+        checkedValues.push(this.value)
+      } else {
+        // We don't want to add or remove so just return
+        return
+      }
+
+      this.$emit('change', checkedValues)
+    },
+    updateBooleanInput (e) {
+      const inputChecked = e.target.checked
+      if (inputChecked) {
+        this.$emit('change', this.value || true)
+      } else {
+        this.$emit('change', false)
+      }
     }
   }
 }
 </script>
 
 <style scoped lang="stylus">
-.sn-switch-wrapper
-  font-family $font-family
-  display flex
-  flex-direction column
-  max-width 256px
-.sn-switch
-  position relative
-  display flex
-  align-items center
-  &--label
-    font-size 15px
-    line-height 20px
-    margin-left 8px
-  &--description
-    font-size 12px
-    line-height 16px
-    text-transform uppercase
-    color lighten1($sn-black-var)
-    margin 0
-    margin-left 48px
-  &--input
-    opacity 0
-    width 100%
-    height 100%
-    position absolute
-    z-index 1
-    cursor pointer
-  &--switcher
-    height 20px
-    width 38px
+  .sn-switch-wrapper
+    font-family $font-family
+    display flex
+    flex-direction column
+    max-width 256px
+    margin 8px
+
+  .sn-switch
     position relative
-    background-color $sn-black
-    border solid 1px $sn-black
-    border-radius 100px
-    display -webkit-flex
-    display -ms-flex
     display flex
     align-items center
-    justify-content flex-start
-    cursor pointer
-    transition linear .2s, background-color linear .2s
-    &:after
-      content ''
-      height 16px
-      width 16px
-      border-radius 100px
-      background-color $sn-white
-      display block
-      transition linear .15s, background-color linear .15s
+
+    &--label
+      font-size 15px
+      line-height 20px
+      margin-left 8px
+
+    &--description
+      font-size 12px
+      line-height 16px
+      text-transform uppercase
+      color lighten1($sn-black-var)
+      margin 0
+      margin-left 48px
+
+    &--input
+      opacity 0
+      width 100%
+      height 100%
       position absolute
-      left 100%
-      margin-left -17px
+      z-index 1
       cursor pointer
-      box-shadow 0 1px 5px 0 rgba(0, 0, 0, 0.1)
-  &--unchecked
-    div
-      justify-content flex-end
-      background-color lighten2($sn-grey-var)
+
+    &--switcher
+      height 20px
+      width 38px
+      position relative
+      background-color $sn-black
+      border solid 1px $sn-black
+      border-radius 100px
+      display -webkit-flex
+      display -ms-flex
+      display flex
+      align-items center
+      justify-content flex-start
+      cursor pointer
+      transition linear .2s, background-color linear .2s
+
       &:after
-        left: 19px
-  &--disabled
-    div
-      border solid 1px disable($sn-grey-var)
-      background-color disable($sn-grey-var)
-    input
-      cursor not-allowed
+        content ''
+        height 16px
+        width 16px
+        border-radius 100px
+        background-color $sn-white
+        display block
+        transition linear .15s, background-color linear .15s
+        position absolute
+        left 100%
+        margin-left -17px
+        cursor pointer
+        box-shadow 0 1px 5px 0 rgba(0, 0, 0, 0.1)
+
+    &--unchecked
+      div
+        justify-content flex-end
+        background-color lighten2($sn-grey-var)
+
+        &:after
+          left: 19px
+
+    &--disabled
+      div
+        border solid 1px disable($sn-grey-var)
+        background-color disable($sn-grey-var)
+
+      input
+        cursor not-allowed
 </style>
