@@ -8,16 +8,16 @@ storiesOf('SnSwitch', module)
     components: { SnSwitch },
     props: {
       description: {
-        default: text('Description', '')
+        default: () => text('Description', '')
       },
       disabled: {
-        default: boolean('Disabled', false)
+        default: () => boolean('Disabled', false)
       },
       label: {
-        default: text('Label', 'Label')
+        default: () => text('Label', 'Label')
       },
       switchValue: {
-        default: text('Switch Value (See actions tab)', '')
+        default: () => text('Switch Value (See actions tab)', '')
       }
     },
     data () {
@@ -40,12 +40,30 @@ storiesOf('SnSwitch', module)
       />
     `
   }), {
-    info: true
+    info: {
+      summary: `
+       The switch component serves as a prettier alternative to a checkbox, although
+       the behavior is basically the same. The component can be bound to a boolean value
+       via v-model, and will update that value based on the current checked status of the
+       underlying html input element.
+
+       The switch component provides several props to help control its behavior, such as.
+       label, description, and disabled
+
+       The component does provide a means to bind and emit a custom value when checked, but
+       use of this outside of Array binding is discouraged.
+
+       An important note, this component modifies the default model prop to \`input-value\`
+       and the model event to \`@change\`. If you wish to listen for check events, you must use
+       \`@change\` instead of \`@input\`.
+       This differs from other input fields such as SnTextField. See [the Vue Docs](https://vuejs.org/v2/guide/components-custom-events.html#Customizing-Component-v-model) for more information on custom bindings
+      `
+    }
   }).add('Array of Switches', () => ({
     components: { SnSwitch },
     data () {
       return {
-        checkedValues: ['Bill', 'Jess']
+        checkedValues: ['Sheev', 'Jess']
       }
     },
     watch: {
@@ -59,25 +77,47 @@ storiesOf('SnSwitch', module)
       v-model="checkedValues"
       value="Jess"
       label="Jess"
+      description="Who's that girl? It's Jess"
     />
     <sn-switch
       v-model="checkedValues"
       value="Bob"
       label="Bob"
+      description="Bob the Builder can he build it?"
       />
     <sn-switch
       v-model="checkedValues"
-      value="Bill"
-      label="Bill"
+      value="Sheev"
+      label="Sheev"
+      description="I am the Senate"
     />
     <sn-switch
       v-model="checkedValues"
-      value="Jane"
-      label="Jane"
+      value="Chad"
+      label="Chad"
+      description="Ok"
     />
     <p>
       Selected Values: {{checkedValues}}
     </p>
   </div>
   `
-  }))
+  }), {
+    info: {
+      summary: `
+      Switches can be bound to an array which they will update by adding or removing their
+      value. You can see an example of this in the playground above. Try toggling the
+      switches and watch how it updates the array of selected values.
+
+      When binding an array to a group of switches, you should provide each switch with a
+      value prop so it knows what to add or remove from the array.
+
+      Please note that values are case sensitive and will be searched for using indexOf
+      which uses strict equals \`===\` under the hood. As such, be extra careful when
+      providing numbers as values to bind to the array.
+      For example, instead of passing the prop \`value="9"\` which is read as a string, pass
+       \`:value="9"\` which will be read as a number
+      `,
+      components: { SnSwitch }
+    }
+  })
