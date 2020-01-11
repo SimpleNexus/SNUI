@@ -3,6 +3,8 @@ import cssVars from 'css-vars-ponyfill'
 import { hexToRgb, setBrandColor } from './util/colorUtils'
 import ClickOutside from './directives/clickOutside'
 
+import './themes/main.styl'
+
 export default {
   install (Vue, options) {
     // Ponyfill for css variables in ie11
