@@ -139,7 +139,7 @@ export default {
       return tab && typeof tab === 'object' ? tab[this.tabDisabled] : false
     },
     getTabLink (tab) {
-      return tab && typeof tab === 'object' ? tab[this.tabLink] : false
+      return tab && typeof tab === 'object' ? tab[this.tabLink] : undefined
     },
     getTabCount (tab) {
       if (!this.count) {
@@ -162,6 +162,7 @@ export default {
   .sn-tabs
     display flex
     list-style-type none
+    padding-left 0
 
     &--column
       flex-direction column

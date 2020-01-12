@@ -172,6 +172,10 @@ export default {
   textFontSize(w)
     (w / 2)
 
+  .sn-avatar-wrapper
+    padding 8px
+    display flex
+
   .sn-avatar
     font-family $font-family
     font-weight $font-weight-medium

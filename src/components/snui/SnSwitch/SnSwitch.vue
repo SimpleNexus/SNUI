@@ -80,6 +80,16 @@ export default {
     if (this.emitOnMount) {
       this.triggerChange({ target: { checked: this.checked } })
     }
+    if (this.isMultiple) {
+      this.internalValue = this.inputValue.includes(this.value)
+    } else {
+      this.internalValue = !!this.inputValue
+    }
+  },
+  data () {
+    return {
+      internalValue: false
+    }
   },
   computed: {
     /**
@@ -93,11 +103,7 @@ export default {
      * the case when the component is bound to an array
      **/
     checked () {
-      if (this.isMultiple) {
-        return this.inputValue.includes(this.value)
-      } else {
-        return !!this.inputValue
-      }
+      return !!this.internalValue
     },
     /**
      * Computed css classes for the switch component
@@ -123,6 +129,7 @@ export default {
       } else {
         this.updatePrimitiveInput(e)
       }
+      this.internalValue = e.target.checked
     },
     /**
      * Handles emitting changes when component is bound to an array
@@ -170,17 +177,26 @@ export default {
         this.$emit('change', false)
       }
     }
+  },
+  watch: {
+    inputValue (val) {
+      if (Array.isArray(val)) {
+        this.internalValue = val.includes(this.value)
+      } else {
+        this.internalValue = !!val
+      }
+    }
   }
 }
 </script>
 
 <style scoped lang="stylus">
   .sn-switch-wrapper
+    padding 8px
     font-family $font-family
     display flex
     flex-direction column
     max-width 256px
-    margin 8px
 
   .sn-switch
     position relative

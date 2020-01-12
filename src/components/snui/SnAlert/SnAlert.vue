@@ -2,11 +2,13 @@
   <transition name="fade">
     <div
       v-show="show"
-      :class="alertClasses"
+      class="sn-alert-wrapper"
     >
-      <div class="sn-alert">
+      <div :class="alertClasses">
         <sn-icon class='sn-alert--icon' size="20" :name="icon" />
-        <slot />
+        <div class="sn-alert--content">
+          <slot />
+        </div>
         <div
           class="sn-alert--action"
           @click="actionClicked"
@@ -114,7 +116,7 @@ export default {
   computed: {
     alertClasses () {
       const colorProps = ['primary', 'warning', 'success', 'caution']
-      return ['sn-alert-wrapper'].concat(this.generateCSSModifierClasses(colorProps, 'sn-alert-wrapper', { defaultModifier: 'primary' }))
+      return this.generateCSSModifierClasses(colorProps, 'sn-alert', { defaultModifier: 'primary', includePrefixInClassList: true })
     }
   },
   methods: {
@@ -142,38 +144,44 @@ export default {
 
 <style scoped lang="stylus">
 .sn-alert-wrapper
-  width 100%
-  border-radius 4px
-  color $sn-white
-  font-family $font-family
-  font-weight $font-weight-semi-bold
-  font-size 15px
-  line-height 20px
-  &--primary
-    background-color $primary
-  &--warning
-    background-color $warning
-  &--caution
-    background-color $caution
-  &--success
-    background-color $success
+  display flex
   .sn-alert
     display flex
     align-items center
+    padding 8px 4px
+    border-radius 4px
+    color $sn-white
+    font-family $font-family
+    font-weight $font-weight-semi-bold
+    font-size 15px
+    line-height 20px
     min-height 48px
     max-width 1104px
     min-width 500px
-    padding 8px 4px
+    &--primary
+      background-color $primary
+    &--warning
+      background-color $warning
+    &--caution
+      background-color $caution
+    &--success
+      background-color $success
     &--icon
+      display flex
       margin-left 16px
       margin-right 8px
+    &--content
+      display flex
+      flex-grow 2
     &--dismiss
+      display flex
       margin-left 8px
       margin-right 8px
       margin-top 4px
       &:hover
         cursor pointer
     &--action
+      display flex
       margin-left auto
       text-transform uppercase
       margin-right 8px

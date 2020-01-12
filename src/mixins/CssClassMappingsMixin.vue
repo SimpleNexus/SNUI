@@ -56,8 +56,6 @@ export default {
        * classes
        */
 
-      console.log({ baseClassList, modifierClasses, classModifierMappings })
-
       if (defaultModifier && modifierClasses.length === baseClassList.length) {
         return baseClassList.concat(`${prefix}--${defaultModifier}`)
       } else {

@@ -210,7 +210,8 @@ export default {
 $animation-duration = 0.3s
 
 .sn-form-field
-  display inline-block
+  padding 8px
+  display flex
   label-active()
     font-size $font-size-caption-2 !important
     line-height $line-height-caption-2

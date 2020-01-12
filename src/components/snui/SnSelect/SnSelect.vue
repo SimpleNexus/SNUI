@@ -326,6 +326,7 @@ export default {
 <style scoped lang="stylus">
   .sn-select-wrapper
     display flex
+    padding 8px
     flex-direction column;
     text-transform uppercase
     vertical-align center
