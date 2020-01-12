@@ -1,9 +1,6 @@
 <template>
   <div id="app" class="snui">
-    <sn-alert class="border">
-      <span>
-        This is an alertThis is an alertThis is an alertThis is an alertThis is an alertThis is an alertThis is an alertThis is an alertThis is an alertThis is an alertThis is an alertThis is an alertThis is an alertThis is an alertThis is an alertThis is an alertThis is an alertThis is an alertThis is an alertThis is an alertThis is an alertThis is an alertThis is an alertThis is an alertThis is an alertThis is an alertThis is an alertThis is an alertThis is an alertThis is an alertThis is an alertThis is an alertThis is an alertThis is an alert
-    </span><span slot="action">CLICK</span></sn-alert>
+    <sn-alert class="border"><span>This is an alert</span><span slot="action">CLICK</span></sn-alert>
     <sn-button class="border">Button</sn-button>
     <sn-avatar name="Jordan Wild" class="border"/>
     <sn-icon name="case" large class="border"/>
