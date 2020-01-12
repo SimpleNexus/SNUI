@@ -1,12 +1,13 @@
 {
   "name": "@simplenexus/snui",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": false,
   "repository": "https://github.com/SimpleNexus/SNUI",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build:app": "vue-cli-service build",
     "build:lib": "vue-cli-service build --target lib --name SNUI src/index.js",
+    "build:publish": "yarn build:lib && npm publish",
     "build-storybook": "yarn run storybook:build",
     "lint": "vue-cli-service lint",
     "storybook:build": "vue-cli-service storybook:build -c config/storybook -s ./public",
