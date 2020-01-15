@@ -111,7 +111,7 @@ export default {
       cursor pointer
 
     &--disabled
-      color disable($sn-black)
+      color $sn-black-lighten-3
 
       &:hover
         cursor not-allowed
@@ -125,7 +125,7 @@ export default {
         content ''
         transition transform 250ms ease-in-out
         transform scaleX(0)
-        border-bottom solid 1px lighten3($sn-black)
+        border-bottom solid 1px $sn-black-lighten-3
         padding-bottom 4px
 
       &--active
@@ -138,7 +138,7 @@ export default {
         border none
 
     .sn-tab-count
-      color $sn-grey
+      color $sn-black-lighten-3
       letter-spacing 2px
       margin-left 4px
 </style>

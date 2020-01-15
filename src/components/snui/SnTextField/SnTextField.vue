@@ -263,10 +263,10 @@ $animation-duration = 0.3s
     &:required
       box-shadow none
     &::placeholder
-      color lighten2($sn-black)
+      color $sn-black-lighten-3
     &:disabled
-      color lighten3($sn-grey)
-      border-bottom 1px solid lighten2($sn-grey)
+      color $sn-black-lighten-4
+      border-bottom 1px solid $sn-black-lighten-3
     &--invalid
       box-shadow none
       outline none

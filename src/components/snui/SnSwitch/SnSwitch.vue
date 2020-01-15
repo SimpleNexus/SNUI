@@ -212,7 +212,7 @@ export default {
       font-size 12px
       line-height 16px
       text-transform uppercase
-      color lighten1($sn-black)
+      color $sn-black-lighten-1
       margin 0
       margin-left 48px
 
@@ -256,15 +256,15 @@ export default {
     &--unchecked
       div
         justify-content flex-end
-        background-color lighten2($sn-grey)
+        background-color $sn-black-lighten-3
 
         &:after
           left: 19px
 
     &--disabled
       div
-        border solid 1px disable($sn-grey)
-        background-color disable($sn-grey)
+        border solid 1px $sn-black-lighten-4
+        background-color $sn-black-lighten-4
 
       input
         cursor not-allowed

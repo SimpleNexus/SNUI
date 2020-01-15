@@ -35,10 +35,11 @@ $sn-green-lighten-4 = #E9FAF4
 
 // Brand
 $sn-brand-var = --snui-color-brand
-$sn-brand = #003A5D
+$sn-brand = s("var(%s)", $sn-brand-var)
+$sn-brand-default = #003A5D
 
 :root
-  --snui-color-brand $sn-brand
+  --snui-color-brand $sn-brand-default
 
 
 /*
@@ -78,12 +79,6 @@ $success-lighten-4 = $sn-green-lighten-4
 
 // Accent
 $accent = $sn-brand
-
-
-$disabled-opacity = .2
-
-resolveBrandColor(v)
-  s("var(%s)", v)
 
 /**
   Text Classes

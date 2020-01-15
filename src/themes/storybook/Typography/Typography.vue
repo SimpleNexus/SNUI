@@ -147,7 +147,7 @@ export default {
 
   .row
     padding 8px
-    border-bottom 1px solid $sn-grey
+    border-bottom 1px solid $sn-black-lighten-3
 
   .col
     padding 18px

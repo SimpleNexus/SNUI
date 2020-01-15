@@ -232,7 +232,7 @@ export default {
     height 100%
     width 100%
     display flex
-    background-color resolveBrandColor($sn-brand-var)
+    background-color $sn-brand
     color $sn-white
     border-radius 50%
     justify-content center
