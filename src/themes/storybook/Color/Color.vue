@@ -8,6 +8,7 @@
       <div
         class="swatch sn-title-1"
         :class="`sn-background-${color.name}`"
+        :ref="color.name + '-main'"
       >
         <h2 class="sn-title-1">
           {{color.name}}
@@ -16,125 +17,121 @@
           RGB: ({{color.color}})
         </span>
         <span class="sn-headline">
-          Hex: {{color.color | rgbToHex}}
+          Hex: {{ shadeColor(color.color, 0)}}
         </span>
       </div>
       <div
         class="swatch lighten sn-title-2"
         :class="`sn-background-${color.name}--lighten-1 `"
+        :ref="color.name + '-lighten-1'"
       >
         <h2 class="sn-title-2">
           Lighten 1
         </h2>
         <span class="sn-headline">
-          RGB: ({{color.color | lighten1}})
+          RGB: ({{color.color}})
         </span>
         <span class="sn-headline">
-          Hex: {{color.color | lighten1 | rgbToHex}}
+          Hex: {{ shadeColor(color.color, 25)}}
         </span>
       </div>
       <div class="swatch lighten sn-title-2"
            :class="`sn-background-${color.name}--lighten-2 `"
+           :ref="color.name + '-lighten-2'"
       >
         <h2 class="sn-title-2">
           Lighten 2
         </h2>
         <span class="sn-headline">
-          RGB: ({{color.color | lighten2}})
+          RGB: ({{color.color}})
         </span>
         <span class="sn-headline">
-          Hex: {{color.color | lighten2 | rgbToHex}}
+          Hex: {{ shadeColor(color.color, 50)}}
         </span>
       </div>
-      <div class="swatch lighten sn-title-2 sn-text-primary--lighten-3"
+      <div class="swatch lighten sn-title-2 sn-text-primary--lighten-1"
            :class="`sn-background-${color.name}--lighten-3 `"
+           :ref="color.name + '-lighten-3'"
       >
         <h2 class="sn-title-2">
           Lighten 3
         </h2>
         <span class="sn-headline">
-          RGB: ({{color.color | lighten3}})
+          RGB: ({{color.color}})
         </span>
         <span class="sn-headline">
-          Hex: {{color.color | lighten3 | rgbToHex}}
+          Hex: {{ shadeColor(color.color, 75)}}
         </span>
-        </div>
+      </div>
     </section>
   </main>
 </template>
 
 <script>
-import { rgbToHex } from '../../../util/colorUtils'
-
 export default {
   name: 'Color',
-  filters: {
-    rgbToHex,
-    lighten1 (color) {
-      return color + ', 0.75'
-    },
-    lighten2 (color) {
-      return color + ', 0.50'
-    },
-    lighten3 (color) {
-      return color + ', 0.25'
-    },
-    disabled (color) {
-      return color + ', 0.2'
-    }
-  },
   data () {
     return {
       colors: [{
         name: 'primary',
-        color: '255, 255, 255'
+        color: '#000000'
       }, {
         name: 'secondary',
-        color: '155, 155, 155'
+        color: '#9B9B9B'
       },
       {
         name: 'warning',
-        color: '212, 64, 17'
+        color: '#D44011'
       },
       {
         name: 'caution',
-        color: '242, 159, 90'
+        color: '#F29F5A'
       },
       {
         name: 'success',
-        color: '36, 212, 154'
+        color: '#24D49A'
       },
       {
 
         name: 'accent',
-        color: '254, 186, 1'
+        color: '#FEBA01'
       }
       ]
+    }
+  },
+  methods: {
+    shadeColor (color, amount) {
+      return '#' + color.replace(/^#/, '').replace(/../g, color => ('0' + Math.min(255, Math.max(0, parseInt(color, 16) + amount)).toString(16)).substr(-2))
     }
   }
 }
 </script>
 
 <style scoped lang="stylus">
-main
-  display flex
-  flex-direction row
-  flex-wrap wrap
-  section
-    margin 24px 16px
-    h2
-      margin-bottom 8px
-      margin-top 4px
-    span
-      margin-top 4px
-    .swatch
-      display flex
-      flex-direction column
-      padding 10px
-      border-radius 8px
-      text-transform uppercase
-      width 600px
-      height 100px
-    .lighten
-      margin-top 4px
+  main
+    display flex
+    flex-direction row
+    flex-wrap wrap
+
+    section
+      margin 24px 16px
+
+      h2
+        margin-bottom 8px
+        margin-top 4px
+
+      span
+        margin-top 4px
+
+      .swatch
+        display flex
+        flex-direction column
+        padding 10px
+        border-radius 8px
+        text-transform uppercase
+        width 600px
+        height 100px
+
+      .lighten
+        margin-top 4px
 </style>

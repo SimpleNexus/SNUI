@@ -111,7 +111,7 @@ export default {
       cursor pointer
 
     &--disabled
-      color disable($sn-black-var)
+      color disable($sn-black)
 
       &:hover
         cursor not-allowed
@@ -125,7 +125,7 @@ export default {
         content ''
         transition transform 250ms ease-in-out
         transform scaleX(0)
-        border-bottom solid 1px lighten3($sn-black-var)
+        border-bottom solid 1px lighten3($sn-black)
         padding-bottom 4px
 
       &--active
