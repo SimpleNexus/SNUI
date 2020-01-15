@@ -8,7 +8,6 @@ import SnIcon from '../SnIcon/SnIcon'
 const buttonTypeLabel = 'Button Type'
 const buttonTypeOptions = {
   Primary: 'primary',
-  Secondary: 'secondary',
   Accent: 'accent',
   Caution: 'caution',
   Warning: 'warning'
@@ -20,9 +19,6 @@ const computedButtonType = {
   },
   primary () {
     return this.buttonType === 'primary'
-  },
-  secondary () {
-    return this.buttonType === 'secondary'
   },
   caution () {
     return this.buttonType === 'caution'
@@ -41,7 +37,6 @@ storiesOf('SnButton', module)
           <h2 class="sn-large-title">Standard Buttons</h2>
           <sn-button>Primary</sn-button>
           <sn-button disabled>Disabled</sn-button>
-          <sn-button secondary>Secondary</sn-button>
           <sn-button caution>Caution</sn-button>
           <sn-button warning>Warning</sn-button>
           <sn-button accent>Accent</sn-button>
@@ -50,7 +45,6 @@ storiesOf('SnButton', module)
           <h2 class="sn-large-title">Outline Buttons</h2>
           <sn-button outline>Primary</sn-button>
           <sn-button disabled outline>Disabled</sn-button>
-          <sn-button outline secondary>Secondary</sn-button>
           <sn-button outline caution>Caution</sn-button>
           <sn-button outline warning>Warning</sn-button>
           <sn-button outline accent>Accent</sn-button>
@@ -111,7 +105,6 @@ storiesOf('SnButton', module)
     template: `
       <sn-button
         :primary="primary"
-        :secondary="secondary"
         :accent="accent"
         :caution="caution"
         :warning="warning"
@@ -143,7 +136,6 @@ storiesOf('SnButton', module)
       <sn-button
         outline
         :primary="primary"
-        :secondary="secondary"
         :accent="accent"
         :caution="caution"
         :warning="warning"
@@ -178,7 +170,6 @@ storiesOf('SnButton', module)
       <div>
         <sn-button prepend-icon="search"
                    :primary="primary"
-                   :secondary="secondary"
                    :accent="accent"
                    :caution="caution"
                    :warning="warning"
@@ -190,7 +181,6 @@ storiesOf('SnButton', module)
         </sn-button>
         <sn-button append-icon="search"
                    :primary="primary"
-                   :secondary="secondary"
                    :accent="accent"
                    :caution="caution"
                    :warning="warning"
@@ -232,7 +222,6 @@ storiesOf('SnButton', module)
       <sn-button
         icon
         :primary="primary"
-        :secondary="secondary"
         :accent="accent"
         :caution="caution"
         :warning="warning"
@@ -270,7 +259,6 @@ storiesOf('SnButton', module)
       <sn-button
         circle
         :primary="primary"
-        :secondary="secondary"
         :accent="accent"
         :caution="caution"
         :warning="warning"
@@ -283,7 +271,6 @@ storiesOf('SnButton', module)
       <sn-button
         circle
         :primary="primary"
-        :secondary="secondary"
         :accent="accent"
         :caution="caution"
         :warning="warning"
@@ -331,7 +318,6 @@ storiesOf('SnButton', module)
           :prepend-icon="prependIcon"
           :append-icon="appendIcon"
           :primary="primary"
-          :secondary="secondary"
           :accent="accent"
           :caution="caution"
           :warning="warning"

@@ -98,14 +98,6 @@ export default {
       required: false
     },
     /**
-     * Styles the button with secondary colors
-     */
-    secondary: {
-      type: Boolean,
-      default: false,
-      required: false
-    },
-    /**
      * Styles the button with warning colors
      */
     warning: {
@@ -117,7 +109,7 @@ export default {
   computed: {
     buttonClasses () {
       const styleClass = this.outline ? 'sn-btn-outline' : 'sn-btn'
-      const colorModifiers = ['primary', 'secondary', 'warning', 'caution', 'accent']
+      const colorModifiers = ['primary', 'warning', 'caution', 'accent']
       const displayModifiers = ['icon', 'display', 'disabled', 'circle']
       return ['sn-btn-base']
         .concat(this.generateCSSModifierClasses(colorModifiers, styleClass, { defaultModifier: 'primary' }))
@@ -160,9 +152,6 @@ export default {
     &--primary
       background-color $primary
       border-color $primary
-    &--secondary
-      background-color $secondary
-      border-color $secondary
     &--caution
       background-color $caution
       border-color $caution
@@ -195,9 +184,6 @@ export default {
     &--primary
       border-color $primary
       color $primary
-    &--secondary
-      border-color $secondary
-      color $secondary
     &--caution
       border-color $caution
       color $caution
