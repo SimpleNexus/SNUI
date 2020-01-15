@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { setBrandColor, adjustColorBrightness } from './util/colorUtils'
+import { setBrandColor } from './util/colorUtils'
 
 export default {
   name: 'app',
@@ -38,9 +38,7 @@ export default {
     }
   },
   methods: {
-    setBrandColor,
-    adjustColorBrightness
-
+    setBrandColor
   }
 }
 </script>

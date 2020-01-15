@@ -2,39 +2,42 @@
   Base Colors
 */
 // White
-$sn-white-var = --snui-color-white
 $sn-white = #FFFFFF
-// Black
-$sn-black-var = --snui-color-black
-$sn-black = #000000
 
-// Grey
-$sn-grey-var = --snui-color-grey
-$sn-grey = #9B9B9B
+// Black
+$sn-black = #000000
+$sn-black-lighten-1 = #404040
+$sn-black-lighten-2 = #7F7F7F
+$sn-black-lighten-3 = #BFBFBF
+$sn-black-lighten-4 = #E5E5E5
+$sn-black-lighten-5 = #F2F2F2
 
 // Red
-$sn-red-var = --snui-color-red
 $sn-red = #D44011
+$sn-red-lighten-1 = #DF704D
+$sn-red-lighten-2 = #E99F88
+$sn-red-lighten-3 = #F4CFC3
+$sn-red-lighten-4 = #FAEBE7
 
 // Orange
-$sn-orange-var = --snui-color-orange
 $sn-orange = #F29F5A
+$sn-orange-lighten-1 = #F6B783
+$sn-orange-lighten-2 = #F8CEAC
+$sn-orange-lighten-3 = #FCE7D5
+$sn-orange-lighten-4 = #FDF5EE
 
 // Green
-$sn-green-var = --snui-color-green
 $sn-green = #24D49A
+$sn-green-lighten-1 = #5BDFB3
+$sn-green-lighten-2 = #91E9CC
+$sn-green-lighten-3 = #C8F4E5
+$sn-green-lighten-4 = #E9FAF4
 
 // Brand
 $sn-brand-var = --snui-color-brand
-$sn-brand = #FEBA01
+$sn-brand = #003A5D
 
 :root
-  --snui-color-whitee $sn-white
-  --snui-color-black $sn-black
-  --snui-color-grey $sn-grey
-  --snui-color-red $sn-red
-  --snui-color-orange $sn-orange
-  --snui-color-green $sn-green
   --snui-color-brand $sn-brand
 
 
@@ -42,25 +45,38 @@ $sn-brand = #FEBA01
   More usable vars
 */
 // Primary
-$primary-var = $sn-black-var
 $primary = $sn-black
+$primary-lighten-1 = $sn-black-lighten-1
+$primary-lighten-2 = $sn-black-lighten-2
+$primary-lighten-3 = $sn-black-lighten-3
+$primary-lighten-4 = $sn-black-lighten-4
+$primary-lighten-5 = $sn-black-lighten-5
+
 // White
-$white-var = $sn-white-var
 $white = $sn-white
-// Secondary
-$secondary-var = $sn-grey-var
-$secondary = $sn-grey
+
 // Warning
-$warning-var = $sn-red-var
 $warning = $sn-red
+$warning-lighten-1 = $sn-red-lighten-1
+$warning-lighten-2 = $sn-red-lighten-2
+$warning-lighten-3 = $sn-red-lighten-3
+$warning-lighten-4 = $sn-red-lighten-4
+
 // Caution
-$caution-var = $sn-orange-var
 $caution = $sn-orange
+$caution-lighten-1 = $sn-orange-lighten-1
+$caution-lighten-2 = $sn-orange-lighten-2
+$caution-lighten-3 = $sn-orange-lighten-3
+$caution-lighten-4 = $sn-orange-lighten-4
+
 // Success
-$success-var = $sn-green-var
 $success = $sn-green
+$success-lighten-1 = $sn-green-lighten-1
+$success-lighten-2 = $sn-green-lighten-2
+$success-lighten-3 = $sn-green-lighten-3
+$success-lighten-4 = $sn-green-lighten-4
+
 // Accent
-$accent-var = $sn-brand-var
 $accent = $sn-brand
 
 
@@ -69,76 +85,75 @@ $disabled-opacity = .2
 resolveBrandColor(v)
   s("var(%s)", v)
 
-// Helpers for adding lightness
-lighten1(c)
-  lighten(c, 25%)
-
-lighten2(c)
-  lighten(c, 50%)
-
-lighten3(c)
-  lighten(c, 75%)
-
-disable(c)
-  lighten(c, 80%)
-
 /**
   Text Classes
  */
 
 .sn-text-primary
   color $primary
-  &--lighten-1
-      color lighten1($primary)
-  &--lighten-2
-      color lighten2($primary)
-  &--lighten-3
-      color lighten3($primary)
 
-.sn-text-secondary
-  color $secondary
   &--lighten-1
-    color lighten1($secondary)
+    color $primary-lighten-1
+
   &--lighten-2
-    color lighten2($secondary)
+    color $primary-lighten-2
+
   &--lighten-3
-    color lighten3($secondary)
+    color $primary-lighten-3
+
+  &--lighten-4
+    color $primary-lighten-4
+
+  &--lighten-5
+    color $primary-lighten-5
 
 .sn-text-warning
   color $warning
+
   &--lighten-1
-    color lighten1($warning)
+    color $warning-lighten-1
+
   &--lighten-2
-    color lighten2($warning)
+    color $warning-lighten-2
+
   &--lighten-3
-    color lighten3($warning)
+    color $warning-lighten-3
+
+  &--lighten-4
+    color $warning-lighten-4
 
 .sn-text-caution
   color $caution
+
   &--lighten-1
-    color lighten1($caution)
+    color $caution-lighten-1
+
   &--lighten-2
-    color lighten2($caution)
+    color $caution-lighten-2
+
   &--lighten-3
-    color lighten3($caution)
+    color $caution-lighten-3
+
+  &--lighten-4
+    color $caution-lighten-4
 
 .sn-text-success
   color $success
+
   &--lighten-1
-    color lighten1($success)
+    color $success-lighten-1
+
   &--lighten-2
-    color lighten2($success)
+    color $success-lighten-2
+
   &--lighten-3
-    color lighten3($success)
+    color $success-lighten-3
+
+  &--lighten-4
+    color $success-lighten-4
 
 .sn-text-accent
   color $accent
-  &--lighten-1
-    color lighten1($accent)
-  &--lighten-2
-    color lighten2($accent)
-  &--lighten-3
-    color lighten3($accent)
 
 .sn-text-white
   color $white
@@ -149,54 +164,69 @@ disable(c)
 
 .sn-background-primary
   background-color $primary
-  &--lighten-1
-    background-color lighten1($primary)
-  &--lighten-2
-    background-color lighten2($primary)
-  &--lighten-3
-    background-color lighten3($primary)
 
-.sn-background-secondary
-  background-color $secondary
   &--lighten-1
-    background-color lighten1($secondary)
+    background-color $primary-lighten-1
+
   &--lighten-2
-    background-color lighten2($secondary)
+    background-color $primary-lighten-2
+
   &--lighten-3
-    background-color lighten3($secondary)
+    background-color $primary-lighten-3
+
+  &--lighten-4
+    background-color $primary-lighten-4
+
+  &--lighten-5
+    background-color $primary-lighten-5
 
 .sn-background-warning
   background-color $warning
+
   &--lighten-1
-    background-color lighten1($warning)
+    background-color $warning-lighten-1
+
   &--lighten-2
-    background-color lighten2($warning)
+    background-color $warning-lighten-2
+
   &--lighten-3
-    background-color lighten3($warning)
+    background-color $warning-lighten-3
+
+  &--lighten-4
+    background-color $warning-lighten-4
 
 .sn-background-caution
   background-color $caution
+
   &--lighten-1
-    background-color lighten1($caution)
+    background-color $caution-lighten-1
+
   &--lighten-2
-    background-color lighten2($caution)
+    background-color $caution-lighten-2
+
   &--lighten-3
-    background-color lighten3($caution)
+    background-color $caution-lighten-3
+
+  &--lighten-4
+    background-color $caution-lighten-4
 
 .sn-background-success
   background-color $success
+
   &--lighten-1
-    background-color lighten1($success)
+    background-color $success-lighten-1
+
   &--lighten-2
-    background-color lighten2($success)
+    background-color $success-lighten-2
+
   &--lighten-3
-    background-color lighten3($success)
+    background-color $success-lighten-3
+
+  &--lighten-4
+    background-color $success-lighten-4
 
 .sn-background-accent
   background-color $accent
-  &--lighten-1
-    background-color lighten1($accent)
-  &--lighten-2
-    background-color lighten2($accent)
-  &--lighten-3
-    background-color lighten3($accent)
+
+.sn-background-white
+  background-color $white
