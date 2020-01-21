@@ -9,7 +9,8 @@ export default {
       inputWrapperClasses: 'sn-checkbox--wrapper',
       inputElementClasses: 'sn-checkbox--input',
       inputLabelClasses: 'sn-checkbox--label',
-      inputLabelTextClasses: 'sn-checkbox--label-text'
+      inputLabelTextClasses: 'sn-checkbox--label-text',
+      inputDescriptionClasses: 'sn-checkbox--description'
     }
   },
   computed: {
@@ -52,6 +53,10 @@ export default {
       margin-left 26px
     &--checked
       background-color $sn-black
+    &--input
+      position absolute
+      opacity 0
+      z-index 1
     &:after
       content ''
       display inline-block

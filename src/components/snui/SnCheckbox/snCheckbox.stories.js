@@ -4,7 +4,7 @@ import SnCheckbox from './SnCheckbox'
 storiesOf('SnCheckbox', module)
   .add('Basic Checkbox', () => ({
     components: { SnCheckbox },
-    template: `<SnCheckbox />`
+    template: `<SnCheckbox label="Label" description="Description"/>`
   }), {
     info: true
   })

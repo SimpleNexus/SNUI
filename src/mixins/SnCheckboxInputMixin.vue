@@ -5,7 +5,6 @@ export default {
     <div :class="inputWrapperClasses">
       <label :class="inputLabelClasses">
         <input
-          class="sn-input-base-class"
           :class="inputElementClasses"
           :type="inputType"
           :disabled="disabled"
@@ -19,6 +18,12 @@ export default {
             {{label}}
       </span>
       </label>
+      <p
+        v-if="description"
+        :class="inputDescriptionClasses"
+      >
+        {{description}}
+      </p>
     </div>
   `,
   model: {
@@ -73,10 +78,3 @@ export default {
   }
 }
 </script>
-
-<style scoped lang="stylus">
-.sn-input-base-class
-  position absolute
-  z-index 1
-  cursor pointer
-</style>
