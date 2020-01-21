@@ -21,7 +21,11 @@
     "vue": "^2.6.10"
   },
   "main": "dist/SNUI.common.js",
-  "sideEffects": ["*.styl", "*.css", "*.vue"],
+  "sideEffects": [
+    "*.styl",
+    "*.css",
+    "*.vue"
+  ],
   "files": [
     "dist/*",
     "src/*",

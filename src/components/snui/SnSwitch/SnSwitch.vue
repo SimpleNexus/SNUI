@@ -212,7 +212,7 @@ export default {
       font-size 12px
       line-height 16px
       text-transform uppercase
-      color $sn-black-lighten-1
+      color $sn-black-lighten-2
       margin 0
       margin-left 48px
 
@@ -231,8 +231,6 @@ export default {
       background-color $sn-black
       border solid 1px $sn-black
       border-radius 100px
-      display -webkit-flex
-      display -ms-flex
       display flex
       align-items center
       justify-content flex-start
