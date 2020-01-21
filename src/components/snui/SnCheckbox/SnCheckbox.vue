@@ -1,67 +1,24 @@
-<template>
-<div class="sn-checkbox--wrapper">
-<label class="sn-checkbox--label-wrapper">
-  <input
-    class="sn-checkbox--input"
-    type="checkbox"
-    :disabled="disabled"
-    :value="value"
-    @change="triggerChange"
-  />
-  <div
-    :class="checkboxDisplayClasses"
-  />
-  <span class="sn-checkbox--label" v-if="label">
-    {{label}}
-  </span>
-</label>
-  <p
-    v-if="description"
-    class="sn-checkbox--description"
-  >
-    {{description}}
-  </p>
-</div>
-</template>
-
 <script>
+import SnCheckboxInputMixin from '../../../mixins/SnCheckboxInputMixin'
+
 export default {
   name: 'SnCheckbox',
-  props: {
-    description: {
-      type: String,
-      default: 'This is a description'
-    },
-    disabled: {
-      type: Boolean,
-      default: false
-    },
-    label: {
-      type: String,
-      default: 'Hello'
-    },
-    value: null
-  },
+  mixins: [SnCheckboxInputMixin],
   data () {
     return {
-      internalValue: false
+      inputWrapperClasses: 'sn-checkbox--wrapper',
+      inputElementClasses: 'sn-checkbox--input',
+      inputLabelClasses: 'sn-checkbox--label',
+      inputLabelTextClasses: 'sn-checkbox--label-text'
     }
   },
   computed: {
-    checked () {
-      return !!this.internalValue
-    },
-    checkboxDisplayClasses () {
+    inputPseudoElementClasses () {
       return {
         'sn-checkbox': true,
         'sn-checkbox--checked': this.checked,
         'sn-checkbox--disabled': this.disabled
       }
-    }
-  },
-  methods: {
-    triggerChange (e) {
-      this.internalValue = e.target.checked
     }
   }
 }
@@ -73,7 +30,7 @@ export default {
   font-family $font-family
   display flex
   flex-direction column
-  .sn-checkbox--label-wrapper
+  .sn-checkbox--label
     display flex
   .sn-checkbox
     height 16px
@@ -82,7 +39,7 @@ export default {
     position relative
     background-color $sn-white
     display flex
-    &--label
+    &--label-text
       font-size 15px
       line-height 20px
       margin-left 8px
@@ -105,10 +62,5 @@ export default {
       border-left 2px solid $sn-white
       border-bottom 2px solid $sn-white
       transform rotate(-45deg)
-    &--input
-      opacity 0
-      position absolute
-      z-index 1
-      cursor pointer
 
 </style>

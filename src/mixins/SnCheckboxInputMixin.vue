@@ -1,28 +1,26 @@
-<template>
-  <div :class="inputWrapperClass">
-    <label :class="inputLabelClasses">
-      <input
-        v-model="internalValue"
-        class="sn-input-base-class"
-        :class="inputElementClass"
-        :type="inputType"
-        :disabled="disabled"
-        :checked="checked"
-        :value="value"
-        :true-value="trueValue"
-        :false-value="falseValue"
-      >
-      <div :class="inputPseudoElementClass"></div>
-      <span :class="inputLabelTextClass" v-if="label">
-            {{label}}
-      </span>
-    </label>
-  </div>
-</template>
-
 <script>
 export default {
   name: 'SnCheckboxInputMixin',
+  template: `
+    <div :class="inputWrapperClasses">
+      <label :class="inputLabelClasses">
+        <input
+          class="sn-input-base-class"
+          :class="inputElementClasses"
+          :type="inputType"
+          :disabled="disabled"
+          :checked="checked"
+          :true-value="trueValue"
+          :false-value="falseValue"
+          @change="setValue"
+        >
+        <div :class="inputPseudoElementClasses"></div>
+        <span :class="inputLabelTextClasses" v-if="label">
+            {{label}}
+      </span>
+      </label>
+    </div>
+  `,
   model: {
     prop: 'inputValue',
     event: 'change'
@@ -47,24 +45,28 @@ export default {
   },
   data () {
     return {
-      inputWrapperClass: 'sn-input--wrapper',
-      inputLabelClasses: ['sn-input--label'],
-      inputElementClass: 'sn-input--element',
-      inputPseudoElementClass: 'sn-input--pseudo',
-      inputLabelTextClass: 'sn-input--label-text',
       inputType: 'checkbox',
-      internalValue: this.inputValue
+      internalValue: this.inputValue ?? false,
+      internalTrueValue: this.trueValue ?? this.value ?? true,
+      internalFalseValue: this.falseValue ?? false
     }
   },
   computed: {
     checked () {
-      return [this.value, this.trueValue].includes(this.internalValue)
+      return [this.value, this.internalTrueValue].includes(this.internalValue)
+    }
+  },
+  methods: {
+    setValue (e) {
+      if (e.target.checked) {
+        this.internalValue = this.internalTrueValue
+      } else {
+        this.internalValue = this.internalFalseValue
+      }
+      this.$emit('change', this.internalValue)
     }
   },
   watch: {
-    internalValue (val) {
-      this.$emit('change', val)
-    },
     inputValue (val) {
       this.internalValue = val
     }
@@ -74,9 +76,6 @@ export default {
 
 <style scoped lang="stylus">
 .sn-input-base-class
-  opacity 0
-  width 100%
-  height 100%
   position absolute
   z-index 1
   cursor pointer
