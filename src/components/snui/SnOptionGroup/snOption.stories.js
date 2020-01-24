@@ -54,7 +54,7 @@ storiesOf('SnOption', module)
           disabled: false,
           selected: false,
           value: 'myOption2',
-          text: 'Text 2'
+          text: 'Text'
         }]
       }
     },
