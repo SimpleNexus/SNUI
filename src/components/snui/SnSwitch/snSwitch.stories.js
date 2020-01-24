@@ -50,9 +50,6 @@ storiesOf('SnSwitch', module)
        The switch component provides several props to help control its behavior, such as.
        label, description, and disabled
 
-       The component does provide a means to bind and emit a custom value when checked, but
-       use of this outside of Array binding is discouraged.
-
        An important note, this component modifies the default model prop to \`input-value\`
        and the model event to \`@change\`. If you wish to listen for check events, you must use
        \`@change\` instead of \`@input\`.
@@ -112,6 +109,9 @@ storiesOf('SnSwitch', module)
       When binding an array to a group of switches, you should provide each switch with a
       value prop so it knows what to add or remove from the array.
 
+      The bound array will be replaced with a modified shallow copy (created via Array.prototype.slice())
+      when a value is added or removed.
+
       Please note that values are case sensitive and will be searched for using indexOf
       which uses strict equals \`===\` under the hood. As such, be extra careful when
       providing numbers as values to bind to the array.
@@ -119,5 +119,53 @@ storiesOf('SnSwitch', module)
        \`:value="9"\` which will be read as a number
       `,
       components: { SnSwitch }
+    }
+  })
+  .add('With custom true/false values', () => ({
+
+    components: { SnSwitch },
+    props: {
+      label: {
+        default: text('Label', 'Label')
+      },
+      description: {
+        default: text('Description', 'description')
+      },
+      disabled: {
+        default: boolean('Disabled', false)
+      },
+      trueValue: {
+        default: text('True Value', 'Truth')
+      },
+      falseValue: {
+        default: text('False Value', 'Fiction')
+      }
+    },
+    methods: {
+      change: action('Value Changed')
+    },
+    data () {
+      return {
+        checked: this.falseValue
+      }
+    },
+    template: `
+        <SnSwitch
+          v-model="checked"
+          :label="label"
+          :description="description"
+          :disabled="disabled"
+          :true-value="trueValue"
+          :false-value="falseValue"
+          @change="change"
+        />
+      `
+  }), {
+    info: {
+      summary: `
+      The component can receive custom true or false values when working with a switch
+      bound to a non-Array value. These props will overwrite the default switch emit values (value prop or true, and false).
+      They should not be used if binding the component to an Array value.
+      `
     }
   })

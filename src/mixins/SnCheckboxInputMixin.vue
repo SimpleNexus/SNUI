@@ -33,21 +33,57 @@ export default {
     event: 'change'
   },
   props: {
+    /**
+     * Provide a description string for the input
+     */
     description: {
-      type: String,
+      type: [String, Number],
       default: ''
     },
+    /**
+     * Disables the input
+     */
     disabled: {
       type: Boolean,
       default: false
     },
+    /**
+     * Specify whether the input should emit it's value on component mount
+     */
+    emitOnMount: {
+      type: Boolean,
+      default: true
+    },
+    /**
+     * The value to emit if input is unchecked. Defaults to false
+     * Should only be used together with the trueValue prop.
+     *
+     * Should not be used when component is bound to an array.
+     */
     falseValue: null,
+    /**
+     * The v-model bound value
+     */
     inputValue: null,
+    /**
+     * Provide a label for the input
+     */
     label: {
-      type: String,
+      type: [String, Number],
       default: ''
     },
+    /**
+     * Sets value for truthy state. Takes precedent over the `value` prop.
+     * Should only be used together with falseValue prop.
+     *
+     * Should not be used when component is bound to an array.
+     */
     trueValue: null,
+    /**
+     * The value of the input. Will be emitted if input is selected. Is overwritten by trueValue prop.
+     * Defaults to emitting true/false if not given.
+     * If bound to an array, this is the value which will be added or removed from the array
+     */
     value: null
   },
   data () {
@@ -69,10 +105,13 @@ export default {
   },
   mounted () {
     this.isChecked = this.$refs.inputElement?.checked
+    if (this.emitOnMount) {
+      this.setValue({ target: { checked: this.isChecked } })
+    }
   },
   methods: {
     setValue (e) {
-      this.isChecked = e.target.checked
+      this.isChecked = e?.target?.checked ?? false
       if (this.isMultiple) {
         this.updateArrayValue(e)
       } else {
@@ -80,7 +119,7 @@ export default {
       }
     },
     updateArrayValue (e) {
-      const checked = e.target.checked
+      const checked = e?.target?.checked ?? false
       // make a copy of the inputValue which contains the list
       // of checked values
       const checkedValues = this.inputValue.slice()
@@ -101,12 +140,24 @@ export default {
       }
 
       // Emit the newly updated list
+      /**
+       * Change event
+       *
+       * @event change
+       * @property {Array} the updated list of selected values
+       */
       this.$emit('change', checkedValues)
     },
     updateSingleValue (e) {
-      const emitValue = e.target.checked
+      const emitValue = e?.target?.checked ?? false
         ? this.internalTrueValue
         : this.internalFalseValue
+      /**
+       * Change event
+       *
+       * @event change
+       * @property {any} The current value of the input (can be modified by value, trueValue, and falseValue props)
+       */
       this.$emit('change', emitValue)
     }
   },
