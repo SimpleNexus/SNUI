@@ -18,6 +18,12 @@ storiesOf('SnCheckbox', module)
       },
       value: {
         default: text('Value', 'My Value')
+      },
+      trueValue: {
+        default: text('True Value', '')
+      },
+      falseValue: {
+        default: text('False Value', '')
       }
     },
     methods: {
@@ -35,6 +41,8 @@ storiesOf('SnCheckbox', module)
         :description="description"
         :disabled="disabled"
         :value="value"
+        :true-value="trueValue"
+        :false-value="falseValue"
         @change="change"
       />`
   }), {
@@ -44,7 +52,7 @@ storiesOf('SnCheckbox', module)
     components: { SnCheckbox },
     data () {
       return {
-        values: [{ prop: 123 }, { prop: 321 }, { prop: 453 }],
+        values: [{ label: 'Label 1', prop: 123 }, { label: 'Label 2', prop: 321 }, { label: 'Label 3', prop: 453 }],
         selectedValues: []
       }
     },
@@ -52,16 +60,18 @@ storiesOf('SnCheckbox', module)
       change: action('Value Changed')
     },
     template: `
-      <div>
+      <section style="width: 700px">
         <SnCheckbox
           v-for="(value, index) in values"
           v-model="selectedValues"
           :value="value"
           :key="index"
-          :label="index.toString()"
+          :label="value.label"
           @change="change"
         />
-        {{selectedValues}}
-      </div>
+        <p>
+          Selected Values: {{selectedValues}}
+        </p>
+      </section>
       `
   }))

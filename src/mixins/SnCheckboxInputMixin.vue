@@ -10,8 +10,9 @@ export default {
             :class="inputElementClasses"
             :type="inputType"
             :disabled="disabled"
-            :true-value="trueValue"
-            :false-value="falseValue"
+            :value="internalTrueValue"
+            :true-value="internalTrueValue"
+            :false-value="internalFalseValue"
             @change="setValue"
           >
           <div :class="inputPseudoElementClasses"></div>
@@ -53,7 +54,7 @@ export default {
     return {
       inputType: 'checkbox',
       isChecked: false,
-      internalValue: this.inputValue ?? false,
+      internalValue: this.inputValue,
       internalTrueValue: this.trueValue ?? this.value ?? true,
       internalFalseValue: this.falseValue ?? false
     }
