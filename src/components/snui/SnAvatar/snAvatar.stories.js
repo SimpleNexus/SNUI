@@ -50,7 +50,7 @@ storiesOf('SnAvatar', module)
       }
     },
     template: `
-        <sn-avatar name="Molly Mormon Mesa"
+        <sn-avatar name="Molly Mesa"
                    :xl="xl"
                    :large="large"
                    :medium="medium"
