@@ -1,33 +1,30 @@
 <script>
 export default {
   name: 'SnCheckboxInputMixin',
-  template: `
-      <div :class="inputWrapperClasses">
-        <label :class="inputLabelClasses">
-          <input
-            ref="inputElement"
-            v-model="internalValue"
-            :class="inputElementClasses"
-            :type="inputType"
-            :disabled="disabled"
-            :value="internalTrueValue"
-            :true-value="internalTrueValue"
-            :false-value="internalFalseValue"
-            @change="setValue"
-          >
-          <div :class="inputPseudoElementClasses"></div>
-          <span :class="inputLabelTextClasses" v-if="label">
-            {{label}}
-      </span>
-        </label>
-        <p
-          v-if="description"
-          :class="inputDescriptionClasses"
-        >
-          {{description}}
-        </p>
-      </div>
-    `,
+  render (createElement) {
+    const self = this
+    return createElement('div', { 'class': self.inputWrapperClasses }, [
+      createElement('label', { 'class': self.inputLabelClasses }, [
+        createElement('input', {
+          ref: 'inputElement',
+          'class': self.inputElementClasses,
+          domProps: {
+            type: self.inputType,
+            disabled: self.disabled,
+            value: self.internalTrueValue,
+            'true-value': self.internalTrueValue,
+            'false-value': self.internalFalseValue
+          },
+          on: {
+            change: self.setValue
+          }
+        }),
+        createElement('div', { 'class': self.inputPseudoElementClasses }),
+        createElement('span', { 'class': self.inputLabelTextClasses }, self.label)
+      ]),
+      self.description ? createElement('p', { 'class': self.inputDescriptionClasses }, self.description) : undefined
+    ])
+  },
   model: {
     prop: 'inputValue',
     event: 'change'

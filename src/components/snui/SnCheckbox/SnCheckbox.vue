@@ -87,6 +87,7 @@ export default {
         width 16px
         opacity 0
         z-index 1
+        cursor pointer
         &--disabled
           cursor not-allowed
 
