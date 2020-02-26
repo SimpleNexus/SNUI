@@ -54,13 +54,13 @@ storiesOf('SnButton', module)
         <section>
           <h2 class="sn-large-title">Circle Buttons</h2>
           <sn-button circle>
-            <sn-icon large name="bell"/>
+            <sn-icon size="large" name="bell"/>
           </sn-button>
           <sn-button outline circle>
-            <sn-icon large name="bell"/>
+            <sn-icon size="large" name="bell"/>
           </sn-button>
           <sn-button circle disabled>
-            <sn-icon large name="bell"/>
+            <sn-icon size="large" name="bell"/>
           </sn-button>
         </section>
         <section>
@@ -222,7 +222,7 @@ storiesOf('SnButton', module)
         :outline="true"
         @click="action"
       >
-        <sn-icon large name="bell"/>
+        <sn-icon size="large" name="bell"/>
       </sn-button>
       <sn-button
         circle

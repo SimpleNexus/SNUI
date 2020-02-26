@@ -19,7 +19,7 @@ export default {
     size: {
       type: String,
       required: false,
-      default: 'medium',
+      default: 'small',
       validator (size) {
         return ['small', 'medium', 'large'].includes(size)
       }
@@ -27,7 +27,7 @@ export default {
   },
   computed: {
     iconClasses () {
-      return [`sn-icon-${this.name}`, `sn-icon-${this.size}`]
+      return [`sn-icon-${this.name}`, `sn-icon--${this.size}`]
     }
   }
 }

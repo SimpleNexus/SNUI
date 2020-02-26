@@ -109,6 +109,7 @@ export default {
 
 <style scoped lang="stylus">
   .sn-btn-base
+    position relative
     text-transform uppercase
     min-width 122px
     height 32px
@@ -118,29 +119,33 @@ export default {
     font-size 15px
     line-height 20px
     vertical-align middle
-    &:focus
-      outline none
     &::-moz-focus-inner
       border 0
 
   .sn-btn
     border 1px solid $sn-black
     color $sn-white
+    &:active
+      &:after
+        content ""
+        position absolute
+        top 0
+        left 0
+        width 100%
+        height 100%
+        background-color $sn-white
+        // TODO Figure out ripple animation
+        /*animation ripple .08s*/
+        opacity .25
     &--primary
       background-color $primary
       border-color $primary
-      &:active
-        background-color $primary-lighten-1
     &--caution
       background-color $caution
       border-color $caution
-      &:active
-        background-color $caution-lighten-1
     &--warning
       background-color $warning
       border-color $warning
-      &:active
-        background-color $warning-lighten-1
     &--accent
       background-color $accent
       border-color $accent
@@ -167,21 +172,12 @@ export default {
     &--primary
       border-color $primary
       color $primary
-      &:active
-        border-color $primary-lighten-1
-        color $primary-lighten-1
     &--caution
       border-color $caution
       color $caution
-      &:active
-        border-color $caution-lighten-1
-        color $caution-lighten-1
     &--warning
       border-color $warning
       color $warning
-      &:active
-        border-color $warning-lighten-1
-        color $warning-lighten-1
     &--accent
       border-color $accent
       color $accent
@@ -198,4 +194,13 @@ export default {
       margin-left 4px
     &--prepend
       margin-right 4px
+
+  @keyframes ripple {
+    from {
+      transform scale(0)
+    }
+    to {
+      transform scale(1)
+    }
+  }
 </style>
