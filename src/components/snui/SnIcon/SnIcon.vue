@@ -1,13 +1,10 @@
 <template>
-<i :class="iconClasses" :style="computedFontSize"/>
+<i :class="iconClasses" />
 </template>
 
 <script>
-import CssClassMappingsMixin from '../../../mixins/CssClassMappingsMixin'
-
 export default {
   name: 'SnIcon',
-  mixins: [CssClassMappingsMixin],
   props: {
     /**
      * The name of the icon to be rendered. Must be a valid
@@ -19,47 +16,18 @@ export default {
       type: String,
       required: true
     },
-    /**
-     * Render a small icon (default)
-     */
-    small: {
-      type: Boolean,
-      required: false,
-      default: false
-    },
-    /**
-     * Render a medium icon
-     */
-    medium: {
-      type: Boolean,
-      required: false,
-      default: false
-    },
-    /**
-     * Render a large icon
-     */
-    large: {
-      type: Boolean,
-      required: false,
-      default: false
-    },
-    /**
-     * The size in pixels of the icon
-     */
     size: {
-      type: [Number, String],
+      type: String,
       required: false,
-      default: 0
+      default: 'medium',
+      validator (size) {
+        return ['small', 'medium', 'large'].includes(size)
+      }
     }
   },
   computed: {
-    computedFontSize () {
-      return this.size ? { 'font-size': this.size + 'px' } : null
-    },
     iconClasses () {
-      const sizeModifiers = ['small', 'medium', 'large']
-      return [`sn-icon-${this.name}`]
-        .concat(this.generateCSSModifierClasses(sizeModifiers, 'sn-icon', { defaultModifier: 'small' }))
+      return [`sn-icon-${this.name}`, `sn-icon-${this.size}`]
     }
   }
 }

@@ -9,11 +9,9 @@
 </template>
 
 <script>
-import CssClassMappingsMixin from '../../../mixins/CssClassMappingsMixin'
 
 export default {
   name: 'SnAvatar',
-  mixins: [CssClassMappingsMixin],
   props: {
     /**
      * Name of the icon to use in the avatar
