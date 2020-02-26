@@ -42,36 +42,16 @@ export default {
       required: false
     },
     /**
-     * Render large sized avatar
+     * Sets the size of the avatar. Must be one of the following:
+     * 'xl' | 'large' | 'medium' | 'standard' | 'small' | 'mini' | 'micro'
      */
-    large: {
-      type: Boolean,
-      default: false,
-      required: false
-    },
-    /**
-     * Render medium sized avatar
-     */
-    medium: {
-      type: Boolean,
-      default: false,
-      required: false
-    },
-    /**
-     * Render micro sized avatar
-     */
-    micro: {
-      type: Boolean,
-      default: false,
-      required: false
-    },
-    /**
-     * Render mini sized avatar
-     */
-    mini: {
-      type: Boolean,
-      default: false,
-      required: false
+    size: {
+      type: String,
+      default: 'standard',
+      required: false,
+      validator (size) {
+        return ['xl', 'large', 'medium', 'standard', 'small', 'mini', 'micro'].includes(size)
+      }
     },
     /**
      * The name of the user. Will be broken up and rendered as initials
@@ -84,44 +64,16 @@ export default {
       required: false
     },
     /**
-     * Custom size in pixels of the avatar.
-     * Named size classes should be preferred to this prop
-     * Max 200
-     * Min 28
-     */
-    size: {
-      type: Number,
-      default: 0,
-      required: false
-    },
-    /**
-     * Render small avatar
-     */
-    small: {
-      type: Boolean,
-      default: false,
-      required: false
-    },
-    /**
      * When true (default), render the name's full initials
      * as opposed to a single initial when false
      */
     useFullInitials: {
       type: Boolean,
       default: true
-    },
-    /**
-     * Render an xl avatar
-     */
-    xl: {
-      type: Boolean,
-      default: false,
-      required: false
     }
   },
   data () {
     return {
-      avatarModifiers: ['xl', 'large', 'medium', 'small', 'mini', 'micro'],
       validatedImage: this.image,
       useImage: !!this.image
     }
@@ -135,18 +87,11 @@ export default {
         return this.name.charAt(0)
       }
     },
-    avatarSize () {
-      return this.size ? {
-        height: this.size + 'px',
-        width: this.size + 'px',
-        'font-size': this.size / 2 + 'px'
-      } : {}
-    },
     avatarClasses () {
-      return this.generateCSSModifierClasses(this.avatarModifiers, 'sn-avatar')
+      return ['sn-avatar', `sn-avatar--${this.size}`]
     },
     avatarIconClasses () {
-      return [`sn-icon-${this.icon}`].concat(this.generateCSSModifierClasses(this.avatarModifiers, 'sn-avatar', { includePrefixInClassList: false }).map(size => size + '--icon'))
+      return [`sn-icon-${this.icon}`, `sn-avatar--${this.size}--icon`]
     }
   },
   methods: {
