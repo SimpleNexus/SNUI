@@ -18,14 +18,6 @@ export default {
   mixins: [CssClassMappingsMixin],
   props: {
     /**
-     * Styles the button with accent colors
-     **/
-    accent: {
-      type: Boolean,
-      default: false,
-      required: false
-    },
-    /**
      * The name of an icon to append to the button text
      **/
     appendIcon: {
@@ -34,12 +26,16 @@ export default {
       required: false
     },
     /**
-     * Styles the button with caution colors
+     * Defines the color of the button. Must be one of the following:
+     * 'primary' | 'accent' | 'caution' | 'warning'
      **/
-    caution: {
-      type: Boolean,
-      default: false,
-      required: false
+    color: {
+      type: String,
+      required: false,
+      default: 'primary',
+      validator (size) {
+        return ['primary', 'accent', 'caution', 'warning'].includes(size)
+      }
     },
     /**
      * Styles the button as a display button (large)
@@ -88,31 +84,13 @@ export default {
       type: String,
       default: '',
       required: false
-    },
-    /**
-     * Styles the button with primary colors
-     */
-    primary: {
-      type: Boolean,
-      default: false,
-      required: false
-    },
-    /**
-     * Styles the button with warning colors
-     */
-    warning: {
-      type: Boolean,
-      required: false,
-      default: false
     }
   },
   computed: {
     buttonClasses () {
       const styleClass = this.outline ? 'sn-btn-outline' : 'sn-btn'
-      const colorModifiers = ['primary', 'warning', 'caution', 'accent']
       const displayModifiers = ['icon', 'display', 'disabled', 'circle']
-      return ['sn-btn-base']
-        .concat(this.generateCSSModifierClasses(colorModifiers, styleClass, { defaultModifier: 'primary' }))
+      return ['sn-btn-base', styleClass, `${styleClass}--${this.color}`]
         .concat(this.generateCSSModifierClasses(displayModifiers, 'sn-btn'))
     }
   },
@@ -132,7 +110,6 @@ export default {
 <style scoped lang="stylus">
   .sn-btn-base
     text-transform uppercase
-    outline none
     min-width 122px
     height 32px
     cursor pointer
@@ -152,12 +129,18 @@ export default {
     &--primary
       background-color $primary
       border-color $primary
+      &:active
+        background-color $primary-lighten-1
     &--caution
       background-color $caution
       border-color $caution
+      &:active
+        background-color $caution-lighten-1
     &--warning
       background-color $warning
       border-color $warning
+      &:active
+        background-color $warning-lighten-1
     &--accent
       background-color $accent
       border-color $accent
@@ -184,12 +167,21 @@ export default {
     &--primary
       border-color $primary
       color $primary
+      &:active
+        border-color $primary-lighten-1
+        color $primary-lighten-1
     &--caution
       border-color $caution
       color $caution
+      &:active
+        border-color $caution-lighten-1
+        color $caution-lighten-1
     &--warning
       border-color $warning
       color $warning
+      &:active
+        border-color $warning-lighten-1
+        color $warning-lighten-1
     &--accent
       border-color $accent
       color $accent

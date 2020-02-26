@@ -13,20 +13,6 @@ const buttonTypeOptions = {
   Warning: 'warning'
 }
 const buttonTypeDefault = 'primary'
-const computedButtonType = {
-  accent () {
-    return this.buttonType === 'accent'
-  },
-  primary () {
-    return this.buttonType === 'primary'
-  },
-  caution () {
-    return this.buttonType === 'caution'
-  },
-  warning () {
-    return this.buttonType === 'warning'
-  }
-}
 
 storiesOf('SnButton', module)
   .add('All Buttons', () => ({
@@ -37,17 +23,17 @@ storiesOf('SnButton', module)
           <h2 class="sn-large-title">Standard Buttons</h2>
           <sn-button>Primary</sn-button>
           <sn-button disabled>Disabled</sn-button>
-          <sn-button caution>Caution</sn-button>
-          <sn-button warning>Warning</sn-button>
-          <sn-button accent>Accent</sn-button>
+          <sn-button color="caution">Caution</sn-button>
+          <sn-button color="warning">Warning</sn-button>
+          <sn-button color="accent">Accent</sn-button>
         </section>
         <section>
           <h2 class="sn-large-title">Outline Buttons</h2>
           <sn-button outline>Primary</sn-button>
           <sn-button disabled outline>Disabled</sn-button>
-          <sn-button outline caution>Caution</sn-button>
-          <sn-button outline warning>Warning</sn-button>
-          <sn-button outline accent>Accent</sn-button>
+          <sn-button outline color="caution">Caution</sn-button>
+          <sn-button outline color="warning">Warning</sn-button>
+          <sn-button outline color="accent">Accent</sn-button>
         </section>
         <section>
           <h2 class="sn-large-title">Buttons With Icons</h2>
@@ -98,23 +84,17 @@ storiesOf('SnButton', module)
       disabled: {
         default: boolean('Disabled', false)
       },
-      buttonType: {
+      buttonColor: {
         default: radios(buttonTypeLabel, buttonTypeOptions, buttonTypeDefault)
       }
     },
     template: `
       <sn-button
-        :primary="primary"
-        :accent="accent"
-        :caution="caution"
-        :warning="warning"
+        :color="buttonColor"
         :disabled="disabled"
         @click="action">Sn Button
       </sn-button>`,
-    methods: { action: action('clicked') },
-    computed: {
-      ...computedButtonType
-    }
+    methods: { action: action('clicked') }
   }), {
     info: {
       summary: `## Description
@@ -128,24 +108,18 @@ storiesOf('SnButton', module)
       disabled: {
         default: boolean('Disabled', false)
       },
-      buttonType: {
+      buttonColor: {
         default: radios(buttonTypeLabel, buttonTypeOptions, buttonTypeDefault)
       }
     },
     template: `
       <sn-button
         outline
-        :primary="primary"
-        :accent="accent"
-        :caution="caution"
-        :warning="warning"
+        :color="buttonColor"
         :disabled="disabled"
         @click="action">Sn Button
       </sn-button>`,
-    methods: { action: action('clicked') },
-    computed: {
-      ...computedButtonType
-    }
+    methods: { action: action('clicked') }
   }), {
     info: {
       summary: `## Description
@@ -162,17 +136,14 @@ storiesOf('SnButton', module)
       outline: {
         default: boolean('Outline', false)
       },
-      buttonType: {
+      buttonColor: {
         default: radios(buttonTypeLabel, buttonTypeOptions, buttonTypeDefault)
       }
     },
     template: `
       <div>
         <sn-button prepend-icon="search"
-                   :primary="primary"
-                   :accent="accent"
-                   :caution="caution"
-                   :warning="warning"
+                   :color="buttonColor"
                    :disabled="disabled"
                    :outline="outline"
                    @click="action"
@@ -180,10 +151,7 @@ storiesOf('SnButton', module)
           Prepend
         </sn-button>
         <sn-button append-icon="search"
-                   :primary="primary"
-                   :accent="accent"
-                   :caution="caution"
-                   :warning="warning"
+                   :color="buttonColor"
                    :disabled="disabled"
                    :outline="outline"
                    @click="action"
@@ -192,10 +160,7 @@ storiesOf('SnButton', module)
         </sn-button>
       </div>
     `,
-    methods: { action: action('clicked') },
-    computed: {
-      ...computedButtonType
-    }
+    methods: { action: action('clicked') }
   }), {
     info: {
       summary: `## Description
@@ -214,17 +179,14 @@ storiesOf('SnButton', module)
       outline: {
         default: boolean('Outline', false)
       },
-      buttonType: {
+      buttonColor: {
         default: radios(buttonTypeLabel, buttonTypeOptions, buttonTypeDefault)
       }
     },
     template: `
       <sn-button
         icon
-        :primary="primary"
-        :accent="accent"
-        :caution="caution"
-        :warning="warning"
+        :color="buttonColor"
         :disabled="disabled"
         :outline="outline"
         @click="action"
@@ -232,10 +194,7 @@ storiesOf('SnButton', module)
         <sn-icon name="search"/>
       </sn-button>
     `,
-    methods: { action: action('clicked') },
-    computed: {
-      ...computedButtonType
-    }
+    methods: { action: action('clicked') }
   }), {
     info: {
       summary: `## Description
@@ -250,7 +209,7 @@ storiesOf('SnButton', module)
       disabled: {
         default: boolean('Disabled', false)
       },
-      buttonType: {
+      buttonColor: {
         default: radios(buttonTypeLabel, buttonTypeOptions, buttonTypeDefault)
       }
     },
@@ -258,10 +217,7 @@ storiesOf('SnButton', module)
       <div>
       <sn-button
         circle
-        :primary="primary"
-        :accent="accent"
-        :caution="caution"
-        :warning="warning"
+        :color="buttonColor"
         :disabled="disabled"
         :outline="true"
         @click="action"
@@ -270,10 +226,7 @@ storiesOf('SnButton', module)
       </sn-button>
       <sn-button
         circle
-        :primary="primary"
-        :accent="accent"
-        :caution="caution"
-        :warning="warning"
+        :color="buttonColor"
         :disabled="disabled"
         :outline="true"
         @click="action"
@@ -282,10 +235,7 @@ storiesOf('SnButton', module)
       </sn-button>
       </div>
     `,
-    methods: { action: action('clicked') },
-    computed: {
-      ...computedButtonType
-    }
+    methods: { action: action('clicked') }
   }), {
     info: {
       summary: `## Description
@@ -302,7 +252,7 @@ storiesOf('SnButton', module)
       outline: {
         default: boolean('Outline', false)
       },
-      buttonType: {
+      buttonColor: {
         default: radios(buttonTypeLabel, buttonTypeOptions, buttonTypeDefault)
       },
       preicon: {
@@ -317,10 +267,7 @@ storiesOf('SnButton', module)
           display
           :prepend-icon="prependIcon"
           :append-icon="appendIcon"
-          :primary="primary"
-          :accent="accent"
-          :caution="caution"
-          :warning="warning"
+          :color="buttonColor"
           :disabled="disabled"
           :outline="outline"
           @click="action"
@@ -330,7 +277,6 @@ storiesOf('SnButton', module)
     `,
     methods: { action: action('clicked') },
     computed: {
-      ...computedButtonType,
       prependIcon () {
         return this.preicon ? 'search' : false
       },
