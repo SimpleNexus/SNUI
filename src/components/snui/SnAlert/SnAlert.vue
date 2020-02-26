@@ -5,7 +5,7 @@
       class="sn-alert-wrapper"
     >
       <div :class="alertClasses">
-        <sn-icon class='sn-alert--icon' size="20" :name="icon" />
+        <sn-icon class='sn-alert--icon' size="medium" :name="icon" />
         <div class="sn-alert--content">
           <slot />
         </div>
@@ -22,7 +22,7 @@
           <sn-icon
             v-if="dismissible"
             name="exit"
-            size="20"
+            size="medium"
           />
         </div>
       </div>
@@ -177,7 +177,7 @@ export default {
       display flex
       margin-left 8px
       margin-right 8px
-      margin-top 4px
+      margin-top 2px
       &:hover
         cursor pointer
     &--action

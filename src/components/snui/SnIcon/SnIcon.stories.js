@@ -8,8 +8,8 @@ storiesOf('SnIcon', module)
     template: `
     <div>
       <sn-icon name="cake" />
-      <sn-icon medium name="cake" />
-      <sn-icon large name="cake" />
+      <sn-icon size="medium" name="cake" />
+      <sn-icon size="large" name="cake" />
     </div>
     `
   }), {

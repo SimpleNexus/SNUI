@@ -11,7 +11,7 @@
       :selected="option.selected"
       class="sn-option-group-child-option"
     >
-        <sn-icon v-if="!!option.icon" :name="option.icon" large/>
+        <sn-icon v-if="!!option.icon" :name="option.icon" size="large"/>
         <span v-else>{{option.text}}</span>
     </sn-option>
   </div>
