@@ -11,20 +11,6 @@ const alertTypeOptions = {
   Warning: 'warning'
 }
 const alertTypeDefault = 'primary'
-const computedAlertType = {
-  success () {
-    return this.alertType === 'success'
-  },
-  primary () {
-    return this.alertType === 'primary'
-  },
-  caution () {
-    return this.alertType === 'caution'
-  },
-  warning () {
-    return this.alertType === 'warning'
-  }
-}
 
 storiesOf('SnAlert', module)
   .add('Basic Alert', () => ({
@@ -42,9 +28,6 @@ storiesOf('SnAlert', module)
       text: {
         default: text('Alert Text', 'This is an alert')
       }
-    },
-    computed: {
-      ...computedAlertType
     },
     data () {
       return {
@@ -64,10 +47,7 @@ storiesOf('SnAlert', module)
       <sn-alert
         v-model="show"
         :dismissible="dismissible"
-        :primary="primary"
-        :caution="caution"
-        :warning="warning"
-        :success="success"
+        :type="alertType"
         @dismissed="dismissed"
         @actionClicked="actionClicked"
       >

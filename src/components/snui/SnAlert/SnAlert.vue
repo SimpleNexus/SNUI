@@ -39,6 +39,19 @@ export default {
   mixins: [CssClassMappingsMixin],
   props: {
     /**
+     * Specify which type the alert should be.
+     * Can be one of the following:
+     * 'primary' | 'success' | 'warning' | 'caution'
+     **/
+    type: {
+      type: String,
+      default: 'primary',
+      required: false,
+      validator (color) {
+        return ['primary', 'success', 'warning', 'caution'].includes(color)
+      }
+    },
+    /**
      * Indicates whether the user should be able to dismiss
      * the alert. If true, includes a clickable dismiss icon
      * to the right of action slot. When click, the icon will
@@ -55,34 +68,6 @@ export default {
     icon: {
       type: String,
       default: 'warning'
-    },
-    /**
-     * Indicates the primary color should be used
-     */
-    primary: {
-      type: Boolean,
-      default: false
-    },
-    /**
-     * Indicates the success color should be used
-     */
-    success: {
-      type: Boolean,
-      default: false
-    },
-    /**
-     * Indicates the warning color should be used
-     */
-    warning: {
-      type: Boolean,
-      default: false
-    },
-    /**
-     * Indicates the caution color should be used
-     */
-    caution: {
-      type: Boolean,
-      default: false
     },
     /**
      * When given, the alert will dismiss itself after
@@ -115,8 +100,7 @@ export default {
   },
   computed: {
     alertClasses () {
-      const colorProps = ['primary', 'warning', 'success', 'caution']
-      return this.generateCSSModifierClasses(colorProps, 'sn-alert', { defaultModifier: 'primary', includePrefixInClassList: true })
+      return ['sn-alert', `sn-alert--${this.type}`]
     }
   },
   methods: {
