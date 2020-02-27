@@ -160,6 +160,10 @@ export default {
     &--disabled
       cursor not-allowed
       opacity $disabled-opacity
+      &:active
+        &:after
+          content ""
+          opacity 0
     &--circle
       border-radius 50%
       min-width 64px
