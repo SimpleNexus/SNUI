@@ -32,11 +32,9 @@
 
 <script>
 import SnIcon from '../SnIcon/SnIcon'
-import CssClassMappingsMixin from '../../../mixins/CssClassMappingsMixin'
 export default {
   name: 'SnAlert',
   components: { SnIcon },
-  mixins: [CssClassMappingsMixin],
   props: {
     /**
      * Specify which type the alert should be.
