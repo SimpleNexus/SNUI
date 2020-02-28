@@ -76,9 +76,18 @@ storiesOf('SnButton', module)
           <sn-button display outline prepend-icon="search">Button</sn-button>
           <sn-button display outline append-icon="search">Button</sn-button>
         </section>
+        <section>
+          <h2 class="sn-large-title">Block Buttons</h2>
+          <sn-button block class="sn-my-1">Block</sn-button>
+          <sn-button block disabled class="sn-my-1">Disabled</sn-button>
+          <sn-button display block class="sn-my-1">Display</sn-button>
+          <sn-button outline block class="sn-my-1">Outline Block</sn-button>
+          <sn-button outline block disabled class="sn-my-1">Outline Disabled</sn-button>
+          <sn-button outline display block disabled class="sn-my-1">Outline Block</sn-button>
+        </section>
       </main>`
   }))
-  .add('Standard Button', () => ({
+  .add('Button', () => ({
     components: { SnButton },
     props: {
       disabled: {
@@ -86,14 +95,29 @@ storiesOf('SnButton', module)
       },
       buttonColor: {
         default: radios(buttonTypeLabel, buttonTypeOptions, buttonTypeDefault)
+      },
+      outline: {
+        default: boolean('Outline', false)
+      },
+      display: {
+        default: boolean('Display', false)
+      },
+      block: {
+        default: boolean('Block', false)
       }
     },
     template: `
-      <sn-button
-        :color="buttonColor"
-        :disabled="disabled"
-        @click="action">Sn Button
-      </sn-button>`,
+        <sn-button
+          :color="buttonColor"
+          :disabled="disabled"
+          :outline="outline"
+          :display="display"
+          :block="block"
+          @click="action"
+        >
+          Sn Button
+        </sn-button>
+    `,
     methods: { action: action('clicked') }
   }), {
     info: {

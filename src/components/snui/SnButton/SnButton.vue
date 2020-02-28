@@ -26,6 +26,14 @@ export default {
       required: false
     },
     /**
+     * Styles the button as a block, filling the width of the container
+     **/
+    block: {
+      type: Boolean,
+      default: false,
+      required: false
+    },
+    /**
      * Defines the color of the button. Must be one of the following:
      * 'primary' | 'accent' | 'caution' | 'warning'
      **/
@@ -89,7 +97,7 @@ export default {
   computed: {
     buttonClasses () {
       const styleClass = this.outline ? 'sn-btn-outline' : 'sn-btn'
-      const displayModifiers = ['icon', 'display', 'disabled', 'circle']
+      const displayModifiers = ['icon', 'display', 'disabled', 'circle', 'block']
       return ['sn-btn-base', styleClass, `${styleClass}--${this.color}`]
         .concat(this.generateCSSModifierClasses(displayModifiers, 'sn-btn'))
     }
@@ -169,6 +177,10 @@ export default {
       min-width 64px
       width 64px
       height 64px
+    &--block
+      min-width 122px
+      height 32px
+      width 100%
 
   .sn-btn-outline
     border 1px solid
@@ -196,8 +208,10 @@ export default {
     line-height 16px
     &--append
       margin-left 4px
+      padding-bottom 2px
     &--prepend
       margin-right 4px
+      padding-bottom 2px
 
   @keyframes ripple {
     from {
