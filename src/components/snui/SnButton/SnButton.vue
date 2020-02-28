@@ -127,24 +127,18 @@ export default {
     font-size 15px
     line-height 20px
     vertical-align middle
-    &::-moz-focus-inner
-      border 0
+    background-position center
+    transition background 0.4s
+    &:hover
+      background: $sn-black-lighten-1 radial-gradient(circle, transparent 1%, $sn-black-lighten-1 1%) center/15000%;
+    &:active
+      background-color $sn-black-lighten-2
+      background-size 100%
+      transition background 0s
 
   .sn-btn
     border 1px solid $sn-black
     color $sn-white
-    &:active
-      &:after
-        content ""
-        position absolute
-        top 0
-        left 0
-        width 100%
-        height 100%
-        background-color $sn-white
-        // TODO Figure out ripple animation
-        /*animation ripple .08s*/
-        opacity .25
     &--primary
       background-color $primary
       border-color $primary
