@@ -8,7 +8,7 @@ import SnIcon from '../SnIcon/SnIcon'
 const buttonTypeLabel = 'Button Type'
 const buttonTypeOptions = {
   Primary: 'primary',
-  Accent: 'accent',
+  Secondary: 'secondary',
   Caution: 'caution',
   Warning: 'warning'
 }
@@ -23,43 +23,23 @@ storiesOf('SnButton', module)
           <h2 class="sn-large-title">Standard Buttons</h2>
           <sn-button>Primary</sn-button>
           <sn-button disabled>Disabled</sn-button>
-          <sn-button color="caution">Caution</sn-button>
-          <sn-button color="warning">Warning</sn-button>
-          <sn-button color="accent">Accent</sn-button>
-        </section>
-        <section>
-          <h2 class="sn-large-title">Outline Buttons</h2>
-          <sn-button outline>Primary</sn-button>
-          <sn-button disabled outline>Disabled</sn-button>
-          <sn-button outline color="caution">Caution</sn-button>
-          <sn-button outline color="warning">Warning</sn-button>
-          <sn-button outline color="accent">Accent</sn-button>
+          <sn-button type="caution">Caution</sn-button>
+          <sn-button type="warning">Warning</sn-button>
         </section>
         <section>
           <h2 class="sn-large-title">Buttons With Icons</h2>
           <sn-button prepend-icon="search">Prepend</sn-button>
           <sn-button append-icon="search" warning>Append</sn-button>
-          <sn-button outline prepend-icon="search">Prepend</sn-button>
-          <sn-button outline warning append-icon="search">Append</sn-button>
         </section>
         <section>
           <h2 class="sn-large-title">Icon Buttons</h2>
           <sn-button icon>
             <sn-icon name="search"/>
           </sn-button>
-          <sn-button outline icon>
-            <sn-icon name="search"/>
-          </sn-button>
         </section>
         <section>
           <h2 class="sn-large-title">Circle Buttons</h2>
           <sn-button circle>
-            <sn-icon size="large" name="bell"/>
-          </sn-button>
-          <sn-button outline circle>
-            <sn-icon size="large" name="bell"/>
-          </sn-button>
-          <sn-button circle disabled>
             <sn-icon size="large" name="bell"/>
           </sn-button>
         </section>
@@ -69,21 +49,12 @@ storiesOf('SnButton', module)
           <sn-button display disabled>Button</sn-button>
           <sn-button display prepend-icon="search">Button</sn-button>
           <sn-button display append-icon="search">Button</sn-button>
-          <br/>
-          <br/>
-          <sn-button display outline>Button</sn-button>
-          <sn-button display outline disabled>Button</sn-button>
-          <sn-button display outline prepend-icon="search">Button</sn-button>
-          <sn-button display outline append-icon="search">Button</sn-button>
         </section>
         <section>
           <h2 class="sn-large-title">Block Buttons</h2>
           <sn-button block class="sn-my-1">Block</sn-button>
           <sn-button block disabled class="sn-my-1">Disabled</sn-button>
           <sn-button display block class="sn-my-1">Display</sn-button>
-          <sn-button outline block class="sn-my-1">Outline Block</sn-button>
-          <sn-button outline block disabled class="sn-my-1">Outline Disabled</sn-button>
-          <sn-button outline display block disabled class="sn-my-1">Outline Block</sn-button>
         </section>
       </main>`
   }))
@@ -93,11 +64,8 @@ storiesOf('SnButton', module)
       disabled: {
         default: boolean('Disabled', false)
       },
-      buttonColor: {
+      buttonType: {
         default: radios(buttonTypeLabel, buttonTypeOptions, buttonTypeDefault)
-      },
-      outline: {
-        default: boolean('Outline', false)
       },
       display: {
         default: boolean('Display', false)
@@ -108,9 +76,8 @@ storiesOf('SnButton', module)
     },
     template: `
         <sn-button
-          :color="buttonColor"
+          :type="buttonType"
           :disabled="disabled"
-          :outline="outline"
           :display="display"
           :block="block"
           @click="action"
@@ -126,63 +93,24 @@ storiesOf('SnButton', module)
                 can be altered by using one of the button type props.`
     }
   })
-  .add('Outline Button', () => ({
-    components: { SnButton },
-    props: {
-      disabled: {
-        default: boolean('Disabled', false)
-      },
-      buttonColor: {
-        default: radios(buttonTypeLabel, buttonTypeOptions, buttonTypeDefault)
-      }
-    },
-    template: `
-      <sn-button
-        outline
-        :color="buttonColor"
-        :disabled="disabled"
-        @click="action">Sn Button
-      </sn-button>`,
-    methods: { action: action('clicked') }
-  }), {
-    info: {
-      summary: `## Description
-                This is the outline style for SnButton. The colors for the outline style
-                can be altered by using one of the button type props.`
-    }
-  })
   .add('Button with Icon', () => ({
     components: { SnButton, SnIcon },
     props: {
       disabled: {
         default: boolean('Disabled', false)
       },
-      outline: {
-        default: boolean('Outline', false)
-      },
-      buttonColor: {
+      buttonType: {
         default: radios(buttonTypeLabel, buttonTypeOptions, buttonTypeDefault)
       }
     },
     template: `
-      <div>
         <sn-button prepend-icon="search"
-                   :color="buttonColor"
+                   :type="buttonType"
                    :disabled="disabled"
-                   :outline="outline"
                    @click="action"
         >
           Prepend
         </sn-button>
-        <sn-button append-icon="search"
-                   :color="buttonColor"
-                   :disabled="disabled"
-                   :outline="outline"
-                   @click="action"
-        >
-          Append
-        </sn-button>
-      </div>
     `,
     methods: { action: action('clicked') }
   }), {
@@ -200,19 +128,15 @@ storiesOf('SnButton', module)
       disabled: {
         default: boolean('Disabled', false)
       },
-      outline: {
-        default: boolean('Outline', false)
-      },
-      buttonColor: {
+      buttonType: {
         default: radios(buttonTypeLabel, buttonTypeOptions, buttonTypeDefault)
       }
     },
     template: `
       <sn-button
         icon
-        :color="buttonColor"
+        :type="buttonType"
         :disabled="disabled"
-        :outline="outline"
         @click="action"
       >
         <sn-icon name="search"/>
@@ -233,7 +157,7 @@ storiesOf('SnButton', module)
       disabled: {
         default: boolean('Disabled', false)
       },
-      buttonColor: {
+      buttonType: {
         default: radios(buttonTypeLabel, buttonTypeOptions, buttonTypeDefault)
       }
     },
@@ -241,18 +165,16 @@ storiesOf('SnButton', module)
       <div>
       <sn-button
         circle
-        :color="buttonColor"
+        :type="buttonType"
         :disabled="disabled"
-        :outline="true"
         @click="action"
       >
         <sn-icon size="large" name="bell"/>
       </sn-button>
       <sn-button
         circle
-        :color="buttonColor"
+        :type="buttonType"
         :disabled="disabled"
-        :outline="true"
         @click="action"
       >
         Text
@@ -273,10 +195,7 @@ storiesOf('SnButton', module)
       disabled: {
         default: boolean('Disabled', false)
       },
-      outline: {
-        default: boolean('Outline', false)
-      },
-      buttonColor: {
+      buttonType: {
         default: radios(buttonTypeLabel, buttonTypeOptions, buttonTypeDefault)
       },
       preicon: {
@@ -291,9 +210,8 @@ storiesOf('SnButton', module)
           display
           :prepend-icon="prependIcon"
           :append-icon="appendIcon"
-          :color="buttonColor"
+          :type="buttonType"
           :disabled="disabled"
-          :outline="outline"
           @click="action"
         >
           Button

@@ -5,7 +5,6 @@
     >
       <sn-icon v-if="!!prependIcon" :name="prependIcon" class="sn-btn-icon sn-btn-icon--prepend"/>
       <slot/>
-      <sn-icon v-if="!!appendIcon" :name="appendIcon" class="sn-btn-icon sn-btn-icon--append"/>
     </button>
 </template>
 
@@ -18,14 +17,6 @@ export default {
   mixins: [CssClassMappingsMixin],
   props: {
     /**
-     * The name of an icon to append to the button text
-     **/
-    appendIcon: {
-      type: String,
-      default: '',
-      required: false
-    },
-    /**
      * Styles the button as a block, filling the width of the container
      **/
     block: {
@@ -34,15 +25,15 @@ export default {
       required: false
     },
     /**
-     * Defines the color of the button. Must be one of the following:
-     * 'primary' | 'accent' | 'caution' | 'warning'
+     * Defines the type of the button. Must be one of the following:
+     * 'primary' | 'secondary' | 'caution' | 'warning'
      **/
-    color: {
+    type: {
       type: String,
       required: false,
       default: 'primary',
       validator (size) {
-        return ['primary', 'accent', 'caution', 'warning'].includes(size)
+        return ['primary', 'secondary', 'caution', 'warning'].includes(size)
       }
     },
     /**
@@ -78,14 +69,6 @@ export default {
       required: false
     },
     /**
-     * Styles the button with an outline instead of fill
-     */
-    outline: {
-      type: Boolean,
-      default: false,
-      required: false
-    },
-    /**
      * The name of the icon to prepend to the button text
      */
     prependIcon: {
@@ -96,9 +79,9 @@ export default {
   },
   computed: {
     buttonClasses () {
-      const styleClass = this.outline ? 'sn-btn-outline' : 'sn-btn'
-      const displayModifiers = ['icon', 'display', 'disabled', 'circle', 'block']
-      return ['sn-btn-base', styleClass, `${styleClass}--${this.color}`]
+      const styleClass = 'sn-btn'
+      const displayModifiers = ['icon', 'display', 'circle', 'block', 'disabled']
+      return [`${styleClass}--${this.type}`, this.disabled ? `${styleClass}--${this.type}--disabled` : '']
         .concat(this.generateCSSModifierClasses(displayModifiers, 'sn-btn'))
     }
   },
@@ -116,7 +99,9 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-  .sn-btn-base
+  .sn-btn
+    border 1px solid $sn-black
+    color $sn-white
     position relative
     text-transform uppercase
     min-width 122px
@@ -127,12 +112,6 @@ export default {
     font-size 15px
     line-height 20px
     vertical-align middle
-    &::-moz-focus-inner
-      border 0
-
-  .sn-btn
-    border 1px solid $sn-black
-    color $sn-white
     &:active
       &:after
         content ""
@@ -142,21 +121,32 @@ export default {
         width 100%
         height 100%
         background-color $sn-white
-        // TODO Figure out ripple animation
-        /*animation ripple .08s*/
         opacity .25
     &--primary
       background-color $primary
       border-color $primary
+      &--disabled
+        background-color $primary-lighten-3
+        border-color $primary-lighten-3
+    &--secondary
+      background-color $sn-white
+      color $primary
+      border 1px solid $primary
+      &--disabled
+        color $primary-lighten-3
+        border-color $primary-lighten-3
     &--caution
       background-color $caution
       border-color $caution
+      &--disabled
+        background-color $caution-lighten-3
+        border-color $caution-lighten-3
     &--warning
       background-color $warning
       border-color $warning
-    &--accent
-      background-color $accent
-      border-color $accent
+      &--disabled
+        background-color $warning-lighten-3
+        border-color $warning-lighten-3
     &--icon
       min-width 32px
       width 32px
@@ -167,7 +157,6 @@ export default {
       height 52px
     &--disabled
       cursor not-allowed
-      opacity $disabled-opacity
       &:active
         &:after
           content ""
@@ -179,46 +168,14 @@ export default {
       height 64px
     &--block
       min-width 122px
-      height 32px
       width 100%
-
-  .sn-btn-outline
-    border 1px solid
-    background-color inherit
-    &--primary
-      border-color $primary
-      color $primary
-    &--caution
-      border-color $caution
-      color $caution
-    &--warning
-      border-color $warning
-      color $warning
-    &--accent
-      border-color $accent
-      color $accent
-    .sn-btn--circle
-      width 65px
-      height 65px
 
   .sn-btn-icon
     width 18px
     height 18px
     vertical-align middle
     line-height 16px
-    &--append
-      margin-left 4px
-      padding-bottom 2px
     &--prepend
       margin-right 4px
       padding-bottom 2px
-
-  @keyframes ripple {
-    from {
-      transform scale(0)
-    }
-    to {
-      transform scale(1)
-    }
-  }
 </style>
