@@ -1,16 +1,18 @@
 <template>
-    <button :class="buttonClasses"
-            :disabled="disabled"
-            @click="handleClick"
-    >
-      <sn-icon v-if="!!prependIcon" :name="prependIcon" class="sn-btn-icon sn-btn-icon--prepend"/>
-      <slot/>
-    </button>
+  <button
+    :class="buttonClasses"
+    :disabled="disabled"
+    @click="handleClick"
+  >
+    <sn-icon v-if="!!prependIcon" :name="prependIcon" class="sn-btn-icon sn-btn-icon--prepend"/>
+    <slot/>
+  </button>
 </template>
 
 <script>
 import SnIcon from '../SnIcon/SnIcon'
 import CssClassMappingsMixin from '../../../mixins/CssClassMappingsMixin'
+
 export default {
   name: 'SnButton',
   components: { SnIcon },
@@ -62,7 +64,7 @@ export default {
     },
     /**
      * Styles the button as icon only
-     ***/
+     **/
     icon: {
       type: Boolean,
       default: false,
@@ -114,6 +116,7 @@ export default {
     font-size 15px
     line-height 20px
     vertical-align middle
+
     &:active
       &:after
         content ""
@@ -124,53 +127,68 @@ export default {
         height 100%
         background-color $sn-white
         opacity .25
+
     &--primary
       background-color $primary
       border-color $primary
+
       &--disabled
         background-color $primary-lighten-3
         border-color $primary-lighten-3
+
     &--secondary
       background-color $sn-white
       color $primary
       border 1px solid $primary
+
       &--disabled
         color $primary-lighten-3
         border-color $primary-lighten-3
+
     &--caution
       background-color $caution
       border-color $caution
+
       &--disabled
         background-color $caution-lighten-3
         border-color $caution-lighten-3
+
     &--warning
       background-color $warning
       border-color $warning
+
       &--disabled
         background-color $warning-lighten-3
         border-color $warning-lighten-3
+
     &--icon
       min-width 32px
       width 32px
       height 32px
       padding 0
+      line-height 16px
+
     &--display
       font-size 20px
       font-family $font-family-condensed
       line-height 20px
       height 52px
+
     &--disabled
       cursor not-allowed
+
       &:active
         &:after
           content ""
           opacity 0
+
     &--circle
       border-radius 50%
       min-width 64px
       width 64px
       height 64px
       padding 0
+
     &--block
       min-width 122px
       width 100%

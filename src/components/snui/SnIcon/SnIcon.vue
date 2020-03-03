@@ -41,5 +41,5 @@ export default {
   &--medium
     font-size 24px
   &--large
-    font-size 34px
+    font-size 36px
 </style>
