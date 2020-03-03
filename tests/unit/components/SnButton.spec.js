@@ -1,4 +1,4 @@
-import SnButton from '../../src/components/snui/SnButton/SnButton'
+import SnButton from '../../../src/components/snui/SnButton/SnButton'
 import { render, fireEvent } from '@testing-library/vue'
 
 describe('SnButton', () => {
