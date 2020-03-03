@@ -37,7 +37,7 @@ export default {
 .sn-icon
   display inline-block
   &--small
-    font-size 17px
+    font-size 18px
   &--medium
     font-size 24px
   &--large

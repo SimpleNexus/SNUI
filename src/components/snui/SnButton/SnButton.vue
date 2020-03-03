@@ -106,6 +106,8 @@ export default {
     text-transform uppercase
     min-width 122px
     height 32px
+    padding-left 16px
+    padding-right 16px
     cursor pointer
     font-family $font-family
     font-weight $font-weight-medium
@@ -150,6 +152,8 @@ export default {
     &--icon
       min-width 32px
       width 32px
+      height 32px
+      padding 0
     &--display
       font-size 20px
       font-family $font-family-condensed
@@ -166,6 +170,7 @@ export default {
       min-width 64px
       width 64px
       height 64px
+      padding 0
     &--block
       min-width 122px
       width 100%
