@@ -1,10 +1,25 @@
 <template>
+  <a v-if="href"
+     :to="to"
+     :class="buttonClasses"
+     :target="target"
+     :href="controlledHref"
+     role="button"
+     @click="handleClick"
+  >
+    <sn-icon v-if="showPrependIcon" :name="prependIcon" class="sn-btn-prepend-icon"/>
+    <span class="sn-btn-slot-wrapper">
+    <slot />
+    </span>
+  </a>
   <button
+    v-else
+    :to="to"
     :class="buttonClasses"
     :disabled="disabled"
     @click="handleClick"
   >
-    <sn-icon v-if="!!prependIcon" :name="prependIcon" class="sn-btn-icon sn-btn-icon--prepend"/>
+    <sn-icon v-if="!!prependIcon" :name="prependIcon" class="sn-btn-prepend-icon"/>
     <slot/>
   </button>
 </template>
@@ -63,6 +78,15 @@ export default {
       required: false
     },
     /**
+     * Indicates that the button should be set as an anchor tag with the role of button
+     * and the provided href.
+     */
+    href: {
+      type: [String, undefined],
+      default: undefined,
+      required: false
+    },
+    /**
      * Styles the button as icon only
      **/
     icon: {
@@ -77,14 +101,46 @@ export default {
       type: String,
       default: '',
       required: false
+    },
+    /**
+     * Designates the target attribute. This should only be applied
+     * when using the href prop
+     */
+    target: {
+      type: String,
+      default: '',
+      required: false
+    },
+    /**
+     * A Vue Router path to attach to the button
+     */
+    to: {
+      type: String,
+      default: '',
+      required: false
     }
   },
   computed: {
+    /**
+     * Reads the button props to determine which css modifiers need to be applied
+     * to the button
+     * @returns {string[]}
+     */
     buttonClasses () {
       const styleClass = 'sn-btn'
       const displayModifiers = ['icon', 'display', 'circle', 'block', 'disabled']
       return [`${styleClass}--${this.type}`, this.disabled ? `${styleClass}--${this.type}--disabled` : '']
         .concat(this.generateCSSModifierClasses(displayModifiers, 'sn-btn'))
+    },
+    /**
+     * Ensures that the href is disabled if the button is disabled
+     * @returns {string | undefined}
+     */
+    controlledHref () {
+      return !this.disabled ? this.href : undefined
+    },
+    showPrependIcon () {
+      return !(this.circle || this.icon) && this.prependIcon
     }
   },
   methods: {
@@ -102,14 +158,15 @@ export default {
 
 <style scoped lang="stylus">
   .sn-btn
+    display inline-block
     border 1px solid $sn-black
+    text-decoration none
     color $sn-white
     position relative
     text-transform uppercase
+    text-align center
     min-width 122px
-    height 32px
-    padding-left 16px
-    padding-right 16px
+    padding 8px 16px
     cursor pointer
     font-family $font-family
     font-weight $font-weight-medium
@@ -118,6 +175,7 @@ export default {
     vertical-align middle
 
     &:active
+      text-decoration none
       &:after
         content ""
         position absolute
@@ -167,12 +225,15 @@ export default {
       height 32px
       padding 0
       line-height 16px
+      .sn-btn-slot-wrapper
+        display inline-block
+        margin-top 8px
 
     &--display
       font-size 20px
       font-family $font-family-condensed
       line-height 20px
-      height 52px
+      padding 16px 16px
 
     &--disabled
       cursor not-allowed
@@ -188,17 +249,19 @@ export default {
       width 64px
       height 64px
       padding 0
+      .sn-btn-slot-wrapper
+        display inline-block
+        margin-top 20px
 
     &--block
       min-width 122px
       width 100%
 
-  .sn-btn-icon
+  .sn-btn-prepend-icon
     width 18px
     height 18px
     vertical-align middle
     line-height 16px
-    &--prepend
-      margin-right 4px
-      padding-bottom 2px
+    margin-right 4px
+    padding-bottom 4px
 </style>
