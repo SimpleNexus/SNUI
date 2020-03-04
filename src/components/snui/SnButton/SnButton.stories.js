@@ -1,6 +1,6 @@
 import { storiesOf } from '@storybook/vue'
 import { action } from '@storybook/addon-actions'
-import { boolean, radios } from '@storybook/addon-knobs'
+import { boolean, radios, text } from '@storybook/addon-knobs'
 
 import SnButton from './SnButton'
 import SnIcon from '../SnIcon/SnIcon'
@@ -275,5 +275,73 @@ storiesOf('SnButton', module)
       A block button can be combined with the display prop to increase the height of the button
       `,
       components: { SnButton }
+    }
+  })
+  .add('Button as Links', () => ({
+    components: { SnButton },
+    props: {
+      href: {
+        default: text('Link', 'https://www.simplenexus.com')
+      },
+      disabled: {
+        default: boolean('Disabled', false)
+      },
+      buttonType: {
+        default: radios(buttonTypeLabel, buttonTypeOptions, buttonTypeDefault)
+      },
+      display: {
+        default: boolean('Display', false)
+      },
+      circle: {
+        default: boolean('Circle', false)
+      },
+      icon: {
+        default: boolean('Icon', false)
+      },
+      block: {
+        default: boolean('Block', false)
+      }
+    },
+    template: `
+      <sn-button
+        secondary
+        target="_blank"
+        prepend-icon="house"
+        :href="href"
+        :disabled="disabled"
+        :type="buttonType"
+        :display="display"
+        :circle="circle"
+        :icon="icon"
+        :block="block"
+      >
+        {{ slot }}
+      </sn-button>`,
+    computed: {
+      slot () {
+        if (this.icon) {
+          return 'L'
+        } else if (this.circle) {
+          return 'Link'
+        } else {
+          return 'SN Home'
+        }
+      }
+    }
+  }), {
+    info: {
+      summary: `
+          ## Description
+
+          Buttons can also be used as links. When the href prop is given,
+          the button will be rendered as an anchor tag with \`role="button"\`.
+          The href prop can be combined with the target prop to control the link behavior.
+
+          Additionally, the button will accept a \`to\` prop which can be used with Vue Router
+          to change the currently viewed route.
+
+          The button will still emit a click event if used as a link, however the button
+          will take care of navigating to the specified href or router location.
+      `
     }
   })
