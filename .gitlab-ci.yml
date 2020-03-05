@@ -5,7 +5,13 @@ cache:
     - node_modules/
 
 before_script:
-  - apt-get update -qq && apt-get install
+  - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+  - eval $(ssh-agent -s)
+  - ssh-add <(echo "$SSH_PRIVATE_KEY")
+  - mkdir -p ~/.ssh
+  - chmod 700 ~/.ssh
+  - touch ~/.ssh/known_hosts
+  - echo "gitlab.com" >> ~/.ssh/known_hosts
 
 stages:
   - build
