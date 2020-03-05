@@ -49,8 +49,8 @@ export default {
       type: String,
       required: false,
       default: 'primary',
-      validator (size) {
-        return ['primary', 'secondary', 'caution', 'warning'].includes(size)
+      validator (type) {
+        return ['primary', 'secondary', 'caution', 'warning'].includes(type)
       }
     },
     /**
