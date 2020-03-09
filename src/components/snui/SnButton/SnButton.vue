@@ -172,6 +172,7 @@ export default {
     font-weight $font-weight-medium
     font-size 15px
     line-height 20px
+    letter-spacing 1.5px
     vertical-align middle
 
     &:active
@@ -225,6 +226,7 @@ export default {
       height 32px
       padding 0
       line-height 16px
+      letter-spacing normal
       .sn-btn-slot-wrapper
         display inline-block
         margin-top 8px
@@ -233,6 +235,7 @@ export default {
       font-size 20px
       font-family $font-family-condensed
       line-height 20px
+      letter-spacing 0.5px
       padding 16px 16px
 
     &--disabled
@@ -249,9 +252,10 @@ export default {
       width 64px
       height 64px
       padding 0
+      letter-spacing 0.5px
       .sn-btn-slot-wrapper
         display inline-block
-        margin-top 20px
+        margin-top 22px
 
     &--block
       min-width 122px
