@@ -1,29 +1,34 @@
 <template>
   <div :class="getFormFieldClasses">
     <div class="sn-text-field-wrapper">
-      <label class="sn-font-standard sn-callout sn-text-field-label sn-text-primary--lighten-3"
-             :class="{'sn-text-field-label--with-icon': !!icon}"
+      <label class="sn-font-standard sn-font-weight-light sn-text-field-label sn-text-primary--lighten-3"
+             :class="{'sn-text-field-label--with-prepend-icon': !!prependIcon,
+                      'sn-text-field-label--disabled': disabled
+             }"
              :for="inputId"
       >
         {{label}}
       </label>
-      <sn-icon v-if="!!icon" :name="icon" class="prepend-icon" />
+      <sn-icon v-if="!!prependIcon" :name="prependIcon" class="prepend-icon" />
       <input v-model="inputValue"
              :id="inputId"
              :name="inputId"
              type="text"
-             class="sn-font-standard sn-body sn-text-field-input sn-text-primary"
+             class="sn-font-standard sn-font-weight-light sn-text-field-input sn-text-primary"
              :class="{'sn-text-field-input--invalid': !validInput,
-                      'sn-text-field-input--with-icon': !!icon }"
-             :style="`width: ${width}px`"
+                      'sn-text-field-input--with-prepend-icon': !!prependIcon,
+                      'sn-text-field-input--with-append-icon': !!appendIcon
+                       }"
+             :style="fullWidth ? `width: 100%` : `width: ${width}px`"
              :placeholder="placeholder"
              :disabled="disabled"
              :required="required"
              @focus="handleInputFocus"
              @blur="handleInputBlur"
       />
+      <sn-icon v-if="!!appendIcon" :name="appendIcon" class="append-icon" />
       <transition name="error-message">
-      <span v-if="!validInput" class="sn-font-standard sn-footnote sn-text-field-message sn-text-warning">
+      <span v-if="!validInput" class="sn-font-standard sn-font-weight-light sn-text-field-message sn-text-warning">
         {{validationErrorList[0]}}
       </span>
       </transition>
@@ -39,6 +44,15 @@ export default {
   components: { SnIcon },
   props: {
     /**
+     * Append the input field with an icon from the sn-icon collection.
+     * Please note, do not include the sn-icon prefix in the icon name
+     */
+    appendIcon: {
+      type: String,
+      required: false,
+      default: ''
+    },
+    /**
      * Disables the input when true
      */
     disabled: {
@@ -47,10 +61,18 @@ export default {
       default: false
     },
     /**
+     * Designates input type as full-width
+     **/
+    fullWidth: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
+    /**
      * Prepend the input field with an icon from the sn-icon collection.
      * Please note, do not include the sn-icon prefix in the icon name
      */
-    icon: {
+    prependIcon: {
       type: String,
       required: false,
       default: ''
@@ -213,8 +235,9 @@ $animation-duration = 0.3s
   padding 8px
   display flex
   label-active()
-    font-size $font-size-caption-2 !important
-    line-height $line-height-caption-2
+    font-size 11px !important
+    line-height 13px
+    left 0 !important
     transform translateY(-18px)
     text-transform uppercase
     padding 28px 0 0 !important
@@ -233,7 +256,7 @@ $animation-duration = 0.3s
 
   .sn-text-field-label
     display block
-    font-size $font-size-footnote
+    font-size 16px
     left 0
     margin 0
     padding 28px 0 0
@@ -241,11 +264,13 @@ $animation-duration = 0.3s
     top 0
     transition all $animation-duration
     cursor text
-    &--with-icon
-      padding 28px 20px
+    &--with-prepend-icon
+      padding 28px 14px
+      left 14px
+    &--disabled
+      cursor: not-allowed
 
   .sn-text-field-wrapper
-    overflow hidden
     position relative
     text-align left
 
@@ -253,7 +278,8 @@ $animation-duration = 0.3s
     appearance none
     background transparent
     border 0
-    font-size $font-size-footnote
+    font-size 16px
+    line-height 21px
     border-bottom 1px solid $sn-black
     display block
     margin-top 24px
@@ -267,13 +293,22 @@ $animation-duration = 0.3s
     &:disabled
       color $sn-black-lighten-4
       border-bottom 1px solid $sn-black-lighten-3
+      cursor: not-allowed;
     &--invalid
       box-shadow none
       outline none
       border none
       border-bottom 1px solid $warning
-    &--with-icon
-      padding-left 20px
+    &--with-prepend-icon
+      padding-left 28px
+    &--with-append-icon
+      padding-right 28px
+
+  .sn-text-field-message
+    position absolute
+    top 60px
+    font-size 16px
+    line-height 21px
 
 .error-message
   &-enter-active, &-leave-active
@@ -285,4 +320,9 @@ $animation-duration = 0.3s
 .prepend-icon
   position absolute
   top 28px
+
+.append-icon
+  position absolute
+  top 28px
+  right 0
 </style>

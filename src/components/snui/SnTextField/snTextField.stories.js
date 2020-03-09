@@ -76,7 +76,11 @@ storiesOf('SnTextField', module)
   .add('With Icon', () => ({
     components: { SnTextField },
     template: `
-      <sn-text-field label="With Icon" icon="search"/>`
+      <div>
+        <sn-text-field label="With prepend icon" prepend-icon="search"/>
+        <sn-text-field label="With appended icon" append-icon="crosshairs" />
+      </div>
+    `
   }), {
     info: {
       summary: `SnTextField can take an icon prop that will prepend an icon to the input field.
