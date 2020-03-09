@@ -46,10 +46,8 @@ storiesOf('SnTextField', module)
   })
   .add('With Validation', () => ({
     components: { SnTextField },
-    data () { return { value: '' } },
     template: `
       <sn-text-field
-        v-model="value"
         label="Must be at least 5 characters" required
         :rules="[(val) => val.length >= 5 || 'Not long enough']"
         @validated="logValidation"
@@ -60,9 +58,6 @@ storiesOf('SnTextField', module)
       logInput: action('input changed'),
       logValidation: action('validation'),
       error: action('error')
-    },
-    watch: {
-      value (input) { this.logInput(input) }
     }
   }), {
     info: {

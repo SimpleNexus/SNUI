@@ -219,15 +219,6 @@ export default {
       if (val) {
         this.hasBeenActive = true
       }
-    },
-    inputValue (val) {
-      /**
-       * Input event when something is entered into the field
-       *
-       * @event input
-       * @property {string} the current value of the input field
-       */
-      this.$emit('input', val)
     }
   },
   computed: {
