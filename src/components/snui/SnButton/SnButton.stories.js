@@ -1,6 +1,6 @@
 import { storiesOf } from '@storybook/vue'
 import { action } from '@storybook/addon-actions'
-import { boolean, radios } from '@storybook/addon-knobs'
+import { boolean, radios, text } from '@storybook/addon-knobs'
 
 import SnButton from './SnButton'
 import SnIcon from '../SnIcon/SnIcon'
@@ -8,7 +8,7 @@ import SnIcon from '../SnIcon/SnIcon'
 const buttonTypeLabel = 'Button Type'
 const buttonTypeOptions = {
   Primary: 'primary',
-  Accent: 'accent',
+  Secondary: 'secondary',
   Caution: 'caution',
   Warning: 'warning'
 }
@@ -22,33 +22,20 @@ storiesOf('SnButton', module)
         <section>
           <h2 class="sn-large-title">Standard Buttons</h2>
           <sn-button>Primary</sn-button>
+          <sn-button type="secondary">Secondary</sn-button>
           <sn-button disabled>Disabled</sn-button>
-          <sn-button color="caution">Caution</sn-button>
-          <sn-button color="warning">Warning</sn-button>
-          <sn-button color="accent">Accent</sn-button>
-        </section>
-        <section>
-          <h2 class="sn-large-title">Outline Buttons</h2>
-          <sn-button outline>Primary</sn-button>
-          <sn-button disabled outline>Disabled</sn-button>
-          <sn-button outline color="caution">Caution</sn-button>
-          <sn-button outline color="warning">Warning</sn-button>
-          <sn-button outline color="accent">Accent</sn-button>
+          <sn-button type="caution">Caution</sn-button>
+          <sn-button type="warning">Warning</sn-button>
         </section>
         <section>
           <h2 class="sn-large-title">Buttons With Icons</h2>
           <sn-button prepend-icon="search">Prepend</sn-button>
           <sn-button append-icon="search" warning>Append</sn-button>
-          <sn-button outline prepend-icon="search">Prepend</sn-button>
-          <sn-button outline warning append-icon="search">Append</sn-button>
         </section>
         <section>
           <h2 class="sn-large-title">Icon Buttons</h2>
           <sn-button icon>
-            <sn-icon name="search"/>
-          </sn-button>
-          <sn-button outline icon>
-            <sn-icon name="search"/>
+            <sn-icon name="airplane"/>
           </sn-button>
         </section>
         <section>
@@ -56,75 +43,51 @@ storiesOf('SnButton', module)
           <sn-button circle>
             <sn-icon size="large" name="bell"/>
           </sn-button>
-          <sn-button outline circle>
-            <sn-icon size="large" name="bell"/>
-          </sn-button>
-          <sn-button circle disabled>
-            <sn-icon size="large" name="bell"/>
-          </sn-button>
         </section>
         <section>
           <h2 class="sn-large-title">Display Buttons</h2>
-          <sn-button display>Button</sn-button>
-          <sn-button display disabled>Button</sn-button>
+          <sn-button display>Display</sn-button>
+          <sn-button display disabled>Disabled</sn-button>
           <sn-button display prepend-icon="search">Button</sn-button>
-          <sn-button display append-icon="search">Button</sn-button>
-          <br/>
-          <br/>
-          <sn-button display outline>Button</sn-button>
-          <sn-button display outline disabled>Button</sn-button>
-          <sn-button display outline prepend-icon="search">Button</sn-button>
-          <sn-button display outline append-icon="search">Button</sn-button>
+        </section>
+        <section>
+          <h2 class="sn-large-title">Block Buttons</h2>
+          <sn-button block class="sn-my-1">Block</sn-button>
+          <sn-button block disabled class="sn-my-1">Disabled Block</sn-button>
+          <sn-button display block class="sn-my-1">Display Block</sn-button>
         </section>
       </main>`
   }))
-  .add('Standard Button', () => ({
+  .add('Button', () => ({
     components: { SnButton },
     props: {
       disabled: {
         default: boolean('Disabled', false)
       },
-      buttonColor: {
+      buttonType: {
         default: radios(buttonTypeLabel, buttonTypeOptions, buttonTypeDefault)
       }
     },
     template: `
       <sn-button
-        :color="buttonColor"
+        :type="buttonType"
         :disabled="disabled"
-        @click="action">Sn Button
-      </sn-button>`,
+        @click="action"
+      >
+        Sn Button
+      </sn-button>
+    `,
     methods: { action: action('clicked') }
   }), {
     info: {
       summary: `## Description
-                This is the standard SnButton style. The colors for the standard style
-                can be altered by using one of the button type props.`
-    }
-  })
-  .add('Outline Button', () => ({
-    components: { SnButton },
-    props: {
-      disabled: {
-        default: boolean('Disabled', false)
-      },
-      buttonColor: {
-        default: radios(buttonTypeLabel, buttonTypeOptions, buttonTypeDefault)
-      }
-    },
-    template: `
-      <sn-button
-        outline
-        :color="buttonColor"
-        :disabled="disabled"
-        @click="action">Sn Button
-      </sn-button>`,
-    methods: { action: action('clicked') }
-  }), {
-    info: {
-      summary: `## Description
-                This is the outline style for SnButton. The colors for the outline style
-                can be altered by using one of the button type props.`
+                This is the standard SnButton style.
+
+                There are 4 variants of the button, primary, secondary, caution,
+                and warning. These can be altered by the \`type\` prop.
+
+                The button will emit a \`click \` event when clicked.
+                `
     }
   })
   .add('Button with Icon', () => ({
@@ -133,40 +96,27 @@ storiesOf('SnButton', module)
       disabled: {
         default: boolean('Disabled', false)
       },
-      outline: {
-        default: boolean('Outline', false)
-      },
-      buttonColor: {
+      buttonType: {
         default: radios(buttonTypeLabel, buttonTypeOptions, buttonTypeDefault)
       }
     },
     template: `
-      <div>
-        <sn-button prepend-icon="search"
-                   :color="buttonColor"
-                   :disabled="disabled"
-                   :outline="outline"
-                   @click="action"
-        >
-          Prepend
-        </sn-button>
-        <sn-button append-icon="search"
-                   :color="buttonColor"
-                   :disabled="disabled"
-                   :outline="outline"
-                   @click="action"
-        >
-          Append
-        </sn-button>
-      </div>
+      <sn-button prepend-icon="search"
+                 :type="buttonType"
+                 :disabled="disabled"
+                 @click="action"
+      >
+        Prepend
+      </sn-button>
     `,
     methods: { action: action('clicked') }
   }), {
     info: {
       summary: `## Description
-                SnButton provides two icon props that will pre/append icons to the button text.
-                The icon props must be given a valid sn-icon name. Please note that the sn-icon prefix
-                can be omitted from the icon name.`,
+                An icon can be prepended to the button text via the prepend-icon prop. It can accept any valid sn-icon
+                name. Please note that the sn-icon prefix can be omitted from the icon name.
+                e.g. \`<sn-button prepend-icon="search">Prepend</sn-button>\`
+                `,
       components: { SnButton }
     }
   })
@@ -176,31 +126,29 @@ storiesOf('SnButton', module)
       disabled: {
         default: boolean('Disabled', false)
       },
-      outline: {
-        default: boolean('Outline', false)
-      },
-      buttonColor: {
+      buttonType: {
         default: radios(buttonTypeLabel, buttonTypeOptions, buttonTypeDefault)
       }
     },
     template: `
       <sn-button
         icon
-        :color="buttonColor"
+        :type="buttonType"
         :disabled="disabled"
-        :outline="outline"
         @click="action"
       >
-        <sn-icon name="search"/>
+        <sn-icon name="settings"/>
       </sn-button>
     `,
     methods: { action: action('clicked') }
   }), {
     info: {
       summary: `## Description
-                SnButton also takes an \`icon\` prop that will style the button as icon only.
-                When this prop is used, the icon must be passed to the default slot with an
-                \`<sn-icon />\` component. See below for example icon usage.`
+                The icon prop can be used to fix the height and width of the button to wrap an SnIcon component.
+                When setting this prop to true, you should pass the default slot an SnIcon component size small, e.g.
+
+                \`<sn-button icon><sn-icon name="settings" size="small" /></sn-button>\`
+                `
     }
   })
   .add('Circle Button', () => ({
@@ -209,37 +157,38 @@ storiesOf('SnButton', module)
       disabled: {
         default: boolean('Disabled', false)
       },
-      buttonColor: {
+      buttonType: {
         default: radios(buttonTypeLabel, buttonTypeOptions, buttonTypeDefault)
       }
     },
     template: `
       <div>
-      <sn-button
-        circle
-        :color="buttonColor"
-        :disabled="disabled"
-        :outline="true"
-        @click="action"
-      >
-        <sn-icon size="large" name="bell"/>
-      </sn-button>
-      <sn-button
-        circle
-        :color="buttonColor"
-        :disabled="disabled"
-        :outline="true"
-        @click="action"
-      >
-        Text
-      </sn-button>
+        <sn-button
+          circle
+          :type="buttonType"
+          :disabled="disabled"
+          @click="action"
+        >
+          <sn-icon size="large" name="bell"/>
+        </sn-button>
+        <sn-button
+          circle
+          :type="buttonType"
+          :disabled="disabled"
+          @click="action"
+        >
+          Text
+        </sn-button>
       </div>
     `,
     methods: { action: action('clicked') }
   }), {
     info: {
       summary: `## Description
-                SnButtons can also be styled as circles with either icons or text.`,
+                SnButtons can be styled as circles. This should primarly be used to wrap large icons or small
+                text snippets. The \`circle\` prop will fix the height and width of the button, so be sure not
+                to overflow any text.
+                `,
       components: { SnButton }
     }
   })
@@ -249,45 +198,150 @@ storiesOf('SnButton', module)
       disabled: {
         default: boolean('Disabled', false)
       },
-      outline: {
-        default: boolean('Outline', false)
-      },
-      buttonColor: {
+      buttonType: {
         default: radios(buttonTypeLabel, buttonTypeOptions, buttonTypeDefault)
       },
       preicon: {
         default: boolean('Prepend Icon', false)
-      },
-      appicon: {
-        default: boolean('Append Icon', false)
       }
     },
     template: `
-        <sn-button
-          display
-          :prepend-icon="prependIcon"
-          :append-icon="appendIcon"
-          :color="buttonColor"
-          :disabled="disabled"
-          :outline="outline"
-          @click="action"
-        >
-          Button
-        </sn-button>
+      <sn-button
+        display
+        :prepend-icon="prependIcon"
+        :type="buttonType"
+        :disabled="disabled"
+        @click="action"
+      >
+        Button
+      </sn-button>
     `,
     methods: { action: action('clicked') },
     computed: {
       prependIcon () {
         return this.preicon ? 'search' : false
-      },
-      appendIcon () {
-        return this.appicon ? 'search' : false
       }
     }
   }), {
     info: {
       summary: `The \`display\` prop will make the button and text larger.
-                Display buttons can be styled like a standard size button`,
+                `,
       components: { SnButton }
+    }
+  })
+  .add('Block Button', () => ({
+    components: { SnButton, SnIcon },
+    props: {
+      disabled: {
+        default: boolean('Disabled', false)
+      },
+      buttonType: {
+        default: radios(buttonTypeLabel, buttonTypeOptions, buttonTypeDefault)
+      },
+      display: {
+        default: boolean('Display', false)
+      },
+      preicon: {
+        default: boolean('Prepend Icon', false)
+      }
+    },
+    template: `
+      <div style="width: 300px">
+        <sn-button
+          :display="display"
+          :prepend-icon="prependIcon"
+          :type="buttonType"
+          :disabled="disabled"
+          block
+          @click="action"
+        >
+          Button
+        </sn-button>
+      </div>
+    `,
+    methods: { action: action('clicked') },
+    computed: {
+      prependIcon () {
+        return this.preicon ? 'search' : false
+      }
+    }
+  }), {
+    info: {
+      summary: `
+      ## Description
+      Normally the button's width will grow to wrap the inner text. A block button will instead fill
+      the width of the container.
+
+      A block button can be combined with the display prop to increase the height of the button
+      `,
+      components: { SnButton }
+    }
+  })
+  .add('Button as Links', () => ({
+    components: { SnButton },
+    props: {
+      href: {
+        default: text('Link', 'https://www.simplenexus.com')
+      },
+      disabled: {
+        default: boolean('Disabled', false)
+      },
+      buttonType: {
+        default: radios(buttonTypeLabel, buttonTypeOptions, buttonTypeDefault)
+      },
+      display: {
+        default: boolean('Display', false)
+      },
+      circle: {
+        default: boolean('Circle', false)
+      },
+      icon: {
+        default: boolean('Icon', false)
+      },
+      block: {
+        default: boolean('Block', false)
+      }
+    },
+    template: `
+      <sn-button
+        secondary
+        target="_blank"
+        prepend-icon="house"
+        :href="href"
+        :disabled="disabled"
+        :type="buttonType"
+        :display="display"
+        :circle="circle"
+        :icon="icon"
+        :block="block"
+      >
+        {{ slot }}
+      </sn-button>`,
+    computed: {
+      slot () {
+        if (this.icon) {
+          return 'L'
+        } else if (this.circle) {
+          return 'Link'
+        } else {
+          return 'SN Home'
+        }
+      }
+    }
+  }), {
+    info: {
+      summary: `
+          ## Description
+
+          Buttons can also be used as links. When the href prop is given,
+          the button will be rendered as an anchor tag with \`role="button"\`.
+          The href prop can be combined with the target prop to control the link behavior.
+
+          Additionally, the button will accept a \`to\` prop which can be used with Vue Router
+          to change the currently viewed route.
+
+          The button will still emit a click event if used as a link, however the button
+          will take care of navigating to the specified href or router location.
+      `
     }
   })

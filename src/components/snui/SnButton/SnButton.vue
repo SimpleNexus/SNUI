@@ -1,40 +1,56 @@
 <template>
-    <button :class="buttonClasses"
-            :disabled="disabled"
-            @click="handleClick"
-    >
-      <sn-icon v-if="!!prependIcon" :name="prependIcon" class="sn-btn-icon sn-btn-icon--prepend"/>
-      <slot/>
-      <sn-icon v-if="!!appendIcon" :name="appendIcon" class="sn-btn-icon sn-btn-icon--append"/>
-    </button>
+  <a v-if="href"
+     :to="to"
+     :class="buttonClasses"
+     :target="target"
+     :href="controlledHref"
+     role="button"
+     @click="handleClick"
+  >
+    <sn-icon v-if="showPrependIcon" :name="prependIcon" class="sn-btn-prepend-icon"/>
+    <span class="sn-btn-slot-wrapper">
+    <slot />
+    </span>
+  </a>
+  <button
+    v-else
+    :to="to"
+    :class="buttonClasses"
+    :disabled="disabled"
+    @click="handleClick"
+  >
+    <sn-icon v-if="!!prependIcon" :name="prependIcon" class="sn-btn-prepend-icon"/>
+    <slot/>
+  </button>
 </template>
 
 <script>
 import SnIcon from '../SnIcon/SnIcon'
 import CssClassMappingsMixin from '../../../mixins/CssClassMappingsMixin'
+
 export default {
   name: 'SnButton',
   components: { SnIcon },
   mixins: [CssClassMappingsMixin],
   props: {
     /**
-     * The name of an icon to append to the button text
+     * Styles the button as a block, filling the width of the container
      **/
-    appendIcon: {
-      type: String,
-      default: '',
+    block: {
+      type: Boolean,
+      default: false,
       required: false
     },
     /**
-     * Defines the color of the button. Must be one of the following:
-     * 'primary' | 'accent' | 'caution' | 'warning'
+     * Defines the type of the button. Must be one of the following:
+     * 'primary' | 'secondary' | 'caution' | 'warning'
      **/
-    color: {
+    type: {
       type: String,
       required: false,
       default: 'primary',
-      validator (size) {
-        return ['primary', 'accent', 'caution', 'warning'].includes(size)
+      validator (type) {
+        return ['primary', 'secondary', 'caution', 'warning'].includes(type)
       }
     },
     /**
@@ -62,17 +78,18 @@ export default {
       required: false
     },
     /**
-     * Styles the button as icon only
-     ***/
-    icon: {
-      type: Boolean,
-      default: false,
+     * Indicates that the button should be set as an anchor tag with the role of button
+     * and the provided href.
+     */
+    href: {
+      type: [String, undefined],
+      default: undefined,
       required: false
     },
     /**
-     * Styles the button with an outline instead of fill
-     */
-    outline: {
+     * Styles the button as icon only
+     **/
+    icon: {
       type: Boolean,
       default: false,
       required: false
@@ -84,14 +101,46 @@ export default {
       type: String,
       default: '',
       required: false
+    },
+    /**
+     * Designates the target attribute. This should only be applied
+     * when using the href prop
+     */
+    target: {
+      type: String,
+      default: '',
+      required: false
+    },
+    /**
+     * A Vue Router path to attach to the button
+     */
+    to: {
+      type: String,
+      default: '',
+      required: false
     }
   },
   computed: {
+    /**
+     * Reads the button props to determine which css modifiers need to be applied
+     * to the button
+     * @returns {string[]}
+     */
     buttonClasses () {
-      const styleClass = this.outline ? 'sn-btn-outline' : 'sn-btn'
-      const displayModifiers = ['icon', 'display', 'disabled', 'circle']
-      return ['sn-btn-base', styleClass, `${styleClass}--${this.color}`]
+      const styleClass = 'sn-btn'
+      const displayModifiers = ['icon', 'display', 'circle', 'block', 'disabled']
+      return [`${styleClass}--${this.type}`, this.disabled ? `${styleClass}--${this.type}--disabled` : '']
         .concat(this.generateCSSModifierClasses(displayModifiers, 'sn-btn'))
+    },
+    /**
+     * Ensures that the href is disabled if the button is disabled
+     * @returns {string | undefined}
+     */
+    controlledHref () {
+      return !this.disabled ? this.href : undefined
+    },
+    showPrependIcon () {
+      return !(this.circle || this.icon) && this.prependIcon
     }
   },
   methods: {
@@ -108,24 +157,26 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-  .sn-btn-base
+  .sn-btn
+    display inline-block
+    border 1px solid $sn-black
+    text-decoration none
+    color $sn-white
     position relative
     text-transform uppercase
+    text-align center
     min-width 122px
-    height 32px
+    padding 8px 16px
     cursor pointer
     font-family $font-family
     font-weight $font-weight-medium
     font-size 15px
     line-height 20px
+    letter-spacing 1.5px
     vertical-align middle
-    &::-moz-focus-inner
-      border 0
 
-  .sn-btn
-    border 1px solid $sn-black
-    color $sn-white
     &:active
+      text-decoration none
       &:after
         content ""
         position absolute
@@ -134,77 +185,87 @@ export default {
         width 100%
         height 100%
         background-color $sn-white
-        // TODO Figure out ripple animation
-        /*animation ripple .08s*/
         opacity .25
+
     &--primary
       background-color $primary
       border-color $primary
+
+      &--disabled
+        background-color $primary-lighten-3
+        border-color $primary-lighten-3
+
+    &--secondary
+      background-color $sn-white
+      color $primary
+      border 1px solid $primary
+
+      &--disabled
+        color $primary-lighten-3
+        border-color $primary-lighten-3
+
     &--caution
       background-color $caution
       border-color $caution
+
+      &--disabled
+        background-color $caution-lighten-3
+        border-color $caution-lighten-3
+
     &--warning
       background-color $warning
       border-color $warning
-    &--accent
-      background-color $accent
-      border-color $accent
+
+      &--disabled
+        background-color $warning-lighten-3
+        border-color $warning-lighten-3
+
     &--icon
       min-width 32px
       width 32px
+      height 32px
+      padding 0
+      line-height 16px
+      letter-spacing normal
+      .sn-btn-slot-wrapper
+        display inline-block
+        margin-top 8px
+
     &--display
       font-size 20px
       font-family $font-family-condensed
       line-height 20px
-      height 52px
+      letter-spacing 0.5px
+      padding 16px 16px
+
     &--disabled
       cursor not-allowed
-      opacity $disabled-opacity
+
       &:active
         &:after
           content ""
           opacity 0
+
     &--circle
       border-radius 50%
       min-width 64px
       width 64px
       height 64px
+      padding 0
+      letter-spacing 0.5px
+      .sn-btn-slot-wrapper
+        display inline-block
+        margin-top 22px
 
-  .sn-btn-outline
-    border 1px solid
-    background-color inherit
-    &--primary
-      border-color $primary
-      color $primary
-    &--caution
-      border-color $caution
-      color $caution
-    &--warning
-      border-color $warning
-      color $warning
-    &--accent
-      border-color $accent
-      color $accent
-    .sn-btn--circle
-      width 65px
-      height 65px
+    &--block
+      min-width 122px
+      width 100%
 
-  .sn-btn-icon
+  .sn-btn-prepend-icon
     width 18px
     height 18px
     vertical-align middle
     line-height 16px
-    &--append
-      margin-left 4px
-    &--prepend
-      margin-right 4px
-
-  @keyframes ripple {
-    from {
-      transform scale(0)
-    }
-    to {
-      transform scale(1)
-    }
-  }
+    margin-right 4px
+    padding-bottom 4px
 </style>

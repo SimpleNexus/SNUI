@@ -1,5 +1,33 @@
 import cssVars from 'css-vars-ponyfill'
 
+export const snuiColors = {
+  // primary
+  primary: '#000000',
+  primaryLighten1: '#404040',
+  primaryLighten2: '#7F7F7F',
+  primaryLighten3: '#BFBFBF',
+  primaryLighten4: '#E5E5E5',
+  primaryLighten5: '#F2F2F2',
+  // warning
+  warning: '#D44011',
+  warningLighten1: '#E99F88',
+  warningLighten2: '#F4CFC3',
+  warningLighten3: '#F4CFC3',
+  warningLighten4: '#FAEBE7',
+  // caution
+  caution: '#F29F5A',
+  cautionLighten1: '#F6B783',
+  cautionLighten2: '#F8CEAC',
+  cautionLighten3: '#FCE7D5',
+  cautionLighten4: '#FDF5EE',
+  // success,
+  success: '#24D49A',
+  successLighten1: '#5BDFB3',
+  successLighten2: '#91E9CC',
+  successLighten3: '#C8F4E5',
+  successLighten4: '#E9FAF4'
+}
+
 export const hexToRgb = (h) => {
   let r = 0; let g = 0; let b = 0
 
