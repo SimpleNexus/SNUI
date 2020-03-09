@@ -33,7 +33,8 @@ storiesOf('SnTextField', module)
         />
     `,
     methods: {
-      logInput: action('input changed') },
+      logInput: action('input changed')
+    },
     watch: {
       value (input) { this.logInput(input) }
     }
@@ -52,10 +53,13 @@ storiesOf('SnTextField', module)
         label="Must be at least 5 characters" required
         :rules="[(val) => val.length >= 5 || 'Not long enough']"
         @validated="logValidation"
+        @input="logInput"
+        @error="error"
       />`,
     methods: {
       logInput: action('input changed'),
-      logValidation: action('validation')
+      logValidation: action('validation'),
+      error: action('error')
     },
     watch: {
       value (input) { this.logInput(input) }
@@ -78,7 +82,7 @@ storiesOf('SnTextField', module)
     template: `
       <div>
         <sn-text-field label="With prepend icon" prepend-icon="search"/>
-        <sn-text-field label="With appended icon" append-icon="crosshairs" />
+        <sn-text-field label="With appended icon" append-icon="crosshairs"/>
       </div>
     `
   }), {

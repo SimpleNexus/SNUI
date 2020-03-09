@@ -6,13 +6,16 @@
                       'sn-text-field-label--disabled': disabled
              }"
              :for="inputId"
+             ref="label"
       >
         {{label}}
       </label>
-      <sn-icon v-if="!!prependIcon" :name="prependIcon" class="prepend-icon" />
+      <sn-icon v-if="!!prependIcon" :name="prependIcon" class="prepend-icon" @click="() => $emit('click:prepend')"/>
       <input v-model="inputValue"
+             v-on="inputListeners"
              :id="inputId"
              :name="inputId"
+             ref="input"
              type="text"
              class="sn-font-standard sn-font-weight-light sn-text-field-input sn-text-primary"
              :class="{'sn-text-field-input--invalid': !validInput,
@@ -23,10 +26,8 @@
              :placeholder="placeholder"
              :disabled="disabled"
              :required="required"
-             @focus="handleInputFocus"
-             @blur="handleInputBlur"
       />
-      <sn-icon v-if="!!appendIcon" :name="appendIcon" class="append-icon" />
+      <sn-icon v-if="!!appendIcon" :name="appendIcon" class="append-icon" @click="() => $emit('click:append')" />
       <transition name="error-message">
       <span v-if="!validInput" class="sn-font-standard sn-font-weight-light sn-text-field-message sn-text-warning">
         {{validationErrorList[0]}}
@@ -37,6 +38,7 @@
 </template>
 
 <script>
+import { keyCodes } from '../../../util/keyCodes'
 import uuid from 'uuid/v4'
 import SnIcon from '../SnIcon/SnIcon'
 export default {
@@ -153,18 +155,6 @@ export default {
     getInputId () {
       return this.inputId ? this.inputId : `sn-text-field-${uuid()}`
     },
-    handleInputFocus () {
-      this.inputActive = true
-    },
-    handleInputBlur () {
-      if (this.shouldValidate) {
-        this.validate()
-      }
-      this.inputActive = false
-    },
-    hasError () {
-      return this.validationErrorList.length > 0
-    },
     validate () {
       const value = this.inputValue
       const errorsList = []
@@ -185,6 +175,15 @@ export default {
       })
       this.validationErrorList = errorsList
       this.validInput = this.validationErrorList.length === 0
+      if (!this.validInput) {
+        /**
+         * Fires when input is invalid with provided rules.
+         * Returns the list of validation errors
+         * @event error
+         * @property { Array<string> }
+         */
+        this.$emit('error', this.validationErrorList)
+      }
       /**
        * Fires when input is validated against provided rules.
        * Returns the validation state of the input
@@ -193,6 +192,26 @@ export default {
        * @property { boolean }
        **/
       this.$emit('validated', this.validInput)
+    },
+    onBlur (e) {
+      if (this.shouldValidate) {
+        this.$nextTick(() => this.validate())
+      }
+      this.inputActive = false
+      this.$nextTick(() => this.$emit('blur', e))
+    },
+    onFocus (e) {
+      this.inputActive = true
+      this.$emit('focus', e)
+    },
+    onInput (e) {
+      this.$emit('input', e.target.value)
+    },
+    onKeydown (e) {
+      if (e.keyCode === keyCodes.enter) {
+        this.$nextTick(() => this.$emit('change', this.inputValue))
+      }
+      this.$nextTick(() => this.$emit('keydown', e))
     }
   },
   watch: {
@@ -209,8 +228,6 @@ export default {
        * @property {string} the current value of the input field
        */
       this.$emit('input', val)
-    },
-    validInput (val) {
     }
   },
   computed: {
@@ -219,6 +236,20 @@ export default {
         'sn-form-field--is-active': this.inputActive,
         'sn-form-field--is-filled': (!!this.inputValue || !!this.placeholder)
       }
+    },
+    /**
+     * See the Vue docs: https://vuejs.org/v2/guide/components-custom-events.html#Binding-Native-Events-to-Components
+     * @returns {{} & Record<string, Function | Function[]> & {input(*): void, blur(*=): void, focus(*=): void}}
+     */
+    inputListeners () {
+      return Object.assign({},
+        this.$listeners,
+        {
+          blur: this.onBlur,
+          focus: this.onFocus,
+          input: this.onInput,
+          keydown: this.onKeydown
+        })
     },
     shouldValidate () {
       return this.hasBeenActive && this.validateOnBlur
