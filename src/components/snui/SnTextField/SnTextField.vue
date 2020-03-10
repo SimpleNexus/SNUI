@@ -10,7 +10,7 @@
       >
         {{label}}
       </label>
-      <sn-icon v-if="!!prependIcon" :name="prependIcon" class="prepend-icon" @click="() => $emit('click:prepend')"/>
+      <sn-icon v-if="!!prependIcon" :name="prependIcon" class="prepend-icon" />
       <input v-model="inputValue"
              v-on="inputListeners"
              v-sn-mask="mask"
@@ -28,7 +28,7 @@
              :disabled="disabled"
              :required="required"
       />
-      <sn-icon v-if="!!appendIcon && !loading" :name="appendIcon" class="append-icon" @click="() => $emit('click:append')" />
+      <sn-icon v-if="!!appendIcon && !loading" :name="appendIcon" class="append-icon" />
       <sn-animation v-if="loading" :animation-name="loadingAnimationKey" class="sn-text-field-animation" />
       <transition name="error-message">
       <span v-if="!validInput" class="sn-font-standard sn-font-weight-light sn-text-field-message sn-text-warning">
