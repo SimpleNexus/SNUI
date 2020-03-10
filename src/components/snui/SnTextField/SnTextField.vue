@@ -13,6 +13,7 @@
       <sn-icon v-if="!!prependIcon" :name="prependIcon" class="prepend-icon" @click="() => $emit('click:prepend')"/>
       <input v-model="inputValue"
              v-on="inputListeners"
+             v-mask="mask"
              :id="inputId"
              :name="inputId"
              ref="input"
@@ -41,9 +42,11 @@
 import { keyCodes } from '../../../util/keyCodes'
 import uuid from 'uuid/v4'
 import SnIcon from '../SnIcon/SnIcon'
+import { mask } from 'vue-the-mask'
 export default {
   name: 'SnTextField',
   components: { SnIcon },
+  directives: { mask },
   props: {
     /**
      * Append the input field with an icon from the sn-icon collection.
@@ -86,6 +89,15 @@ export default {
       type: String,
       required: false,
       default: ''
+    },
+    /**
+     * A vue-the-mask compatible input mask
+     * See https://github.com/vuejs-tips/vue-the-mask
+     * */
+    mask: {
+      type: [String, undefined],
+      required: false,
+      default: undefined
     },
     /**
      * Placeholder text to be used in the input

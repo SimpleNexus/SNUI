@@ -25,12 +25,12 @@ storiesOf('SnTextField', module)
       }
     },
     template: `
-        <sn-text-field
-          v-model="value"
-          :disabled="disabled"
-          :label="label"
-          :placeholder="placeholder"
-        />
+      <sn-text-field
+        v-model="value"
+        :disabled="disabled"
+        :label="label"
+        :placeholder="placeholder"
+      />
     `,
     methods: {
       logInput: action('input changed')
@@ -86,5 +86,38 @@ storiesOf('SnTextField', module)
                 The icon name must be one that is available in the sn-icon library. Please note that
                 you do not need to include the sn-icon prefix in the icon name`,
       components: { SnTextField }
+    }
+  })
+  .add('With mask', () => ({
+    components: { SnTextField },
+    props: {
+      mask: {
+        default: text('Mask', '###-##-####')
+      },
+      placeholder: {
+        default: text('Placeholder', '###-##-####')
+      }
+    },
+    template: `
+      <sn-text-field label="With mask" :mask="mask" :placeholder="placeholder"/>`
+  }), {
+    info: {
+      summary: `
+      SnTextField can be provided a Vue the Mask compatible mask. This will force
+      the input to conform to a given format. Vue the Mask offers the following matchers:
+
+      \`\`\`javascript
+      '#': {pattern: /\\d/},
+      'X': {pattern: /[0-9a-zA-Z]/},
+      'S': {pattern: /[a-zA-Z]/},
+      'A': {pattern: /[a-zA-Z]/, transform: v => v.toLocaleUpperCase()},
+      'a': {pattern: /[a-zA-Z]/, transform: v => v.toLocaleLowerCase()},
+      '!': {escape: true}
+      \`\`\`
+
+      Please note that the mask does not put in a placeholder, as the mask tokens are
+      not always a user-friendly indication of what should be entered. Instead, it is suggested
+      that you provide a placeholder that mimics the required input format.
+      `
     }
   })
