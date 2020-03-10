@@ -29,7 +29,7 @@
              :required="required"
       />
       <sn-icon v-if="!!appendIcon && !loading" :name="appendIcon" class="append-icon" @click="() => $emit('click:append')" />
-      <sn-animation v-if="loading" animation-name="loading-small" class="sn-text-field-animation" />
+      <sn-animation v-if="loading" :animation-name="loadingAnimationKey" class="sn-text-field-animation" />
       <transition name="error-message">
       <span v-if="!validInput" class="sn-font-standard sn-font-weight-light sn-text-field-message sn-text-warning">
         {{validationErrorList[0]}}
@@ -44,6 +44,7 @@ import { keyCodes } from '../../../util/keyCodes'
 import uuid from 'uuid/v4'
 import SnIcon from '../SnIcon/SnIcon'
 import SnAnimation from '../SnAnimation/SnAnimation'
+import { SNUIAnimationKeys } from '../../..'
 
 export default {
   name: 'SnTextField',
@@ -174,7 +175,8 @@ export default {
       inputId: this.getInputId(),
       validInput: true,
       validationErrorList: [],
-      validationErrorMessage: ''
+      validationErrorMessage: '',
+      loadingAnimationKey: SNUIAnimationKeys.LOADING_SMALL
     }
   },
   methods: {
