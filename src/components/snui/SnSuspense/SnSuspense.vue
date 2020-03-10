@@ -1,12 +1,14 @@
 <template>
   <div class="sn-suspense">
-    <sn-animation v-if="suspend" animation-name="loading-large" :style="animationStyles"/>
+    <sn-animation v-if="suspend" :animation-name="animationName" :style="animationStyles"/>
     <slot v-else />
   </div>
 </template>
 
 <script>
 import SnAnimation from '../SnAnimation/SnAnimation'
+import { SNUIAnimationKeys } from '../../..'
+
 export default {
   name: 'SnSuspense',
   components: { SnAnimation },
@@ -20,6 +22,11 @@ export default {
       type: Object,
       default: () => ({}),
       required: false
+    }
+  },
+  data () {
+    return {
+      animationName: SNUIAnimationKeys.LOADING_LARGE
     }
   }
 }
