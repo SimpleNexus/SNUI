@@ -8,6 +8,8 @@ module.exports = {
   setupFilesAfterEnv: [
     '<rootDir>/config/jest/setup.js'
   ],
+  // For Lottie
+  setupFiles: ['jest-canvas-mock'],
   silent: true,
   verbose: false
 }
