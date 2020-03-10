@@ -68,9 +68,4 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-  .sn-animation
-    svg
-      g
-        path
-          fill green !important
 </style>
