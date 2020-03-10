@@ -4,6 +4,10 @@ import { action } from '@storybook/addon-actions'
 import { boolean, text } from '@storybook/addon-knobs'
 
 import SnTextField from './SnTextField'
+import Vue from 'vue'
+import SnMask from '../../../directives/snMask'
+
+Vue.directive('sn-mask', SnMask)
 
 storiesOf('SnTextField', module)
   .add('Basic Text Field', () => ({
@@ -78,6 +82,7 @@ storiesOf('SnTextField', module)
       <div>
         <sn-text-field label="With prepend icon" prepend-icon="search"/>
         <sn-text-field label="With appended icon" append-icon="crosshairs"/>
+        <sn-text-field />
       </div>
     `
   }), {
@@ -88,7 +93,7 @@ storiesOf('SnTextField', module)
       components: { SnTextField }
     }
   })
-  .add('With mask', () => ({
+  .add('With Mask', () => ({
     components: { SnTextField },
     props: {
       mask: {

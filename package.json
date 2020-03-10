@@ -26,8 +26,8 @@
     "core-js": "^3.4.7",
     "css-vars-ponyfill": "^2.1.2",
     "uuid": "^3.3.3",
-    "vue": "^2.6.10",
-    "vue-the-mask": "^0.11.1"
+    "v-mask": "^2.0.2",
+    "vue": "^2.6.10"
   },
   "devDependencies": {
     "@babel/plugin-proposal-nullish-coalescing-operator": "^7.8.3",

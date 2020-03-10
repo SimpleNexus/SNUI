@@ -13,11 +13,11 @@
       <sn-icon v-if="!!prependIcon" :name="prependIcon" class="prepend-icon" @click="() => $emit('click:prepend')"/>
       <input v-model="inputValue"
              v-on="inputListeners"
-             v-mask="mask"
+             v-sn-mask="mask"
              :id="inputId"
              :name="inputId"
              ref="input"
-             type="text"
+             :type="type"
              class="sn-font-standard sn-font-weight-light sn-text-field-input sn-text-primary"
              :class="{'sn-text-field-input--invalid': !validInput,
                       'sn-text-field-input--with-prepend-icon': !!prependIcon,
@@ -42,11 +42,10 @@
 import { keyCodes } from '../../../util/keyCodes'
 import uuid from 'uuid/v4'
 import SnIcon from '../SnIcon/SnIcon'
-import { mask } from 'vue-the-mask'
+
 export default {
   name: 'SnTextField',
   components: { SnIcon },
-  directives: { mask },
   props: {
     /**
      * Append the input field with an icon from the sn-icon collection.
@@ -125,6 +124,14 @@ export default {
       type: Array,
       required: false,
       default: () => []
+    },
+    /**
+     * Defines the input type
+     **/
+    type: {
+      type: String,
+      required: false,
+      default: 'text'
     },
     /**
      * Set the width of the input field
@@ -320,6 +327,7 @@ $animation-duration = 0.3s
     padding 4px 0
     outline 0
     width 100%
+    box-sizing border-box
     &:required
       box-shadow none
     &::placeholder
