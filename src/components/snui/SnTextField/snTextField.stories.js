@@ -21,6 +21,9 @@ storiesOf('SnTextField', module)
       },
       disabled: {
         default: boolean('Disabled', false)
+      },
+      loading: {
+        default: boolean('Loading', false)
       }
     },
     data () {
@@ -34,6 +37,7 @@ storiesOf('SnTextField', module)
         :disabled="disabled"
         :label="label"
         :placeholder="placeholder"
+        :loading="loading"
       />
     `,
     methods: {
@@ -73,23 +77,37 @@ storiesOf('SnTextField', module)
                 Each rule must be a function that returns either a boolean or a string
                 when given a string as an argument. If the validation function returns false,
                 the input will use the string as an error message.
+
+                After every validation, the component will emit a
                 `
     }
   })
   .add('With Icon', () => ({
     components: { SnTextField },
+    props: {
+      disabled: {
+        default: boolean('Disabled', false)
+      },
+      loading: {
+        default: boolean('Loading', false)
+      }
+    },
     template: `
       <div>
-        <sn-text-field label="With prepend icon" prepend-icon="search"/>
-        <sn-text-field label="With appended icon" append-icon="crosshairs"/>
-        <sn-text-field />
+        <sn-text-field label="With prepend icon" prepend-icon="search" :disabled="disabled" :loading="loading"/>
+        <sn-text-field label="With appended icon" append-icon="crosshairs" :disabled="disabled" :loading="loading" />
+        <sn-text-field label="No Icon" />
       </div>
     `
   }), {
     info: {
-      summary: `SnTextField can take an icon prop that will prepend an icon to the input field.
+      summary: `SnTextField can take an pre/append icon prop that will pre/append an icon to the input field.
                 The icon name must be one that is available in the sn-icon library. Please note that
-                you do not need to include the sn-icon prefix in the icon name`,
+                you do not need to include the sn-icon prefix in the icon name.
+
+                Because the loading animation and the append icon take up the same slot, the loading animation
+                will take precedence as seen here in this example.
+                `,
       components: { SnTextField }
     }
   })
@@ -101,6 +119,9 @@ storiesOf('SnTextField', module)
       },
       placeholder: {
         default: text('Placeholder', '###-##-####')
+      },
+      loading: {
+        default: boolean('Loading')
       }
     },
     methods: {
@@ -111,6 +132,7 @@ storiesOf('SnTextField', module)
         label="With Mask"
         :mask="mask"
         :placeholder="placeholder"
+        :loading="loading"
         @input="input"
       />`
   }), {
