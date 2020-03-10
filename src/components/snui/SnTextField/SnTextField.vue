@@ -21,7 +21,7 @@
              class="sn-font-standard sn-font-weight-light sn-text-field-input sn-text-primary"
              :class="{'sn-text-field-input--invalid': !validInput,
                       'sn-text-field-input--with-prepend-icon': !!prependIcon,
-                      'sn-text-field-input--with-append-icon': !!appendIcon
+                      'sn-text-field-input--with-append-icon': !!appendIcon || loading
                        }"
              :style="fullWidth ? `width: 100%` : `width: ${width}px`"
              :placeholder="placeholder"
@@ -40,7 +40,6 @@
 </template>
 
 <script>
-import { keyCodes } from '../../../util/keyCodes'
 import uuid from 'uuid/v4'
 import SnIcon from '../SnIcon/SnIcon'
 import SnAnimation from '../SnAnimation/SnAnimation'
@@ -196,9 +195,9 @@ export default {
         if (typeof valid === 'string') {
           errorsList.push(valid)
         } else if (typeof valid !== 'boolean') {
-          console.error(`Rules should return a string or a boolean, received ${typeof value} instead`, this)
+          console.error(`Rules should return a string or a boolean, received ${typeof valid} instead`, this)
         } else if (!valid) {
-          errorsList.push('The value is incorrect')
+          errorsList.push('Invalid value')
         }
       })
       this.validationErrorList = errorsList
@@ -236,7 +235,7 @@ export default {
       this.$emit('input', e.target.value)
     },
     onKeydown (e) {
-      if (e.keyCode === keyCodes.enter) {
+      if (e.code === 'Enter') {
         this.$nextTick(() => this.$emit('change', this.inputValue))
       }
       this.$nextTick(() => this.$emit('keydown', e))

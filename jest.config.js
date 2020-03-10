@@ -10,6 +10,6 @@ module.exports = {
   ],
   // For Lottie
   setupFiles: ['jest-canvas-mock'],
-  silent: true,
+  silent: false,
   verbose: false
 }
