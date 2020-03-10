@@ -2,7 +2,7 @@ import * as components from './components/snui'
 import cssVars from 'css-vars-ponyfill'
 import { hexToRgb, setBrandColor } from './util/colorUtils'
 import ClickOutside from './directives/clickOutside'
-import { animationLibrary } from './util/animations/animationLibrary'
+import { SNUIAnimationKeys } from './util/animations/animationLibrary'
 import SnMask from './directives/snMask'
 import './themes/main.styl'
 
@@ -34,5 +34,5 @@ export default {
 
 export {
   setBrandColor,
-  animationLibrary
+  SNUIAnimationKeys
 }
