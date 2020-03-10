@@ -70,5 +70,9 @@ export default {
 }
 </script>
 
-<style scoped lang="stylus">
+<style lang="stylus">
+  .snui-animation-accent-color
+    fill $accent
+    stroke $accent
+
 </style>
