@@ -28,7 +28,8 @@
              :disabled="disabled"
              :required="required"
       />
-      <sn-icon v-if="!!appendIcon" :name="appendIcon" class="append-icon" @click="() => $emit('click:append')" />
+      <sn-icon v-if="!!appendIcon && !loading" :name="appendIcon" class="append-icon" @click="() => $emit('click:append')" />
+      <sn-animation v-if="loading" animation-name="loading-small" class="sn-text-field-animation" />
       <transition name="error-message">
       <span v-if="!validInput" class="sn-font-standard sn-font-weight-light sn-text-field-message sn-text-warning">
         {{validationErrorList[0]}}
@@ -42,10 +43,11 @@
 import { keyCodes } from '../../../util/keyCodes'
 import uuid from 'uuid/v4'
 import SnIcon from '../SnIcon/SnIcon'
+import SnAnimation from '../SnAnimation/SnAnimation'
 
 export default {
   name: 'SnTextField',
-  components: { SnIcon },
+  components: { SnAnimation, SnIcon },
   props: {
     /**
      * Append the input field with an icon from the sn-icon collection.
@@ -88,6 +90,11 @@ export default {
       type: String,
       required: false,
       default: ''
+    },
+    loading: {
+      type: Boolean,
+      required: false,
+      default: false
     },
     /**
      * A vue-the-mask compatible input mask
@@ -367,4 +374,11 @@ $animation-duration = 0.3s
   position absolute
   top 28px
   right 0
+
+.sn-text-field-animation
+  position absolute
+  top 28px
+  right 0
+  height 18px
+  width 18px
 </style>
