@@ -98,8 +98,16 @@ storiesOf('SnTextField', module)
         default: text('Placeholder', '###-##-####')
       }
     },
+    methods: {
+      input: action('input')
+    },
     template: `
-      <sn-text-field label="With mask" :mask="mask" :placeholder="placeholder"/>`
+      <sn-text-field
+        label="With Mask"
+        :mask="mask"
+        :placeholder="placeholder"
+        @input="input"
+      />`
   }), {
     info: {
       summary: `
