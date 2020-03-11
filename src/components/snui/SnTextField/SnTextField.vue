@@ -91,6 +91,10 @@ export default {
       required: false,
       default: ''
     },
+    /**
+     * Indicates that some sort of operation is happening. Will add a loading animation to the end of the input.
+     * If there is an appended icon in the text field, the loading animation will replace it.
+     **/
     loading: {
       type: Boolean,
       required: false,
