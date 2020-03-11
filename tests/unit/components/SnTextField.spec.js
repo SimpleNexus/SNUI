@@ -201,4 +201,16 @@ describe('SnTextField', () => {
       expect(mock).toBeCalledWith(expect.stringMatching(/Rules should return a string or a boolean, received object instead/), expect.anything())
     })
   })
+
+  describe('Masking', () => {
+    it('Masks an input', async () => {
+      const options = getOptions({ mask: '###-##-####' })
+      const { queryByLabelText, emitted } = render(SnTextField, options)
+      const txtField = queryByLabelText(LABEL)
+      await fireEvent.update(txtField, '123121234')
+      const inputEvents = emitted().input
+      expect(inputEvents).toBeTruthy()
+      expect(inputEvents[inputEvents.length - 1][0]).toBe('123-12-1234')
+    })
+  })
 })
