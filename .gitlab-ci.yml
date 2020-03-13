@@ -50,8 +50,8 @@ jest:
 
 deploy-storybook:
   stage: deploy-storybook
-  only:
-    - master
+#  only:
+#    - master
   before_script:
     - rm -rf .yarn
     - yarn install
