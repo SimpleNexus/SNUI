@@ -1,6 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { configure, addDecorator, addParameters } from '@storybook/vue'
-import { withInfo } from 'storybook-addon-vue-info'
+import { withInfo, setDefaults } from 'storybook-addon-vue-info'
 import { withKnobs } from '@storybook/addon-knobs'
 import centered from '@storybook/addon-centered/vue'
 import snTheme from './snTheme'
@@ -10,6 +10,9 @@ import '../../src/themes/main.styl'
 addDecorator(withInfo)
 addDecorator(centered)
 addDecorator(withKnobs)
+setDefaults({
+  source: false
+})
 
 addParameters({
   options: {

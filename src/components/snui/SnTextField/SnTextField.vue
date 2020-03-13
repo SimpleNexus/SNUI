@@ -1,29 +1,37 @@
 <template>
   <div :class="getFormFieldClasses">
     <div class="sn-text-field-wrapper">
-      <label class="sn-font-standard sn-callout sn-text-field-label sn-text-primary--lighten-3"
-             :class="{'sn-text-field-label--with-icon': !!icon}"
+      <label class="sn-font-standard sn-font-weight-light sn-text-field-label sn-text-primary--lighten-3"
+             :class="{'sn-text-field-label--with-prepend-icon': !!prependIcon,
+                      'sn-text-field-label--disabled': disabled
+             }"
              :for="inputId"
+             ref="label"
       >
         {{label}}
       </label>
-      <sn-icon v-if="!!icon" :name="icon" class="prepend-icon" />
+      <sn-icon v-if="!!prependIcon" :name="prependIcon" class="prepend-icon" />
       <input v-model="inputValue"
+             v-on="inputListeners"
+             v-sn-mask="mask"
              :id="inputId"
              :name="inputId"
-             type="text"
-             class="sn-font-standard sn-body sn-text-field-input sn-text-primary"
+             ref="input"
+             :type="type"
+             class="sn-font-standard sn-font-weight-light sn-text-field-input sn-text-primary"
              :class="{'sn-text-field-input--invalid': !validInput,
-                      'sn-text-field-input--with-icon': !!icon }"
-             :style="`width: ${width}px`"
+                      'sn-text-field-input--with-prepend-icon': !!prependIcon,
+                      'sn-text-field-input--with-append-icon': !!appendIcon || loading
+                       }"
+             :style="fullWidth ? `width: 100%` : `width: ${width}px`"
              :placeholder="placeholder"
              :disabled="disabled"
              :required="required"
-             @focus="handleInputFocus"
-             @blur="handleInputBlur"
       />
+      <sn-icon v-if="!!appendIcon && !loading" :name="appendIcon" class="append-icon" />
+      <sn-animation v-if="loading" :animation-name="loadingAnimationKey" class="sn-text-field-animation" />
       <transition name="error-message">
-      <span v-if="!validInput" class="sn-font-standard sn-footnote sn-text-field-message sn-text-warning">
+      <span v-if="!validInput" class="sn-font-standard sn-font-weight-light sn-text-field-message sn-text-warning">
         {{validationErrorList[0]}}
       </span>
       </transition>
@@ -34,10 +42,22 @@
 <script>
 import uuid from 'uuid/v4'
 import SnIcon from '../SnIcon/SnIcon'
+import SnAnimation from '../SnAnimation/SnAnimation'
+import { SNUIAnimationKeys } from '../../..'
+
 export default {
   name: 'SnTextField',
-  components: { SnIcon },
+  components: { SnAnimation, SnIcon },
   props: {
+    /**
+     * Append the input field with an icon from the sn-icon collection.
+     * Please note, do not include the sn-icon prefix in the icon name
+     */
+    appendIcon: {
+      type: String,
+      required: false,
+      default: ''
+    },
     /**
      * Disables the input when true
      */
@@ -47,10 +67,18 @@ export default {
       default: false
     },
     /**
+     * Designates input type as full-width
+     **/
+    fullWidth: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
+    /**
      * Prepend the input field with an icon from the sn-icon collection.
      * Please note, do not include the sn-icon prefix in the icon name
      */
-    icon: {
+    prependIcon: {
       type: String,
       required: false,
       default: ''
@@ -62,6 +90,24 @@ export default {
       type: String,
       required: false,
       default: ''
+    },
+    /**
+     * Indicates that some sort of operation is happening. Will add a loading animation to the end of the input.
+     * If there is an appended icon in the text field, the loading animation will replace it.
+     **/
+    loading: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
+    /**
+     * A vue-the-mask compatible input mask
+     * See https://github.com/vuejs-tips/vue-the-mask
+     * */
+    mask: {
+      type: [String, undefined],
+      required: false,
+      default: undefined
     },
     /**
      * Placeholder text to be used in the input
@@ -89,6 +135,14 @@ export default {
       type: Array,
       required: false,
       default: () => []
+    },
+    /**
+     * Defines the input type
+     **/
+    type: {
+      type: String,
+      required: false,
+      default: 'text'
     },
     /**
      * Set the width of the input field
@@ -124,24 +178,13 @@ export default {
       inputId: this.getInputId(),
       validInput: true,
       validationErrorList: [],
-      validationErrorMessage: ''
+      validationErrorMessage: '',
+      loadingAnimationKey: SNUIAnimationKeys.LOADING_SMALL
     }
   },
   methods: {
     getInputId () {
       return this.inputId ? this.inputId : `sn-text-field-${uuid()}`
-    },
-    handleInputFocus () {
-      this.inputActive = true
-    },
-    handleInputBlur () {
-      if (this.shouldValidate) {
-        this.validate()
-      }
-      this.inputActive = false
-    },
-    hasError () {
-      return this.validationErrorList.length > 0
     },
     validate () {
       const value = this.inputValue
@@ -156,13 +199,22 @@ export default {
         if (typeof valid === 'string') {
           errorsList.push(valid)
         } else if (typeof valid !== 'boolean') {
-          console.error(`Rules should return a string or a boolean, received ${typeof value} instead`, this)
+          console.error(`Rules should return a string or a boolean, received ${typeof valid} instead`, this)
         } else if (!valid) {
-          errorsList.push('The value is incorrect')
+          errorsList.push('Invalid value')
         }
       })
       this.validationErrorList = errorsList
       this.validInput = this.validationErrorList.length === 0
+      if (!this.validInput) {
+        /**
+         * Fires when input is invalid with provided rules.
+         * Returns the list of validation errors
+         * @event error
+         * @property { Array<string> }
+         */
+        this.$emit('error', this.validationErrorList)
+      }
       /**
        * Fires when input is validated against provided rules.
        * Returns the validation state of the input
@@ -171,6 +223,26 @@ export default {
        * @property { boolean }
        **/
       this.$emit('validated', this.validInput)
+    },
+    onBlur (e) {
+      if (this.shouldValidate) {
+        this.$nextTick(() => this.validate())
+      }
+      this.inputActive = false
+      this.$nextTick(() => this.$emit('blur', e))
+    },
+    onFocus (e) {
+      this.inputActive = true
+      this.$emit('focus', e)
+    },
+    onInput (e) {
+      this.$emit('input', e.target.value)
+    },
+    onKeydown (e) {
+      if (e.code === 'Enter') {
+        this.$nextTick(() => this.$emit('change', this.inputValue))
+      }
+      this.$nextTick(() => this.$emit('keydown', e))
     }
   },
   watch: {
@@ -178,17 +250,6 @@ export default {
       if (val) {
         this.hasBeenActive = true
       }
-    },
-    inputValue (val) {
-      /**
-       * Input event when something is entered into the field
-       *
-       * @event input
-       * @property {string} the current value of the input field
-       */
-      this.$emit('input', val)
-    },
-    validInput (val) {
     }
   },
   computed: {
@@ -197,6 +258,20 @@ export default {
         'sn-form-field--is-active': this.inputActive,
         'sn-form-field--is-filled': (!!this.inputValue || !!this.placeholder)
       }
+    },
+    /**
+     * See the Vue docs: https://vuejs.org/v2/guide/components-custom-events.html#Binding-Native-Events-to-Components
+     * @returns {{} & Record<string, Function | Function[]> & {input(*): void, blur(*=): void, focus(*=): void}}
+     */
+    inputListeners () {
+      return Object.assign({},
+        this.$listeners,
+        {
+          blur: this.onBlur,
+          focus: this.onFocus,
+          input: this.onInput,
+          keydown: this.onKeydown
+        })
     },
     shouldValidate () {
       return this.hasBeenActive && this.validateOnBlur
@@ -213,8 +288,9 @@ $animation-duration = 0.3s
   padding 8px
   display flex
   label-active()
-    font-size $font-size-caption-2 !important
-    line-height $line-height-caption-2
+    font-size 11px !important
+    line-height 13px
+    left 0 !important
     transform translateY(-18px)
     text-transform uppercase
     padding 28px 0 0 !important
@@ -233,7 +309,7 @@ $animation-duration = 0.3s
 
   .sn-text-field-label
     display block
-    font-size $font-size-footnote
+    font-size 16px
     left 0
     margin 0
     padding 28px 0 0
@@ -241,11 +317,13 @@ $animation-duration = 0.3s
     top 0
     transition all $animation-duration
     cursor text
-    &--with-icon
-      padding 28px 20px
+    &--with-prepend-icon
+      padding 28px 14px
+      left 14px
+    &--disabled
+      cursor: not-allowed
 
   .sn-text-field-wrapper
-    overflow hidden
     position relative
     text-align left
 
@@ -253,13 +331,15 @@ $animation-duration = 0.3s
     appearance none
     background transparent
     border 0
-    font-size $font-size-footnote
+    font-size 16px
+    line-height 21px
     border-bottom 1px solid $sn-black
     display block
     margin-top 24px
     padding 4px 0
     outline 0
     width 100%
+    box-sizing border-box
     &:required
       box-shadow none
     &::placeholder
@@ -267,13 +347,22 @@ $animation-duration = 0.3s
     &:disabled
       color $sn-black-lighten-4
       border-bottom 1px solid $sn-black-lighten-3
+      cursor: not-allowed;
     &--invalid
       box-shadow none
       outline none
       border none
       border-bottom 1px solid $warning
-    &--with-icon
-      padding-left 20px
+    &--with-prepend-icon
+      padding-left 28px
+    &--with-append-icon
+      padding-right 28px
+
+  .sn-text-field-message
+    position absolute
+    top 60px
+    font-size 16px
+    line-height 21px
 
 .error-message
   &-enter-active, &-leave-active
@@ -285,4 +374,16 @@ $animation-duration = 0.3s
 .prepend-icon
   position absolute
   top 28px
+
+.append-icon
+  position absolute
+  top 28px
+  right 0
+
+.sn-text-field-animation
+  position absolute
+  top 28px
+  right 0
+  height 18px
+  width 18px
 </style>

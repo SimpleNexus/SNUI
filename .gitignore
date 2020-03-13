@@ -5,6 +5,7 @@ node_modules
 .env.local
 .env.*.local
 dist/
+coverage
 
 # Log files
 npm-debug.log*

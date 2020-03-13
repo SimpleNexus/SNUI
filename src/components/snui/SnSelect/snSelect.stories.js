@@ -5,7 +5,7 @@ import { action } from '@storybook/addon-actions'
 import Vue from 'vue'
 import ClickOutside from '../../../directives/clickOutside'
 
-Vue.directive('click-outside', ClickOutside)
+Vue.directive('sn-click-outside', ClickOutside)
 
 storiesOf('SnSelect', module)
   .add('Basic Select', () => ({

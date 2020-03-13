@@ -1,0 +1,60 @@
+image: node:12
+
+cache:
+  paths:
+    - node_modules/
+
+before_script:
+  - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+  - eval $(ssh-agent -s)
+  - ssh-add <(echo "$SSH_PRIVATE_KEY")
+  - mkdir -p ~/.ssh
+  - chmod 700 ~/.ssh
+  - touch ~/.ssh/known_hosts
+  - echo "gitlab.com" >> ~/.ssh/known_hosts
+
+stages:
+  - build
+  - test
+  - deploy-storybook
+
+lint:
+  stage: build
+  before_script:
+    - rm -rf .yarn
+    - yarn install
+  script:
+    - yarn lint
+
+build:
+  stage: build
+  before_script:
+    - rm -rf .yarn
+    - yarn install
+  script:
+    - yarn build:lib
+
+jest:
+  stage: test
+  before_script:
+    - rm -rf .yarn
+    - yarn install
+  script:
+    yarn test:unit --coverage
+  artifacts:
+    name: coverage
+    paths:
+      - coverage/
+    expire_in: 30 days
+  coverage: '/All files[^|]*\|[^|]*\s+([\d\.]+)/'
+
+#deploy-storybook:
+#  stage: deploy-storybook
+#  only:
+#    - master
+#  before_script:
+#    - rm -rf .yarn
+#    - yarn install
+#  script:
+#    - yarn storybook:build
+#    - yarn storybook:deploy

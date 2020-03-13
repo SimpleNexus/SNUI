@@ -25,7 +25,7 @@
       <i class="sn-select--chevron" :class="chevronIcon"/>
     </div>
     <ul
-      v-click-outside="{
+      v-sn-click-outside="{
         exclude: ['selectBox'],
         handler: 'closeItems'
       }"
