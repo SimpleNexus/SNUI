@@ -4,14 +4,17 @@
 
 <script>
 import lottie from 'lottie-web'
-import { animationLibrary } from '../../../util/animations/animationLibrary'
+import { animationLibrary, SNUIAnimationKeys } from '../../../util/animations/animationLibrary'
 
 export default {
   name: 'SnAnimation',
   props: {
     animationName: {
       type: String,
-      required: true
+      required: true,
+      validator (name) {
+        return Object.values(SNUIAnimationKeys).includes(name)
+      }
     },
     width: {
       type: String,
@@ -67,5 +70,9 @@ export default {
 }
 </script>
 
-<style scoped lang="stylus">
+<style lang="stylus">
+  .snui-animation-accent-color
+    fill $accent
+    stroke $accent
+
 </style>
