@@ -48,13 +48,13 @@ jest:
     expire_in: 30 days
   coverage: '/All files[^|]*\|[^|]*\s+([\d\.]+)/'
 
-deploy-storybook:
-  stage: deploy-storybook
+#deploy-storybook:
+#  stage: deploy-storybook
 #  only:
 #    - master
-  before_script:
-    - rm -rf .yarn
-    - yarn install
-  script:
-    - yarn storybook:build
-    - yarn storybook:deploy
+#  before_script:
+#    - rm -rf .yarn
+#    - yarn install
+#  script:
+#    - yarn storybook:build
+#    - yarn storybook:deploy
