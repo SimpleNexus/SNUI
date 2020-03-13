@@ -2,7 +2,8 @@ import * as components from './components/snui'
 import cssVars from 'css-vars-ponyfill'
 import { hexToRgb, setBrandColor } from './util/colorUtils'
 import ClickOutside from './directives/clickOutside'
-
+import { SNUIAnimationKeys } from './util/animations/animationLibrary'
+import SnMask from './directives/snMask'
 import './themes/main.styl'
 
 export default {
@@ -26,6 +27,12 @@ export default {
       setBrandColor
     }
 
-    Vue.directive('click-outside', ClickOutside)
+    Vue.directive('sn-click-outside', ClickOutside)
+    Vue.directive('sn-mask', SnMask)
   }
+}
+
+export {
+  setBrandColor,
+  SNUIAnimationKeys
 }

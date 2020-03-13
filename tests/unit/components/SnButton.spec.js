@@ -47,10 +47,10 @@ describe('SnButton', () => {
     })
 
     it('Validates the type property correctly', () => {
-      const spy = jest.spyOn(global.console, 'error')
+      const mock = jest.fn()
+      console.error = mock
       render(SnButton, getOptions({ type: 'badtype' }))
-      expect(spy).toBeCalledWith(expect.stringMatching(/custom validator check failed for prop "type"/))
-      spy.mockReset()
+      expect(mock).toBeCalledWith(expect.stringMatching(/custom validator check failed for prop "type"/))
     })
   })
 
