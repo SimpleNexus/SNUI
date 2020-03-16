@@ -34,6 +34,7 @@ export default {
 
 <style scoped lang="stylus">
 .sn-suspense
+  display flex
   width 100%
   height 100%
 </style>

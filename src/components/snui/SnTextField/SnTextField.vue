@@ -285,15 +285,15 @@ export default {
 $animation-duration = 0.3s
 
 .sn-form-field
-  padding 8px
+  padding 6px 8px
   display flex
+  height 50px
   label-active()
     font-size 11px !important
     line-height 13px
     left 0 !important
     transform translateY(-18px)
     text-transform uppercase
-    padding 28px 0 0 !important
     display inline-block
 
   // Move the label up and
@@ -312,20 +312,20 @@ $animation-duration = 0.3s
     font-size 16px
     left 0
     margin 0
-    padding 28px 0 0
     position absolute
-    top 0
+    top 4px
     transition all $animation-duration
     cursor text
     &--with-prepend-icon
-      padding 28px 14px
-      left 14px
+      top 4px
+      left 24px
     &--disabled
       cursor: not-allowed
 
   .sn-text-field-wrapper
     position relative
     text-align left
+    display block
 
   .sn-text-field-input
     appearance none
@@ -335,7 +335,7 @@ $animation-duration = 0.3s
     line-height 21px
     border-bottom 1px solid $sn-black
     display block
-    margin-top 24px
+    height 30px
     padding 4px 0
     outline 0
     width 100%
@@ -360,7 +360,7 @@ $animation-duration = 0.3s
 
   .sn-text-field-message
     position absolute
-    top 60px
+    top 32px
     font-size 16px
     line-height 21px
 
@@ -373,16 +373,16 @@ $animation-duration = 0.3s
 
 .prepend-icon
   position absolute
-  top 28px
+  top 4px
 
 .append-icon
   position absolute
-  top 28px
+  top 4px
   right 0
 
 .sn-text-field-animation
   position absolute
-  top 28px
+  top 4px
   right 0
   height 18px
   width 18px

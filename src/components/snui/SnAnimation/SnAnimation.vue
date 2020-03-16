@@ -46,14 +46,13 @@ export default {
     const vm = this
     const animationLoader = animationLibrary[vm.animationName]
     if (animationLoader) {
-      animationLoader().then(animationData => {
-        vm.animation = lottie.loadAnimation({
-          container: vm.$refs.animate,
-          renderer: 'svg',
-          loop: vm.loop,
-          autoplay: vm.autoplay,
-          animationData
-        })
+      const animationData = animationLoader()
+      vm.animation = lottie.loadAnimation({
+        container: vm.$refs.animate,
+        renderer: 'svg',
+        loop: vm.loop,
+        autoplay: vm.autoplay,
+        animationData
       })
     } else {
       console.warn(`SNUI: Could not load animation ${this.animationName}`)

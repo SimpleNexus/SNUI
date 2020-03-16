@@ -166,6 +166,7 @@ export default {
     text-transform uppercase
     text-align center
     min-width 122px
+    margin 6px 8px
     height 32px
     padding 0 16px
     cursor pointer
@@ -175,6 +176,7 @@ export default {
     line-height 20px
     letter-spacing 1.5px
     vertical-align middle
+    box-sizing border-box
 
     &:active
       text-decoration none

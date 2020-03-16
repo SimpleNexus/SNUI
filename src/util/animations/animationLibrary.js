@@ -1,6 +1,6 @@
 export const animationLibrary = {
-  'loading-small': () => import('./loading-small'),
-  'loading-large': () => import('./loading-large')
+  'loading-small': () => require('./loading-small'),
+  'loading-large': () => require('./loading-large')
 }
 
 export const SNUIAnimationKeys = {
