@@ -166,7 +166,8 @@ export default {
     text-transform uppercase
     text-align center
     min-width 122px
-    padding 8px 16px
+    height 32px
+    padding 0 16px
     cursor pointer
     font-family $font-family
     font-weight $font-weight-medium
@@ -236,7 +237,8 @@ export default {
       font-family $font-family-condensed
       line-height 20px
       letter-spacing 0.5px
-      padding 16px 16px
+      padding 0 16px
+      height 52px
 
     &--disabled
       cursor not-allowed
