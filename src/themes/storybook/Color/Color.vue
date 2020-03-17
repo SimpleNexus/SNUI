@@ -1,9 +1,30 @@
 <template>
-  <main class="snui sn-text-white">
+  <main class="snui">
+    <section class="description">
+      <h2 class="sn-title-1 sn-text-primary">Helper Classes</h2>
+      <p class="sn-body">
+        SNUI provides color helper classes nested under the top-level
+        class <code>snui</code>.
+
+        These helper classes are in the following format:
+
+      <pre>sn-text-{colorName}</pre>
+      <pre>sn-background-{colorName}</pre>
+
+      These colors can be modified by appending a <code>--lighten-{level}</code> to the end of the class name.
+      For example:
+      <pre>
+        class="sn-text-primary sn-background-warning--lighten-4"
+      </pre>
+      You can find the color names and the lightness variants in the swatches below.
+      </p>
+      <h3 class="sn-title-2">Remember: These classes must exist as children to the <code>snui</code> class or the styles will not be applied</h3>
+    </section>
     <section
       v-for="color in colors"
       :key="color.name"
       :id="color.name"
+      class="sn-text-white"
     >
       <div
         class="swatch sn-title-1"
@@ -75,7 +96,7 @@
       <div
         v-if="color.light5"
         class="swatch lighten sn-title-2 sn-text-primary--lighten-1"
-           :class="`sn-background-${color.name}--lighten-5 `"
+        :class="`sn-background-${color.name}--lighten-5 `"
       >
         <h2 class="sn-title-2">
           Lighten 5
@@ -90,7 +111,7 @@
     </section>
     <section id="action">
       <div
-        class="accent sn-title-1 sn-background-accent"
+        class="accent sn-title-1 sn-background-accent sn-text-white"
       >
         <h2 class="sn-title-1">
           Accent
@@ -190,4 +211,9 @@ export default {
         width 1032px
         padding 16px
         text-transform uppercase
+
+    .description
+      display flex
+      width 100%
+      flex-direction column
 </style>

@@ -29,6 +29,25 @@ Please note that SNUI is still in development and not all components are availab
 The currently available components are:
 
 * SnButton
+* SnTextField
+
+# SN Setup Notes
+
+Ensure that the SNUI package is properly imported and applied in your js pack file. A correct configuration should look like this:
+
+```js
+import Vue from 'vue
+import SNUI from '@simplenexus/snui'
+import '@simplenexus/snui/dist/SNUI.css'
+
+Vue.use(SNUI)
+```
+
+Now SNUI will be attached the vue instance.
+
+To minimize conflicts with Vuetify stylings, we have namespaced all the SNUI css to be under the `snui` css class. 
+This means that you should place `class=”snui”` on whatever your root component is. The `snui` class will set the body 
+font to Barlow, and provide typography and color helpers as defined in the Storybook
 
 ## Development
 
