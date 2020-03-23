@@ -164,11 +164,7 @@ export default {
     /**
      * Value that will be bound to input component
      */
-    value: {
-      type: String,
-      required: false,
-      default: ''
-    }
+    value: {}
   },
   data () {
     return {
