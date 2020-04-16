@@ -7,7 +7,7 @@ import ClickOutside from '../../../directives/clickOutside'
 
 Vue.directive('sn-click-outside', ClickOutside)
 
-storiesOf('SnSelect', module)
+storiesOf('WIP/SnSelect', module)
   .add('Basic Select', () => ({
     components: { SnSelect },
     props: {

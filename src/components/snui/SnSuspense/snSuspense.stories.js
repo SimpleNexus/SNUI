@@ -2,7 +2,7 @@ import { storiesOf } from '@storybook/vue'
 import SnSuspense from './SnSuspense'
 import SnButton from '../SnButton/SnButton'
 
-storiesOf('SnSuspense', module).add('Example', () => ({
+storiesOf('WIP/SnSuspense', module).add('Example', () => ({
   components: { SnSuspense, SnButton },
   data () {
     return {

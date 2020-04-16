@@ -6,7 +6,7 @@ import SnIcon from '../SnIcon/SnIcon'
 import SnOptionGroup from '../SnOptionGroup/SnOptionGroup'
 import { action } from '@storybook/addon-actions'
 
-storiesOf('SnOption', module)
+storiesOf('WIP/SnOption', module)
   .add('Basic Option', () => ({
     components: { SnOption, SnIcon },
     props: {

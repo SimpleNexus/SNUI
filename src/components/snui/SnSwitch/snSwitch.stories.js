@@ -3,7 +3,7 @@ import SnSwitch from './SnSwitch'
 import { boolean, text } from '@storybook/addon-knobs'
 import { action } from '@storybook/addon-actions'
 
-storiesOf('SnSwitch', module)
+storiesOf('WIP/SnSwitch', module)
   .add('Basic Switch', () => ({
     components: { SnSwitch },
     props: {

@@ -3,7 +3,7 @@ import SnCheckbox from './SnCheckbox'
 import { boolean, text } from '@storybook/addon-knobs'
 import { action } from '@storybook/addon-actions'
 
-storiesOf('SnCheckbox', module)
+storiesOf('WIP/SnCheckbox', module)
   .add('Basic Checkbox', () => ({
     components: { SnCheckbox },
     props: {

@@ -2,7 +2,7 @@
 import { storiesOf } from '@storybook/vue'
 import SnIcon from '../../snui/SnIcon/SnIcon'
 
-storiesOf('SnIcon', module)
+storiesOf('WIP/SnIcon', module)
   .add('Basic Icons', () => ({
     components: { SnIcon },
     template: `

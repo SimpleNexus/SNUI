@@ -3,7 +3,7 @@ import SnTabs from './SnTabs'
 import { boolean, number } from '@storybook/addon-knobs'
 import { action } from '@storybook/addon-actions'
 
-storiesOf('SnTabs', module)
+storiesOf('WIP/SnTabs', module)
   .add('Basic Tabs', () => ({
     components: { SnTabs },
     props: {
