@@ -283,7 +283,7 @@ $animation-duration = 0.3s
 .sn-form-field
   padding 6px 8px
   display flex
-  height 50px
+  min-height 75px
   label-active()
     font-size 11px !important
     line-height 13px
