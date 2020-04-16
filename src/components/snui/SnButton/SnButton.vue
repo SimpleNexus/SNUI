@@ -264,6 +264,7 @@ export default {
     &--block
       min-width 122px
       width 100%
+      margin 0 8px
 
   .sn-btn-prepend-icon
     width 18px
