@@ -164,7 +164,7 @@ export default {
     /**
      * Value that will be bound to input component
      */
-    value: {}
+    value: null
   },
   data () {
     return {
@@ -296,6 +296,7 @@ $animation-duration = 0.3s
   &--is-active
     .sn-text-field-input
       border-bottom 2px solid $sn-black
+      max-width 100%
     .sn-text-field-label
       label-active()
 
@@ -309,11 +310,11 @@ $animation-duration = 0.3s
     left 0
     margin 0
     position absolute
-    top 4px
+    top 2px
     transition all $animation-duration
     cursor text
     &--with-prepend-icon
-      top 4px
+      top 2px
       left 24px
     &--disabled
       cursor: not-allowed
