@@ -156,19 +156,19 @@ export default {
         },
         {
           name: 'caution',
-          main: '#f29f5a',
-          light1: '#f6b783',
-          light2: '#f8ceac',
-          light3: '#fce7d5',
-          light4: '#fdf5ee'
+          main: '#EC7000',
+          light1: '#F19440',
+          light2: '#F5B77F',
+          light3: '#FADBBF',
+          light4: '#FEF1E6'
         },
         {
           name: 'success',
-          main: '#24d49a',
-          light1: '#5bdfb3',
-          light2: '#91e9cc',
-          light3: '#c8f4e5',
-          light4: '#e9faf4'
+          main: '#22A969',
+          light1: '#5ABF8F',
+          light2: '#90D4B4',
+          light3: '#C8E9D9',
+          light4: '#E9F7F0'
         }
       ]
     }
