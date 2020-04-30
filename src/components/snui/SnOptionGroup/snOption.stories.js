@@ -22,7 +22,7 @@ storiesOf('WIP/SnOption', module)
     template: `
       <div>
         <sn-option v-model="value" label="label" option-value="test" name="example">
-          <sn-icon v-if="icon" name="bell" large />
+          <sn-icon v-if="icon" name="bell" size="large" />
           <span v-else>Text</span>
         </sn-option>
       </div>
