@@ -5,7 +5,7 @@
         class="sn-select-selected--leader"
         v-if="selectedItemAvatar"
         :image="selectedItemAvatar"
-        micro
+        size="micro"
         :name="selectedItemText"
       />
       <i
@@ -42,7 +42,7 @@
           :image="getItemAvatar(item)"
           class="sn-select-item--leader"
           :name="getItemText(item)"
-          micro
+          size="micro"
         />
         <i v-if="getItemIcon(item)"
            class="sn-select-item--leader sn-select-item--icon"
