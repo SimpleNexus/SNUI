@@ -15,17 +15,17 @@ export const snuiColors = {
   warningLighten3: '#F4CFC3',
   warningLighten4: '#FAEBE7',
   // caution
-  caution: '#F29F5A',
+  caution: '#EC7000',
   cautionLighten1: '#F6B783',
   cautionLighten2: '#F8CEAC',
   cautionLighten3: '#FCE7D5',
   cautionLighten4: '#FDF5EE',
   // success,
-  success: '#24D49A',
-  successLighten1: '#5BDFB3',
-  successLighten2: '#91E9CC',
-  successLighten3: '#C8F4E5',
-  successLighten4: '#E9FAF4'
+  success: '#22A969',
+  successLighten1: '#5ABF8F',
+  successLighten2: '#90D4B4',
+  successLighten3: '#C8E9D9',
+  successLighten4: '#E9F7F0'
 }
 
 export const hexToRgb = (h) => {
