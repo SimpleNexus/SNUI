@@ -106,7 +106,7 @@ export default {
       /**
        * Click Event on Action Slot
        *
-       * @event click
+       * @event actionClicked
        */
       this.$emit('actionClicked', arguments)
     },
