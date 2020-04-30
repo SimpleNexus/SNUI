@@ -3,6 +3,7 @@
   "version": "0.1.9",
   "private": false,
   "scripts": {
+    "prepare": "yarn build:lib",
     "serve": "vue-cli-service serve",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",

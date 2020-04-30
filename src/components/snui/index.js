@@ -2,12 +2,10 @@ import SnButton from './SnButton/SnButton'
 import SnTextField from './SnTextField/SnTextField'
 import SnAnimation from './SnAnimation/SnAnimation'
 import SnSuspense from './SnSuspense/SnSuspense'
-// import SnIcon from './SnIcon/SnIcon'
-// import SnOptionGroup from './SnOptionGroup/SnOptionGroup'
-// import SnAvatar from './SnAvatar/SnAvatar'
-// import SnSelect from './SnSelect/SnSelect'
-// import SnTabs from './SnTabs/SnTabs'
 import SnAlert from './SnAlert/SnAlert'
+import SnAvatar from './SnAvatar/SnAvatar'
+// import SnIcon from './SnIcon/SnIcon'
+// import SnTabs from './SnTabs/SnTabs'
 // import SnSwitch from './SnSwitch/SnSwitch'
 
-export { SnButton, SnTextField, SnAnimation, SnSuspense, SnAlert }
+export { SnButton, SnTextField, SnAnimation, SnSuspense, SnAlert, SnAvatar }
