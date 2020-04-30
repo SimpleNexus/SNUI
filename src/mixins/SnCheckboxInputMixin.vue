@@ -13,7 +13,8 @@ export default {
             disabled: self.disabled,
             value: self.internalTrueValue,
             'true-value': self.internalTrueValue,
-            'false-value': self.internalFalseValue
+            'false-value': self.internalFalseValue,
+            checked: this.isMultiple ? this.inputValue.includes(this.internalTrueValue) : this.inputValue === this.internalTrueValue
           },
           on: {
             change: self.setValue
