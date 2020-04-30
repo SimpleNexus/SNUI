@@ -164,9 +164,9 @@ export default {
         cursor pointer
     &--action
       display flex
-      margin-left auto
       text-transform uppercase
       margin-right 8px
+      margin-left 24px
       &:hover
         cursor pointer
 

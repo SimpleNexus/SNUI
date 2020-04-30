@@ -12,7 +12,7 @@ const alertTypeOptions = {
 }
 const alertTypeDefault = 'primary'
 
-storiesOf('WIP/SnAlert', module)
+storiesOf('SnAlert', module)
   .add('Basic Alert', () => ({
     components: { SnAlert },
     props: {

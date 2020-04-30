@@ -15,7 +15,7 @@ const avatarSizeOptions = {
 
 const avatarSizeDefault = 'standard'
 
-storiesOf('WIP/SnAvatar', module)
+storiesOf('SnAvatar', module)
   .add('Basic Avatar', () => ({
     components: { SnAvatar },
     props: {
