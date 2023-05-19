@@ -16,9 +16,10 @@ export default defineConfig({
   },
   build: {
     lib: {
-      entry: resolve(__dirname, 'src/main.js'),
+      entry: resolve(__dirname, 'src/index.js'),
       name: 'SNUI',
-      fileName: 'snui'
-    }
+      fileName: 'snui',
+    },
+    cssCodeSplit: true
   }
 })
