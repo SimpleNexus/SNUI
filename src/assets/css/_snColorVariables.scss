@@ -1,0 +1,88 @@
+:root {
+  --sn-brand-01: #F3F7F7;
+  --sn-brand-02: #C3D7D7;
+  --sn-brand-03: #0F5F5E;
+}
+
+/*
+  Base Colors
+*/
+// Primary
+$sn-primary-01: #6D6D6D;
+$sn-primary-02: #404040;
+$sn-primary-03: #1F1F1F;
+$sn-primary-04: #040404;
+$sn-primary: $sn-primary-03;
+
+// White
+$sn-white: #FFFFFF;
+
+// Gray
+$sn-gray-01: #F7F7F7;
+$sn-gray-02: #F2F2F2;
+$sn-gray-03: #E5E5E5;
+$sn-gray-04: #BFBFBF;
+$sn-gray: $sn-gray-03;
+
+// Success (green)
+$sn-success-01: #E9F7F0;
+$sn-success-02: #90D4B4;
+$sn-success-03: #22A969;
+$sn-success-04: #1B8754;
+$sn-success: $sn-success-03;
+
+// Warning (red)
+$sn-error-01: #FAEBE7;
+$sn-error-02: #E99F88;
+$sn-error-03: #D44011;
+$sn-error-04: #AA330E;
+$sn-error: $sn-error-03;
+
+// Caution (orange)
+$sn-caution-01: #FEF1E6;
+$sn-caution-02: #F5B77F;
+$sn-caution-03: #EC7000;
+$sn-caution-04: #BD5A00;
+$sn-caution: $sn-caution-03;
+
+// Brand
+$sn-brand-01: var(--sn-brand-01);
+$sn-brand-02: var(--sn-brand-02);
+$sn-brand-03: var(--sn-brand-03);
+$sn-brand: $sn-brand-03;
+
+:export {
+  snPrimary01: $sn-primary-01;
+  snPrimary02: $sn-primary-02;
+  snPrimary03: $sn-primary-03;
+  snPrimary04: $sn-primary-04;
+  snPrimary: $sn-primary;
+  snWhite: $sn-white;
+  snGray01: $sn-gray-01;
+  snGray02: $sn-gray-02;
+  snGray03: $sn-gray-03;
+  snGray04: $sn-gray-04;
+  snGray: $sn-gray;
+  snSuccess01: $sn-success-01;
+  snSuccess02: $sn-success-02;
+  snSuccess03: $sn-success-03;
+  snSuccess04: $sn-success-04;
+  snSuccess: $sn-success;
+  snError01: $sn-error-01;
+  snError02: $sn-error-02;
+  snError03: $sn-error-03;
+  snError04: $sn-error-04;
+  snError: $sn-error;
+  snCaution01: $sn-caution-01;
+  snCaution02: $sn-caution-02;
+  snCaution03: $sn-caution-03;
+  snCaution04: $sn-caution-04;
+  snCaution: $sn-caution;
+  // these exports are only used to provide an initial value to veutify's theme variables.
+  // Vuetify requries a hex or rgb value so we can't pass a sass or css variable directly here
+  // snThemMixin.js eventually injects the right brand values into these vuetify theme values
+  snBrand01: #F3F7F7;
+  snBrand02: #C3D7D7;
+  snBrand03: #0F5F5E;
+  snBrand: #0F5F5E;
+}

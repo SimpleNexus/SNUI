@@ -1,0 +1,10 @@
+$small-screen-size: 320px;
+$medium-screen-size: 990px;
+$medium-small-screen-size: 600px;
+
+// GLOBAL BOX SHADOW / ELEVATION
+$sn-shadow-depth-0: 0px 0px 0px rgba(31, 31, 31, 0.25);
+$sn-shadow-depth-1: 0px 1px 1.5px rgba(31, 31, 31, 0.04), 0px 2px 5px rgba(31, 31, 31, 0.1), 0px 3px 9px 6px rgba(31, 31, 31, 0.05);
+$sn-shadow-depth-2: 0px 5px 10px rgba(31, 31, 31, 0.1), 0px 7px 14px rgba(31, 31, 31, 0.08), 0px 3px 6px rgba(31, 31, 31, 0.08);
+$sn-shadow-depth-3: 0px 7px 12px rgba(31, 31, 31, 0.1), 0px 8px 16px rgba(31, 31, 31, 0.08), 0px 9px 18px rgba(31, 31, 31, 0.08);
+$sn-shadow-depth-4: 0px 9px 15px rgba(31, 31, 31, 0.08), 0px 10px 20px rgba(31, 31, 31, 0.08), 0px 9px 20px rgba(31, 31, 31, 0.08);

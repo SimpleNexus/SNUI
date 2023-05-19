@@ -1,0 +1,45 @@
+$body-font-family: 'Barlow', 'Roboto', 'Arial', sans-serif;
+
+$switch-track-inset-width: 38px;
+$switch-dirty-offset-x: 15px;
+$switch-track-inset-height: 20px;
+$switch-thumb-height: 16px;
+$switch-thumb-width: 16px;
+$switch-thumb-top: calc(50% - 8px);
+$switch-track-inset-opacity: 1;
+
+$label-font-size: 15px;
+$label-line-height: 20px;
+
+$material-light: (
+  'text': (
+    'primary': rgba(0, 0, 0, 1),
+    'secondary': rgba(0, 0, 0, 1)
+  ),
+  'primary-text-percent': 1,
+  'secondary-text-percent': 1
+);
+
+$list-item-padding: 0 12px;
+$list-padding: 0 0;
+
+$btn-border-radius: 2px;
+
+$icon-size: 22px;
+
+$btn-sizes: (
+  'regular': 30,
+  'large': 50,
+  'x-large': 50
+);
+
+$btn-font-sizes: (
+  'regular': 15px,
+  'large': 20px,
+  'x-large': 20px
+);
+
+// For styling the shadows (Vue elevation attribute) on cards
+$shadow-key-umbra-opacity: rgba(#000000, 0.2);
+$shadow-key-penumbra-opacity: rgba(#000000, 0.2);
+$shadow-key-ambient-opacity: rgba(#000000, 0.2);
