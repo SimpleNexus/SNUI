@@ -1,0 +1,129 @@
+@import './snColorVariables';
+
+/**
+  Text Classes
+*/
+.sn-text-primary {
+  color: $sn-primary;
+
+  &-01 { color: $sn-primary-01; }
+  &-02 { color: $sn-primary-02; }
+  &-03 { color: $sn-primary-03; }
+  &-04 { color: $sn-primary-04; }
+}
+
+.sn-text-gray {
+  color: $sn-gray;
+
+  &-01 { color: $sn-gray-01; }
+  &-02 { color: $sn-gray-02; }
+  &-03 { color: $sn-gray-03; }
+  &-04 { color: $sn-gray-04; }
+}
+
+.sn-text-success {
+  color: $sn-success;
+
+  &-01 { color: $sn-success-01; }
+  &-02 { color: $sn-success-02; }
+  &-03 { color: $sn-success-03; }
+  &-04 { color: $sn-success-04; }
+}
+
+.sn-text-error {
+  color: $sn-error !important;
+
+  &-01 { color: $sn-error-01; }
+  &-02 { color: $sn-error-02; }
+  &-03 { color: $sn-error-03; }
+  &-04 { color: $sn-error-04; }
+}
+
+.sn-text-caution {
+  color: $sn-caution;
+
+  &-01 { color: $sn-caution-01; }
+  &-02 { color: $sn-caution-02; }
+  &-03 { color: $sn-caution-03; }
+  &-04 { color: $sn-caution-04; }
+}
+
+.sn-text-brand {
+  color: $sn-brand;
+
+  &-01 { color: $sn-brand-01; }
+  &-02 { color: $sn-brand-02; }
+  &-03 { color: $sn-brand-03; }
+}
+
+.sn-text-white {
+  color: $sn-white;
+}
+
+/**
+  Background Classes
+*/
+.sn-background-primary {
+  background-color: $sn-primary;
+
+  &-01 { background-color: $sn-primary-01; }
+  &-02 { background-color: $sn-primary-02; }
+  &-03 { background-color: $sn-primary-03; }
+  &-04 { background-color: $sn-primary-04; }
+}
+
+.sn-background-gray {
+  background-color: $sn-gray;
+
+  &-01 { background-color: $sn-gray-01; }
+  &-02 { background-color: $sn-gray-02; }
+  &-03 { background-color: $sn-gray-03; }
+  &-04 { background-color: $sn-gray-04; }
+}
+
+.sn-background-success {
+  background-color: $sn-success;
+
+  &-01 { background-color: $sn-success-01; }
+  &-02 { background-color: $sn-success-02; }
+  &-03 { background-color: $sn-success-03; }
+  &-04 { background-color: $sn-success-04; }
+}
+
+.sn-background-error {
+  background-color: $sn-error;
+
+  &-01 { background-color: $sn-error-01; }
+  &-02 { background-color: $sn-error-02; }
+  &-03 { background-color: $sn-error-03; }
+  &-04 { background-color: $sn-error-04; }
+}
+
+.sn-background-caution {
+  background-color: $sn-caution;
+
+  &-01 { background-color: $sn-caution-01; }
+  &-02 { background-color: $sn-caution-02; }
+  &-03 { background-color: $sn-caution-03; }
+  &-04 { background-color: $sn-caution-04; }
+}
+
+.sn-background-brand {
+  background-color: $sn-brand;
+
+  &-01 { background-color: $sn-brand-01; }
+  &-02 { background-color: $sn-brand-02; }
+  &-03 { background-color: $sn-brand-03; }
+}
+
+.sn-background-white {
+  background-color: $sn-white;
+}
+
+.sn-background-brand {
+  background-color: $sn-brand;
+
+  &-01 { background-color: $sn-brand-01; }
+  &-02 { background-color: $sn-brand-02; }
+  &-03 { background-color: $sn-brand-03; }
+}

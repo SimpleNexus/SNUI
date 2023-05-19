@@ -1,10 +1,8 @@
 import Vue from 'vue'
-import SNUI from './index'
 import App from './App.vue'
-
-Vue.config.productionTip = false
-Vue.use(SNUI)
+import vuetify from '~/util/vuetify.js'
 
 new Vue({
-  render: h => h(App)
+  render: (h) => h(App),
+  vuetify
 }).$mount('#app')

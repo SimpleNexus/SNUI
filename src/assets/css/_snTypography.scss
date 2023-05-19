@@ -1,0 +1,211 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Serif+Pro:700,900|Open+Sans:400,600,700&display=swap');
+@import './snColorVariables';
+@import './snTypographyVariables';
+
+@mixin sn-display-1 {
+  font-family: $font-family-secondary !important;
+  font-weight: $font-weight-black !important;
+  color: $sn-primary;
+
+  @media screen and (max-width: $medium-screen-size) {
+    font-size: 3rem !important;
+    line-height: 3.5rem !important;
+  }
+
+  @media screen and (min-width: $medium-screen-size + 1) {
+    font-size: 4.5rem !important;
+    line-height: 5.625rem !important;
+  }
+}
+
+@mixin sn-display-2 {
+  font-family: $font-family-secondary !important;
+  font-weight: $font-weight-bold !important;
+  color: $sn-primary;
+
+  @media screen and (max-width: $medium-screen-size) {
+    font-size: 2.25rem !important;
+    line-height: 3rem !important;
+  }
+
+  @media screen and (min-width: $medium-screen-size + 1) {
+    font-size: 4rem !important;
+    line-height: 4.875rem !important;
+  }
+}
+
+@mixin sn-h1 {
+  font-family: $font-family-secondary !important;
+  font-weight: $font-weight-bold !important;
+  color: $sn-primary;
+
+  @media screen and (max-width: $medium-screen-size) {
+    font-size: 1.75rem !important;
+    line-height: 2.25rem !important;
+  }
+
+  @media screen and (min-width: $medium-screen-size + 1) {
+    font-size: 2.5rem !important;
+    line-height: 3.125rem !important;
+  }
+}
+
+@mixin sn-h2 {
+  font-family: $font-family-secondary !important;
+  font-weight: $font-weight-bold !important;
+  color: $sn-primary;
+
+  @media screen and (max-width: $medium-screen-size) {
+    font-size: 1.5rem !important;
+    line-height: 2rem !important;
+  }
+
+  @media screen and (min-width: $medium-screen-size + 1) {
+    font-size: 2rem !important;
+    line-height: 2.625rem !important;
+  }
+}
+
+@mixin sn-h3 {
+  font-family: $font-family-primary !important;
+  color: $sn-primary;
+  font-weight: $font-weight-semi-bold !important;
+
+  @media screen and (max-width: $medium-screen-size) {
+    font-size: 1.375rem !important;
+    line-height: 2rem !important;
+  }
+
+  @media screen and (min-width: $medium-screen-size + 1) {
+    font-size: 1.625rem !important;
+    line-height: 2.25rem !important;
+  }
+}
+
+@mixin sn-h4 {
+  font-family: $font-family-primary !important;
+  font-weight: $font-weight-semi-bold !important;
+  color: $sn-primary;
+
+  @media screen and (max-width: $medium-screen-size) {
+    font-size: 1.25rem !important;
+    line-height: 1.875rem !important;
+  }
+
+  @media screen and (min-width: $medium-screen-size + 1) {
+    font-size: 1.375rem !important;
+    line-height: 2rem !important;
+  }
+}
+
+@mixin sn-h5 {
+  font-family: $font-family-primary !important;
+  font-weight: $font-weight-semi-bold !important;
+  color: $sn-primary;
+  font-size: 1.25rem !important;
+  line-height: 1.875rem !important;
+}
+
+@mixin sn-btn {
+  font-family: $font-family-primary !important;
+  font-weight: $font-weight-semi-bold !important;
+  font-size: 1.0625rem !important;
+  line-height: 1.5rem !important;
+  letter-spacing: 0 !important;
+}
+
+@mixin sn-subtitle-1 {
+  font-family: $font-family-primary !important;
+  font-weight: $font-weight-bold !important;
+  color: $sn-primary;
+  font-size: 1.0625rem !important;
+  line-height: 1.5rem !important;
+}
+
+@mixin sn-subtitle-2 {
+  font-family: $font-family-primary !important;
+  font-weight: $font-weight-bold !important;
+  color: $sn-primary;
+  font-size: 0.9375rem !important;
+  line-height: 1.375rem !important;
+}
+
+@mixin sn-body-1 {
+  font-family: $font-family-primary !important;
+  font-weight: $font-weight-regular !important;
+  color: $sn-primary;
+  font-size: 1.0625rem !important;
+  line-height: 1.5rem !important;
+}
+
+@mixin sn-body-2 {
+  font-family: $font-family-primary !important;
+  font-weight: $font-weight-regular !important;
+  color: $sn-primary;
+  font-size: 0.9375rem !important;
+  line-height: 1.375rem !important;
+}
+
+@mixin sn-caption {
+  font-family: $font-family-primary !important;
+  font-weight: $font-weight-regular !important;
+  color: $sn-primary;
+  font-size: 0.8125rem !important;
+  line-height: 1.125rem !important;
+}
+
+@mixin sn-caption-01 {
+  font-family: $font-family-primary !important;
+  font-size: 13px;
+  font-weight: $font-weight-regular !important;
+  line-height: 18px;
+  color: $sn-primary-01;
+}
+
+@mixin sn-font-weight-black {
+  font-weight: $font-weight-black !important;
+}
+
+@mixin sn-font-weight-bold {
+  font-weight: $font-weight-bold !important;
+}
+
+@mixin sn-font-weight-semi-bold {
+  font-weight: $font-weight-semi-bold !important;
+}
+
+@mixin sn-font-weight-regular {
+  font-weight: $font-weight-regular !important;
+}
+
+@mixin sn-font-primary {
+  font-family: $font-family-primary !important;
+  color: $sn-primary;
+}
+
+@mixin sn-font-secondary {
+  font-family: $font-family-secondary !important;
+  color: $sn-primary;
+}
+
+.sn-display-1 { @include sn-display-1; }
+.sn-display-2 { @include sn-display-2; }
+.sn-h1 { @include sn-h1; }
+.sn-h2 { @include sn-h2; }
+.sn-h3 { @include sn-h3; }
+.sn-h4 { @include sn-h4; }
+.sn-h5 { @include sn-h5; }
+.sn-btn { @include sn-btn; }
+.sn-text-btn { @include sn-btn; }
+.sn-subtitle-1 { @include sn-subtitle-1; }
+.sn-subtitle-2 { @include sn-subtitle-2; }
+.sn-body-1 { @include sn-body-1; }
+.sn-body-2 { @include sn-body-2; }
+.sn-caption { @include sn-caption; }
+.sn-caption-01 { @include  sn-caption-01; }
+.sn-font-weight-black { @include sn-font-weight-black; }
+.sn-font-weight-bold { @include sn-font-weight-bold; }
+.sn-font-weight-semi-bold { @include sn-font-weight-semi-bold; }
+.sn-font-weight-regular { @include sn-font-weight-regular; }
+.sn-font-primary { @include sn-font-primary; }
+.sn-font-secondary { @include sn-font-secondary; }
