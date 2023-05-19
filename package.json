@@ -1,6 +1,6 @@
 {
   "name": "@simplenexus/snui",
-  "version": "0.2.1",
+  "version": "0.2.0",
   "main": "dist/snui.mjs",
   "module": "dist/snui.umd.js",
   "description": "SNUI component library",
