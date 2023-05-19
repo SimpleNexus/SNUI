@@ -3,6 +3,7 @@
     <sn-btn
       size="standard"
       text="test button"
+      prependIcon="$snAirplane"
     />
   </div>
 </template>

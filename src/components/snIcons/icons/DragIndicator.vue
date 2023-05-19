@@ -1,0 +1,56 @@
+<template>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+  >
+    <g id="a" />
+    <g id="b">
+      <g id="c">
+        <g>
+          <g>
+            <circle
+              fill="currentColor"
+              cx="1.2"
+              cy="16.79"
+              r="1.2"
+            />
+            <circle
+              fill="currentColor"
+              cx="9.57"
+              cy="16.79"
+              r="1.2"
+            />
+          </g>
+          <g>
+            <circle
+              fill="currentColor"
+              cx="1.2"
+              cy="8.99"
+              r="1.2"
+            />
+            <circle
+              fill="currentColor"
+              cx="9.57"
+              cy="8.99"
+              r="1.2"
+            />
+          </g>
+          <g>
+            <circle
+              fill="currentColor"
+              cx="1.2"
+              cy="1.2"
+              r="1.2"
+            />
+            <circle
+              fill="currentColor"
+              cx="9.57"
+              cy="1.2"
+              r="1.2"
+            />
+          </g>
+        </g>
+      </g>
+    </g>
+  </svg>
+</template>

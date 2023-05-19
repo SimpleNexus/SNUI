@@ -1,6 +1,6 @@
 import { action } from '@storybook/addon-actions'
 
-import SnBtn from './snBtn'
+import SnBtn from './snBtn.vue'
 
 export default {
   title: 'Buttons/Button',

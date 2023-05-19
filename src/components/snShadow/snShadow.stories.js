@@ -1,4 +1,4 @@
-import snShadow from './snShadow'
+import snShadow from './snShadow.vue'
 
 export default {
   title: 'Containers/Shadow',

@@ -1,9 +1,8 @@
 import Vue from 'vue'
 import App from './App.vue'
-import Vuetify from 'vuetify'
-
-Vue.use(Vuetify)
+import vuetify from '~/util/vuetify.js'
 
 new Vue({
-  render: (h) => h(App)
+  render: (h) => h(App),
+  vuetify
 }).$mount('#app')

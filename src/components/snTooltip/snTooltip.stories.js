@@ -1,4 +1,4 @@
-import snTooltip from './snTooltip'
+import snTooltip from './snTooltip.vue'
 
 export default {
   title: 'Messages/Tooltip',
