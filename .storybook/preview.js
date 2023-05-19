@@ -1,14 +1,14 @@
-/** @type { import('@storybook/vue').Preview } */
-const preview = {
-  parameters: {
-    actions: { argTypesRegex: "^on[A-Z].*" },
-    controls: {
-      matchers: {
-        color: /(background|color)$/i,
-        date: /Date$/,
-      },
-    },
-  },
-};
+/** @type { import('@storybook/vue-vite').Preview } */
 
-export default preview;
+import vuetify from './plugins/vuetify.storybook'
+
+const preview = {
+  decorators: [
+    () => ({
+      vuetify,
+      template:'<v-app><story/></v-app>'
+    })
+  ]
+}
+
+export default preview

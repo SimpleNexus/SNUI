@@ -104,5 +104,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '~/assets/css/snui';
+@import '~/assets/css/index.scss';
 </style>

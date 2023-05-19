@@ -90,7 +90,6 @@
 </template>
 
 <script>
-import { VIcon, VBtn } from 'vuetify/lib'
 import snTooltip from '../snTooltip/snTooltip.vue'
 import snShadow from '../snShadow/snShadow.vue'
 // import { cypressMixin } from '../mixins/cypressMixin'
